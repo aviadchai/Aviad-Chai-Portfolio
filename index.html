@@ -282,12 +282,16 @@ body:not(.dark) .ov-cat{color:var(--mu)}
 .ov-back-row{
   position:fixed;
   top:60px;left:0;right:0;z-index:821;
-  display:flex;align-items:center;
+  display:flex;align-items:center;justify-content:space-between;
   padding:8px 44px;
   opacity:0;pointer-events:none;transition:opacity .3s;
 }
 #ov.on .ov-back-row{opacity:1;pointer-events:all}
 @media(max-width:640px){.ov-back-row{padding:8px 20px}}
+/* dark-glass pill in overlay */
+.ov-pill{background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.ov-pill button{color:rgba(255,255,255,.55)}
+.ov-pill button.on{background:rgba(255,255,255,.88);color:#000}
 .ov-back{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.85);
   background:rgba(0,0,0,.22);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
   border:1px solid rgba(255,255,255,.22);border-radius:100px;padding:7px 15px;transition:color .2s,background .2s}
@@ -413,7 +417,7 @@ body:not(.dark) .ov-cat{color:var(--mu)}
 
 <!-- NAV -->
 <nav id="nav">
-  <a class="logo" href="#" onclick="goPage('home');return false">AC</a>
+  <a class="logo" id="el-logo" href="#" onclick="goPage('home');return false">AC</a>
   <div class="pill" id="nav-pill-mobile">
     <button id="tLx" onclick="setTheme(0)" class="on">Light</button>
     <button id="tDx" onclick="setTheme(1)">Dark</button>
@@ -494,6 +498,10 @@ body:not(.dark) .ov-cat{color:var(--mu)}
       <div class="ov-back-ring">←</div>
       All Projects
     </button>
+    <div class="pill ov-pill">
+      <button id="tLo" onclick="setTheme(0)">Light</button>
+      <button id="tDo" onclick="setTheme(1)">Dark</button>
+    </div>
   </div>
   <div class="ov-wrap">
     <div class="ov-hero" id="ov-hero">
@@ -527,26 +535,26 @@ body:not(.dark) .ov-cat{color:var(--mu)}
       <div class="aimg-glow"></div>
     </div>
     <div>
-      <div class="about-tag">About</div>
-      <h1 class="about-h">Motion designer,<br>storyteller,<br>Tel Aviv.</h1>
+      <div class="about-tag" id="el-about-tag">About</div>
+      <h1 class="about-h" id="el-about-title">Motion designer,<br>storyteller,<br>Tel Aviv.</h1>
       <p class="about-bio" id="el-bio1">I'm a 3D Motion Designer based in Tel Aviv, crafting visual stories for brands, TV channels, and agencies. My work spans broadcast design, product films, commercial ads, and brand identities.</p>
       <p class="about-bio" id="el-bio2">I believe great motion design communicates something real — whether a broadcast package or a full brand film, I bring the same level of craft to every frame.</p>
-      <div class="about-sks">
+      <div class="about-sks" id="el-skills">
         <span class="about-sk">Cinema 4D</span><span class="about-sk">After Effects</span>
         <span class="about-sk">Octane Render</span><span class="about-sk">Redshift</span>
         <span class="about-sk">Motion Graphics</span><span class="about-sk">Broadcast Design</span>
         <span class="about-sk">3D Animation</span>
       </div>
       <div class="about-lks">
-        <a class="about-lk" href="https://www.linkedin.com/in/aviadchai"  target="_blank">LinkedIn ↗</a>
-        <a class="about-lk" href="https://www.behance.net/AviadChai"      target="_blank">Behance ↗</a>
-        <a class="about-lk" href="https://vimeo.com/user108665724"        target="_blank">Vimeo ↗</a>
-        <a class="about-lk" href="mailto:aviadchai@gmail.com">Email me</a>
+        <a class="about-lk" id="el-alink1" href="https://www.linkedin.com/in/aviadchai"  target="_blank">LinkedIn ↗</a>
+        <a class="about-lk" id="el-alink2" href="https://www.behance.net/AviadChai"      target="_blank">Behance ↗</a>
+        <a class="about-lk" id="el-alink3" href="https://vimeo.com/user108665724"        target="_blank">Vimeo ↗</a>
+        <a class="about-lk" id="el-alink4" href="mailto:aviadchai@gmail.com">Email me</a>
       </div>
     </div>
   </div>
   <footer>
-    <span>© 2025 Aviad Chai</span>
+    <span id="el-footer-copy">© 2025 Aviad Chai</span>
     <button onclick="goPage('home')">← Back to work</button>
   </footer>
 </div>
@@ -556,8 +564,8 @@ body:not(.dark) .ov-cat{color:var(--mu)}
   <div class="cp">
     <div class="cp-row">
       <div>
-        <h2 class="cp-big">Let's Work<br>Together.</h2>
-        <p class="cp-sub">Got a project in mind? Fill out the form or reach out directly.</p>
+        <h2 class="cp-big" id="el-contact-title">Let's Work<br>Together.</h2>
+        <p class="cp-sub" id="el-contact-sub">Got a project in mind? Fill out the form or reach out directly.</p>
       </div>
       <form class="form" id="cform" onsubmit="submitForm(event)">
         <div class="frow">
@@ -570,21 +578,21 @@ body:not(.dark) .ov-cat{color:var(--mu)}
       </form>
     </div>
     <div class="cp-info">
-      <div><div class="ci-l">Email</div><div class="ci-v">aviadchai@gmail.com</div></div>
-      <div><div class="ci-l">Phone</div><div class="ci-v">+972 050-222-5909</div></div>
+      <div><div class="ci-l">Email</div><div class="ci-v" id="el-contact-email">aviadchai@gmail.com</div></div>
+      <div><div class="ci-l">Phone</div><div class="ci-v" id="el-contact-phone">+972 050-222-5909</div></div>
       <div>
         <div class="ci-l">Social</div>
         <div class="ci-lks">
-          <a class="ci-a" href="https://www.linkedin.com/in/aviadchai" target="_blank">LinkedIn</a>
-          <a class="ci-a" href="https://www.behance.net/AviadChai"     target="_blank">Behance</a>
-          <a class="ci-a" href="https://vimeo.com/user108665724"       target="_blank">Vimeo</a>
-          <a class="ci-a" href="https://www.instagram.com/aviadchai/"  target="_blank">Instagram</a>
+          <a class="ci-a" id="el-alink1-c" href="https://www.linkedin.com/in/aviadchai" target="_blank">LinkedIn</a>
+          <a class="ci-a" id="el-alink2-c" href="https://www.behance.net/AviadChai"     target="_blank">Behance</a>
+          <a class="ci-a" id="el-alink3-c" href="https://vimeo.com/user108665724"       target="_blank">Vimeo</a>
+          <a class="ci-a" id="el-alink4-c" href="https://www.instagram.com/aviadchai/"  target="_blank">Instagram</a>
         </div>
       </div>
     </div>
   </div>
   <footer>
-    <span>© 2025 Aviad Chai</span>
+    <span id="el-footer-copy2">© 2025 Aviad Chai</span>
     <button onclick="goPage('home')">← Back to work</button>
   </footer>
 </div>
@@ -615,8 +623,8 @@ function bindHover(){
 // Use class on body — CSS :root stays light, .dark overrides
 function setTheme(d){
   document.body.classList.toggle('dark',!!d);
-  ['tL','tLm','tLx'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('on',!d)});
-  ['tD','tDm','tDx'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('on',!!d)});
+  ['tL','tLm','tLx','tLo'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('on',!d)});
+  ['tD','tDm','tDx','tDo'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('on',!!d)});
   localStorage.setItem('ac_theme',d?'1':'0');
 }
 // Init — default light, restore only if user explicitly chose dark
@@ -827,9 +835,11 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeOv();closeMenu
 /* ── CONTACT FORM ───────────────────────── */
 function submitForm(e){
   e.preventDefault();
+  const fid=(window._formspreeId||'').trim();
+  if(!fid){alert('Formspree ID not configured.');return;}
   const btn=document.getElementById('fbtn');
   btn.textContent='Sending…';btn.disabled=true;
-  fetch('https://formspree.io/f/YOUR_FORM_ID',{method:'POST',body:new FormData(e.target),headers:{'Accept':'application/json'}})
+  fetch(`https://formspree.io/f/${fid}`,{method:'POST',body:new FormData(e.target),headers:{'Accept':'application/json'}})
     .then(r=>r.ok?Promise.resolve():Promise.reject())
     .then(()=>{btn.textContent='Sent! ✓';e.target.reset();})
     .catch(()=>{btn.textContent='Error — try again';btn.disabled=false;});
@@ -837,23 +847,66 @@ function submitForm(e){
 
 /* ── SHEET CONFIG ───────────────────────── */
 // ← הכנס כאן את ה-ID של ה-Google Sheet שלך
-const SHEET_ID='YOUR_SHEET_ID_HERE';
+const SHEET_ID='1r6CRpgulaFTyoX7CDtCWFhR9jo4HX82nmRijOdoc7SA';
 
 function getSheetId(url){const m=url.match(/\/d\/([a-zA-Z0-9-_]+)/);return m?m[1]:null;}
 
 async function loadSheet(id){
   try{
-    const res=await fetch(`https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:json`);
+    // Sheet 1 — Projects
+    const res=await fetch(`https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:json&sheet=Projects`);
     const txt=await res.text();
     const json=JSON.parse(txt.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
     const cols=json.table.cols.map(c=>(c.label||'').toLowerCase().trim());
     const rows=json.table.rows.map(row=>{
       const o={};cols.forEach((c,i)=>{o[c]=row.c[i]?.v||'';});return o;
     }).filter(p=>p.name||p.title);
-    if(!rows.length)return;
-    projects=rows.map(r=>({...r,name:r.name||r.title}));
-    renderGrid();
+    if(rows.length){
+      projects=rows.map(r=>({...r,name:r.name||r.title}));
+      renderGrid();
+    }
+    // Sheet 2 — Site Content
+    const res2=await fetch(`https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:json&sheet=Site%20Content`);
+    const txt2=await res2.text();
+    const json2=JSON.parse(txt2.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
+    const siteRows=json2.table.rows.map(r=>({key:(r.c[0]?.v||'').trim(),val:(r.c[1]?.v||'').trim()})).filter(r=>r.key&&r.val);
+    const SC={};siteRows.forEach(r=>SC[r.key]=r.val);
+    applySiteContent(SC);
   }catch(e){console.warn('Sheet load failed',e);}
+}
+
+function applySiteContent(SC){
+  const s=(id,v)=>{const el=document.getElementById(id);if(el&&v)el.textContent=v;};
+  const sh=(id,v)=>{const el=document.getElementById(id);if(el&&v)el.innerHTML=v;};
+  const a=(id,v)=>{const el=document.getElementById(id);if(el&&v)el.href=v;};
+  const src=(id,v)=>{const el=document.getElementById(id);if(el&&v)el.src=v;};
+  // Nav
+  s('el-logo',SC.logo);
+  // Hero
+  s('el-h1',SC.hero_line1);s('el-h2',SC.hero_line2);
+  s('el-tag',SC.hero_tag);s('el-desc',SC.hero_desc);
+  // About
+  s('el-about-tag',SC.about_tag);s('el-about-title',SC.about_title);
+  s('el-bio1',SC.about_bio1);s('el-bio2',SC.about_bio2);
+  src('el-photo',SC.about_photo);
+  if(SC.about_skills){
+    const el=document.getElementById('el-skills');
+    if(el)el.innerHTML=SC.about_skills.split(',').map(sk=>`<span class="about-sk">${sk.trim()}</span>`).join('');
+  }
+  // About links
+  ['1','2','3','4'].forEach(n=>{
+    const lbl=SC[`about_link${n}_label`],url=SC[`about_link${n}_url`];
+    const el=document.getElementById(`el-alink${n}`);
+    if(el&&lbl){el.textContent=lbl+' ↗';if(url)el.href=url;}
+    else if(el&&!lbl)el.style.display='none';
+    // Mirror to contact social links
+    const elc=document.getElementById(`el-alink${n}-c`);
+    if(elc&&lbl){elc.textContent=lbl;if(url)elc.href=url;}
+    else if(elc&&!lbl)elc.style.display='none';
+  });
+  // Footer (both pages)
+  s('el-footer-copy',SC.footer_copy);
+  s('el-footer-copy2',SC.footer_copy);
 }
 
 /* ── INIT ───────────────────────────────── */
