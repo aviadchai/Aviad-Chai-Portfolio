@@ -32,7 +32,7 @@ body.dark::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9
 /* ── LOADER ─────────────────────────────── */
 #ld{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;animation:ldOut .45s var(--ease) 1.6s forwards}
 @keyframes ldOut{to{opacity:0;visibility:hidden;pointer-events:none}}
-#ld .ld-name{font-size:clamp(18px,2.5vw,32px);font-weight:800;letter-spacing:-.04em;overflow:hidden}
+#ld .ld-name{font-size:clamp(18px,2.5vw,32px);font-weight:700;letter-spacing:-.04em;overflow:hidden}
 #ld .ld-name span{display:block;animation:ldUp .7s var(--ease) .1s both}
 #ld .ld-sub{font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--mu);overflow:hidden}
 #ld .ld-sub span{display:block;animation:ldUp .6s var(--ease) .65s both}
@@ -41,7 +41,7 @@ body.dark::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9
 /* ── NAV ────────────────────────────────── */
 #nav{position:fixed;top:0;left:0;right:0;z-index:820;height:var(--nav);display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:rgba(255,255,255,.72);backdrop-filter:blur(24px) saturate(1.8);-webkit-backdrop-filter:blur(24px) saturate(1.8);border-bottom:1px solid rgba(0,0,0,.07);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 2px 20px -2px rgba(0,0,0,.06);transition:background .35s,border-color .35s}
 body.dark #nav{background:rgba(0,0,0,.75);border-bottom:1px solid rgba(255,255,255,.07);box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 2px 20px -2px rgba(0,0,0,.6)}
-.logo{font-size:18px;font-weight:800;letter-spacing:-.5px;transition:opacity .2s}
+.logo{font-size:20px;font-weight:800;letter-spacing:-.05em;transition:opacity .2s}
 .logo:hover{opacity:.6}
 .nav-r{display:flex;align-items:center;gap:20px}
 .nav-links{display:flex;gap:20px}
@@ -64,7 +64,7 @@ body.dark #nav{background:rgba(0,0,0,.75);border-bottom:1px solid rgba(255,255,2
 /* mobile menu */
 #mm{position:fixed;inset:0;z-index:790;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;opacity:0;visibility:hidden;transition:opacity .3s var(--ease),visibility .3s}
 #mm.on{opacity:1;visibility:visible}
-#mm a{font-size:32px;font-weight:800;letter-spacing:-1.5px;transition:color .2s}
+#mm a{font-size:32px;font-weight:800;letter-spacing:-.04em;transition:color .2s}
 #mm a:hover{color:var(--mu)}
 
 @media(max-width:640px){
@@ -103,7 +103,7 @@ body.dark #nav{background:rgba(0,0,0,.75);border-bottom:1px solid rgba(255,255,2
 @keyframes fup{to{opacity:1;transform:translateY(0)}}
 .hdot{width:6px;height:6px;border-radius:50%;background:#c8ff00;flex-shrink:0;animation:pulse 2.4s ease-in-out 2.4s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.htitle{font-size:clamp(52px,10.5vw,128px);font-weight:800;letter-spacing:-4px;line-height:.87;margin-bottom:38px}
+.htitle{font-size:clamp(52px,10.5vw,128px);font-weight:800;letter-spacing:-.04em;line-height:.92;margin-bottom:38px}
 .htl{display:block;overflow:hidden}
 .htl span{display:block;transform:translateY(110%);animation:htlUp .88s var(--ease) forwards}
 .htl:nth-child(1) span{animation-delay:1.9s}
@@ -111,13 +111,13 @@ body.dark #nav{background:rgba(0,0,0,.75);border-bottom:1px solid rgba(255,255,2
 @keyframes htlUp{to{transform:translateY(0)}}
 .hbot{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;opacity:0;animation:fi .65s ease 2.4s forwards}
 @keyframes fi{to{opacity:1}}
-.hdesc{font-size:15px;line-height:1.8;color:var(--mu);max-width:360px}
+.hdesc{font-size:15px;line-height:1.8;color:var(--mu);max-width:380px}
 .hscroll{display:flex;align-items:center;gap:9px;flex-shrink:0;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}
 .sring{width:40px;height:40px;border-radius:50%;border:1px solid var(--bdr);display:flex;align-items:center;justify-content:center;animation:bounce 2.5s ease-in-out 3.3s infinite}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
 .sring svg{width:14px;height:14px}
 
-@media(max-width:640px){.hero{padding:80px 20px 52px}.htitle{font-size:clamp(46px,13.5vw,80px);letter-spacing:-2.5px}.hbot{flex-direction:column;align-items:flex-start;gap:14px}.hscroll{display:none}.hdesc{max-width:none;font-size:14px}}
+@media(max-width:640px){.hero{padding:80px 20px 52px}.htitle{font-size:clamp(46px,13.5vw,80px);letter-spacing:-.04em}.hbot{flex-direction:column;align-items:flex-start;gap:14px}.hscroll{display:none}.hdesc{max-width:none;font-size:14px}}
 @media(min-width:641px) and (max-width:1024px){.hero{padding-left:28px;padding-right:28px}}
 
 /* ── WORK GRID ──────────────────────────── */
@@ -176,7 +176,7 @@ footer button:hover{color:var(--txt)}
 .ov-hc{position:relative;z-index:1;opacity:0;transform:translateY(16px);transition:opacity .55s ease .25s,transform .55s var(--ease) .25s}
 #ov.on .ov-hc{opacity:1;transform:translateY(0)}
 .ov-cat{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:9px}
-.ov-title{font-size:clamp(26px,5vw,58px);font-weight:800;letter-spacing:-2px;line-height:.92;color:#fff}
+.ov-title{font-size:clamp(28px,5vw,58px);font-weight:800;letter-spacing:-.04em;line-height:.92;color:#fff}
 body:not(.dark) .ov-title{color:var(--txt)}
 body:not(.dark) .ov-cat{color:var(--mu)}
 @media(max-width:640px){.ov-hero{height:320px;padding:0 20px 36px}}
@@ -231,8 +231,8 @@ body:not(.dark) .ov-cat{color:var(--mu)}
 .aimg-wrap{position:relative}
 .aimg{width:100%;aspect-ratio:3/4;object-fit:cover;filter:grayscale(1) contrast(1.05);border-radius:3px}
 .aimg-glow{position:absolute;bottom:-18px;right:-18px;width:88px;height:88px;border-radius:50%;background:#c8ff00;opacity:.4;filter:blur(26px);z-index:-1}
-.about-tag{display:inline-block;border:1px solid var(--bdr);border-radius:100px;padding:4px 13px;margin-bottom:18px;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}
-.about-h{font-size:clamp(26px,4vw,50px);font-weight:800;letter-spacing:-2.5px;line-height:.92;margin-bottom:20px}
+.about-tag{display:inline-block;border:1px solid var(--bdr);border-radius:100px;padding:4px 13px;margin-bottom:16px;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}
+.about-h{font-size:clamp(28px,4.5vw,58px);font-weight:800;letter-spacing:-.04em;line-height:.92;margin-bottom:20px}
 .about-bio{font-size:15px;line-height:1.8;color:var(--mu);margin-bottom:10px}
 .about-sks{display:flex;flex-wrap:wrap;gap:6px;margin:22px 0}
 .about-sk{font-size:12px;font-weight:500;border:1px solid var(--bdr);border-radius:100px;padding:4px 13px;color:var(--mu)}
@@ -244,8 +244,8 @@ body:not(.dark) .ov-cat{color:var(--mu)}
 
 /* ── CONTACT ────────────────────────────── */
 .cp-row{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;margin-bottom:52px}
-.cp-big{font-size:clamp(32px,6vw,70px);font-weight:800;letter-spacing:-2.5px;line-height:.9}
-.cp-sub{font-size:15px;line-height:1.75;color:var(--mu);margin-top:14px}
+.cp-big{font-size:clamp(32px,6vw,70px);font-weight:800;letter-spacing:-.04em;line-height:.92}
+.cp-sub{font-size:15px;line-height:1.8;color:var(--mu);margin-top:14px}
 .form{display:flex;flex-direction:column;gap:8px}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .field{background:var(--surf);border:1.5px solid var(--bdr);border-radius:9px;overflow:hidden;transition:border-color .2s}
@@ -276,7 +276,7 @@ body:not(.dark) .ov-cat{color:var(--mu)}
 
 <!-- LOADER -->
 <div id="ld">
-  <div class="ld-name"><span>AVIAD CHAI</span></div>
+  <div class="ld-name"><span>Aviad Chai</span></div>
   <div class="ld-sub"><span>Motion Designer</span></div>
 </div>
 
@@ -292,7 +292,7 @@ body:not(.dark) .ov-cat{color:var(--mu)}
   </div>
   <div class="nav-r">
     <div class="nav-links">
-      <a id="nl-home"    href="#"       onclick="goPage('home');return false">Work</a>
+      <a id="nl-home"    href="#"       onclick="goHome();return false">Work</a>
       <a id="nl-about"   href="#about"  onclick="goPage('about');return false">About</a>
       <a id="nl-contact" href="#contact"onclick="goPage('contact');return false">Contact</a>
     </div>
@@ -329,12 +329,12 @@ body:not(.dark) .ov-cat{color:var(--mu)}
       <span id="el-tag">3D Motion Designer · Tel Aviv</span>
     </div>
     <h1 class="htitle">
-      <span class="htl"><span id="el-h1">AVIAD</span></span>
-      <span class="htl"><span id="el-h2">CHAI</span></span>
+      <span class="htl"><span id="el-h1">Aviad</span></span>
+      <span class="htl"><span id="el-h2">Chai</span></span>
     </h1>
     <div class="hbot">
       <p class="hdesc" id="el-desc">Crafting motion that moves people — from concept to final frame. Brands, broadcasts, and everything in between.</p>
-      <div class="hscroll">
+      <div class="hscroll" onclick="document.getElementById('work-section').scrollIntoView({behavior:'smooth'})" style="cursor:none">
         <span>Scroll</span>
         <div class="sring">
           <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -344,7 +344,7 @@ body:not(.dark) .ov-cat{color:var(--mu)}
       </div>
     </div>
   </section>
-  <section class="work">
+  <section class="work" id="work-section">
     <div class="whdr">
       <span class="wlbl">Selected Work</span>
       <span class="wcnt" id="work-cnt">—</span>
@@ -435,6 +435,7 @@ body:not(.dark) .ov-cat{color:var(--mu)}
   <div class="page-inner">
     <div class="cp-row">
       <div>
+        <div class="about-tag" style="margin-bottom:16px">Contact</div>
         <h2 class="cp-big" id="el-contact-title">Let's Work<br>Together.</h2>
         <p class="cp-sub" id="el-contact-sub">Got a project in mind? Fill out the form or reach out directly.</p>
       </div>
@@ -510,6 +511,15 @@ function closeMenu(){
   document.body.classList.remove('lock');
 }
 window.addEventListener('resize',()=>{if(window.innerWidth>640)closeMenu();});
+
+/* ── GO HOME + SCROLL TO WORK ──────────── */
+function goHome(){
+  goPage('home');
+  setTimeout(()=>{
+    const el=document.getElementById('work-section');
+    if(el)el.scrollIntoView({behavior:'smooth'});
+  },80);
+}
 
 /* ── ROUTING ────────────────────────────── */
 const PAGES=['home','about','contact'];
