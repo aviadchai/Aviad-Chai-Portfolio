@@ -249,7 +249,8 @@ body:not(.dark) .ov-cat{color:var(--mu)}
 .ob-pad{max-width:900px;margin:0 auto;width:calc(100% - 88px);padding:0}
 .ob-img img,.ob-img video{width:100%;display:block}
 .ob-duo{display:grid;grid-template-columns:1fr 1fr;gap:3px}
-.ob-duo{aspect-ratio:16/9}
+.ob-duo{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.ob-duo>*{aspect-ratio:16/9;overflow:hidden}
 .ob-duo img,.ob-duo video{width:100%;height:100%;object-fit:cover;display:block}
 .ob-video{position:relative;padding-bottom:min(56.25%, 506px);height:0;max-width:900px;margin:0 auto}
 .ob-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
