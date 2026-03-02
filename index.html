@@ -24,10 +24,35 @@ body.dark::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9
 
 /* ── CURSOR ─────────────────────────────── */
 #cd,#cr{position:fixed;border-radius:50%;pointer-events:none;z-index:8999;transform:translate(-50%,-50%)}
-#cd{width:7px;height:7px;background:var(--txt);transition:background .25s}
-#cr{width:32px;height:32px;border:1.5px solid var(--txt);opacity:.2;transition:width .22s var(--easeB),height .22s var(--easeB),opacity .22s,background .22s}
-#cr.h{width:50px;height:50px;opacity:.07;background:var(--txt)}
-#cr.c{width:11px;height:11px;opacity:.8}
+#cd{width:6px;height:6px;background:var(--txt);transition:background .25s;z-index:9000}
+#cr{
+  width:38px;height:38px;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(3px) saturate(4) contrast(1.15) brightness(1.04);
+  -webkit-backdrop-filter:blur(3px) saturate(4) contrast(1.15) brightness(1.04);
+  border:1px solid rgba(255,255,255,.7);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.9),
+    inset 0 -1px 0 rgba(0,0,0,.06),
+    inset 1px 0 0 rgba(255,255,255,.5),
+    inset -1px 0 0 rgba(255,255,255,.2),
+    0 2px 12px rgba(0,0,0,.1),
+    0 0 0 .5px rgba(0,0,0,.05);
+  transition:width .3s var(--easeB),height .3s var(--easeB);
+  opacity:1;
+}
+body.dark #cr{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.28);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.28),
+    inset 0 -1px 0 rgba(0,0,0,.25),
+    inset 1px 0 0 rgba(255,255,255,.15),
+    0 2px 12px rgba(0,0,0,.45),
+    0 0 0 .5px rgba(255,255,255,.06);
+}
+#cr.h{width:54px;height:54px;}
+#cr.c{width:10px;height:10px;}
 
 /* ── LOADER ─────────────────────────────── */
 #ld{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;animation:ldOut .45s var(--ease) 1.6s forwards}
@@ -39,8 +64,8 @@ body.dark::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9
 @keyframes ldUp{from{transform:translateY(110%)}to{transform:translateY(0)}}
 
 /* ── NAV ────────────────────────────────── */
-#nav{position:fixed;top:0;left:0;right:0;z-index:820;height:var(--nav);display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:rgba(255,255,255,.72);backdrop-filter:blur(24px) saturate(1.8);-webkit-backdrop-filter:blur(24px) saturate(1.8);border-bottom:1px solid rgba(0,0,0,.07);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 2px 20px -2px rgba(0,0,0,.06);transition:background .35s,border-color .35s}
-body.dark #nav{background:rgba(0,0,0,.75);border-bottom:1px solid rgba(255,255,255,.07);box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 2px 20px -2px rgba(0,0,0,.6)}
+#nav{position:fixed;top:0;left:0;right:0;z-index:820;height:var(--nav);display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);background:rgba(255,255,255,.28);backdrop-filter:blur(6px) saturate(4) contrast(1.12) brightness(1.05);-webkit-backdrop-filter:blur(6px) saturate(4) contrast(1.12) brightness(1.05);border-bottom:1px solid rgba(255,255,255,.6);box-shadow:inset 0 2px 0 rgba(255,255,255,.95),0 1px 0 rgba(0,0,0,.07),0 6px 28px -4px rgba(0,0,0,.1);transition:background .35s,border-color .35s}
+body.dark #nav{background:rgba(8,8,12,.28);border-bottom:1px solid rgba(255,255,255,.14);box-shadow:inset 0 2px 0 rgba(255,255,255,.07),0 1px 0 rgba(0,0,0,.6),0 6px 28px -4px rgba(0,0,0,.6);backdrop-filter:blur(6px) saturate(3.5) contrast(1.15);-webkit-backdrop-filter:blur(6px) saturate(3.5) contrast(1.15)}
 .logo{font-size:20px;font-weight:800;letter-spacing:-.05em;transition:opacity .2s}
 .logo:hover{opacity:.6}
 .nav-r{display:flex;align-items:center;gap:20px}
@@ -49,9 +74,37 @@ body.dark #nav{background:rgba(0,0,0,.75);border-bottom:1px solid rgba(255,255,2
 .nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;background:var(--txt);transform:scaleX(0);transform-origin:left;transition:transform .25s var(--ease)}
 .nav-links a:hover,.nav-links a.on{color:var(--txt)}
 .nav-links a.on::after,.nav-links a:hover::after{transform:scaleX(1)}
-.pill{display:flex;background:rgba(128,128,128,.09);border:1px solid var(--gbdr);border-radius:100px;padding:3px}
-.pill button{font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:100px;color:var(--mu);transition:all .2s}
-.pill button.on{background:var(--inv);color:var(--invbg)}
+.pill{
+  display:flex;position:relative;
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(1.5px) saturate(3) contrast(1.1);
+  -webkit-backdrop-filter:blur(1.5px) saturate(3) contrast(1.1);
+  border:1px solid rgba(0,0,0,.13);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 1px 4px rgba(0,0,0,.1);
+  border-radius:100px;padding:3px;
+}
+body.dark .pill{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.12),inset 0 -1px 0 rgba(0,0,0,.3),0 2px 12px rgba(0,0,0,.3);
+}
+.pill button{
+  font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+  padding:4px 10px;border-radius:100px;color:var(--mu);
+  position:relative;z-index:1;
+  transition:color .3s ease;
+}
+.pill button.on{color:var(--invbg)}
+.pill-slider{
+  position:absolute;top:3px;bottom:3px;left:3px;
+  background:var(--inv);
+  border-radius:100px;
+  box-shadow:0 1px 8px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.25);
+  transition:left .38s cubic-bezier(.34,1.62,.64,1), width .22s cubic-bezier(.34,1.62,.64,1);
+  z-index:0;
+  pointer-events:none;
+  will-change:left,width;
+}
 .hbg{display:none;flex-direction:column;gap:5px;padding:4px}
 .hbg span{width:21px;height:1.5px;background:var(--txt);border-radius:2px;transition:transform .3s var(--ease),opacity .3s;display:block}
 .hbg.on span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
@@ -259,8 +312,8 @@ body:not(.dark) .ov-cat{color:var(--mu)}
 .cp-info{border-top:1px solid var(--bdr);padding-top:36px;display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 .ci-l{font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mu2);margin-bottom:7px}
 .ci-v{font-size:13px;font-weight:500}
-.ci-lks{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
-.ci-a{font-size:12px;font-weight:500;color:var(--mu);border:1px solid var(--bdr);border-radius:100px;padding:4px 12px;transition:all .2s}
+.ci-lks{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px}
+.ci-a{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;border:1px solid var(--bdr);border-radius:100px;padding:7px 15px;transition:all .2s;color:var(--txt)}
 .ci-a:hover{background:var(--inv);color:var(--invbg);border-color:var(--inv)}
 @media(max-width:640px){.cp-row{grid-template-columns:1fr;gap:32px}.frow{grid-template-columns:1fr}.cp-info{grid-template-columns:1fr;gap:20px}}
 @media(min-width:641px) and (max-width:1024px){.cp-row{gap:44px}.cp-info{grid-template-columns:1fr 1fr}}
@@ -287,6 +340,7 @@ body:not(.dark) .ov-cat{color:var(--mu)}
 <nav id="nav">
   <a class="logo" id="el-logo" href="#" onclick="goPage('home');return false">AC</a>
   <div class="pill" id="nav-pill-mobile">
+    <div class="pill-slider" id="slx"></div>
     <button id="tLx" onclick="setTheme(0)">Light</button>
     <button id="tDx" onclick="setTheme(1)">Dark</button>
   </div>
@@ -297,6 +351,7 @@ body:not(.dark) .ov-cat{color:var(--mu)}
       <a id="nl-contact" href="#contact"onclick="goPage('contact');return false">Contact</a>
     </div>
     <div class="pill">
+      <div class="pill-slider" id="sl"></div>
       <button id="tL" onclick="setTheme(0)">Light</button>
       <button id="tD" onclick="setTheme(1)">Dark</button>
     </div>
@@ -312,6 +367,7 @@ body:not(.dark) .ov-cat{color:var(--mu)}
   <a href="#about"  onclick="goPage('about');closeMenu();return false">About</a>
   <a href="#contact"onclick="goPage('contact');closeMenu();return false">Contact</a>
   <div class="pill" style="margin-top:8px">
+    <div class="pill-slider" id="slm"></div>
     <button id="tLm" onclick="setTheme(0)">Light</button>
     <button id="tDm" onclick="setTheme(1)">Dark</button>
   </div>
@@ -365,6 +421,7 @@ body:not(.dark) .ov-cat{color:var(--mu)}
       All Projects
     </button>
     <div class="pill ov-pill">
+      <div class="pill-slider" id="slo"></div>
       <button id="tLo" onclick="setTheme(0)">Light</button>
       <button id="tDo" onclick="setTheme(1)">Dark</button>
     </div>
@@ -495,8 +552,36 @@ function setTheme(d){
   ['tL','tLm','tLx','tLo'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('on',!d)});
   ['tD','tDm','tDx','tDo'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('on',!!d)});
   localStorage.setItem('ac_theme',d?'1':'0');
+  // animate sliders with stretch effect
+  ['sl','slm','slx','slo'].forEach(id=>{
+    const sl=document.getElementById(id);
+    if(!sl)return;
+    const pill=sl.parentElement;
+    const btns=pill.querySelectorAll('button');
+    const from=btns[d?0:1];
+    const to=btns[d?1:0];
+    if(!from||!to)return;
+    const fromL=from.offsetLeft;
+    const fromW=from.offsetWidth;
+    const toL=to.offsetLeft;
+    const toW=to.offsetWidth;
+    // stretch phase: expand to cover both buttons
+    const stretchL=Math.min(fromL,toL);
+    const stretchW=Math.abs(toL-fromL)+toW;
+    sl.style.transition='left .18s cubic-bezier(.4,0,.2,1), width .18s cubic-bezier(.4,0,.2,1)';
+    sl.style.left=stretchL+'px';
+    sl.style.width=stretchW+'px';
+    // snap to target
+    setTimeout(()=>{
+      sl.style.transition='left .28s cubic-bezier(.34,1.56,.64,1), width .28s cubic-bezier(.34,1.56,.64,1)';
+      sl.style.left=toL+'px';
+      sl.style.width=toW+'px';
+    },160);
+  });
 }
 setTheme(localStorage.getItem('ac_theme')==='1'?1:0);
+// init slider positions after layout
+requestAnimationFrame(()=>setTheme(localStorage.getItem('ac_theme')==='1'?1:0));
 
 /* ── MOBILE MENU ────────────────────────── */
 function toggleMenu(){
