@@ -219,7 +219,7 @@ footer button:hover{color:var(--txt)}
 @media(max-width:640px){.ov-back-row{padding:10px 20px}}
 @media(min-width:641px) and (max-width:1024px){.ov-back-row{padding:10px 28px}}
 
-.ov-wrap{padding-top:var(--nav);transform:translateY(22px);opacity:0;transition:transform .5s var(--ease) .06s,opacity .5s ease .06s}
+.ov-wrap{padding-top:var(--nav);transform:translateY(22px);opacity:0;transition:transform .5s var(--ease) .06s,opacity .5s ease .06s;overflow:hidden}
 .ov-inner{max-width:900px;margin:0 auto;width:100%;padding:0 var(--pad)}
 #ov.on .ov-wrap{transform:translateY(0);opacity:1}
 .ov-hero{position:relative;height:380px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
@@ -249,6 +249,7 @@ body:not(.dark) .ov-cat{color:var(--mu)}
 .ob-pad{max-width:900px;margin:0 auto;width:calc(100% - 88px);padding:0}
 .ob-img img,.ob-img video{width:100%;display:block}
 .ob-duo{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.ob-duo{aspect-ratio:16/9}
 .ob-duo img,.ob-duo video{width:100%;height:100%;object-fit:cover;display:block}
 .ob-video{position:relative;padding-bottom:min(56.25%, 506px);height:0;max-width:900px;margin:0 auto}
 .ob-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
@@ -338,23 +339,24 @@ body:not(.dark) .ov-title{color:var(--txt)}
 .cr-n{font-size:13px;font-weight:500}
 
 /* quote block */
-.ob-quote{padding:52px 0;max-width:900px;margin:0 auto;width:calc(100% - 88px)}
+.ob-quote{padding:60px 0;max-width:900px;margin:0 auto;width:calc(100% - 88px);border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr)}
 .ob-quote p{font-size:clamp(22px,3.2vw,38px);font-weight:700;letter-spacing:-.03em;line-height:1.2;color:var(--txt)}
 
 /* media+text side by side */
-.ob-split{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:center;margin:4px 0}
-.ob-split-media{overflow:hidden}
-.ob-split-media img,.ob-split-media video{width:100%;height:100%;object-fit:cover;display:block;min-height:320px}
+.ob-split{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;margin:32px auto;max-width:900px;width:calc(100% - 88px);border:1px solid var(--bdr);border-radius:6px;overflow:hidden}
+.ob-split-media{overflow:hidden;aspect-ratio:4/3}
+.ob-split-media img,.ob-split-media video{width:100%;height:100%;object-fit:cover;display:block}
 .ob-split-text{padding:48px 44px}
 .ob-split-text h3{font-size:clamp(15px,1.8vw,22px);font-weight:700;letter-spacing:-.02em;margin-bottom:14px}
 .ob-split-text p{font-size:15px;line-height:1.8;color:var(--mu)}
 
 /* full width media */
-.ob-full-media{width:100%;margin:4px 0}
-.ob-full-media img,.ob-full-media video{width:100%;display:block;max-height:80vh;object-fit:cover}
+.ob-full-media{width:100%;margin:32px 0}
+.ob-full-media{aspect-ratio:21/9}
+.ob-full-media img,.ob-full-media video{width:100%;height:100%;object-fit:cover;display:block}
 
 /* duo stays same */
-.ob-duo-wrap{margin:4px 0}
+.ob-duo-wrap{margin:32px 0}
 
 @media(max-width:768px){
   .ob-split{grid-template-columns:1fr}
@@ -819,7 +821,7 @@ function openProject(idx){
         src='https://player.vimeo.com/video/'+src.replace(/.*vimeo\.com\/(?:video\/)?/,'').split('?')[0];
       if(!src.includes('?'))src+='?';
       else src+='&';
-      src+='autoplay=0&title=0&byline=0&portrait=0&controls=1';
+      src+='autoplay=0&title=0&byline=0&portrait=0&controls=1&badge=0&dnt=1';
     }
     // YouTube
     else if(src.includes('youtu')){
@@ -921,7 +923,14 @@ async function loadSheet(){
     const r1=await fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=Projects&headers=1`);
     const t1=await r1.text();
     const j1=JSON.parse(t1.match(/google\.visualization\.Query\.setResponse\(([\s\S]*?)\);?\s*$/)[1]);
-    const cols=j1.table.cols.map(c=>(c.label||'').toLowerCase().trim());
+    const cols=j1.table.cols.map(c=>{
+      let l=(c.label||'').toLowerCase().trim();
+      // normalize: "thumbnail\n(img1)" → "img1", strip newlines+parens
+      l=l.replace(/\n.*/,'').trim(); // take only first line
+      l=l.replace(/\s*\(([^)]+)\)\s*/g,'').trim(); // remove (xxx)
+      l=l.replace(/[^a-z0-9_]/g,'_').replace(/_+/g,'_').replace(/^_|_$/g,'');
+      return l;
+    });
     const rows=j1.table.rows
       .map(row=>{const o={};cols.forEach((c,i)=>{o[c]=(row.c[i]?.v||row.c[i]?.f||'').toString().trim();});return o;})
       .filter(p=>p.name&&p.name.length>0);
