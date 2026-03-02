@@ -810,6 +810,27 @@ function openProject(idx){
   }
 
   // ── BLOCK ORDER ─────────────────────────
+  // 0. video embed (vimeo or youtube) — clean player
+  if(p.video){
+    let src=p.video.trim();
+    // Vimeo
+    if(src.includes('vimeo.com')){
+      if(!src.includes('player.vimeo'))
+        src='https://player.vimeo.com/video/'+src.replace(/.*vimeo\.com\/(?:video\/)?/,'').split('?')[0];
+      if(!src.includes('?'))src+='?';
+      else src+='&';
+      src+='autoplay=0&title=0&byline=0&portrait=0&controls=1';
+    }
+    // YouTube
+    else if(src.includes('youtu')){
+      const vid=src.includes('youtu.be/')
+        ?src.split('youtu.be/')[1].split('?')[0]
+        :(src.match(/[?&]v=([^&]+)/)||[])[1]||'';
+      src=`https://www.youtube.com/embed/${vid}?controls=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&fs=0`;
+    }
+    addBlock(`<div class="ob-video-wrap"><div class="ob-video"><iframe src="${src}" allowfullscreen allow="autoplay;fullscreen;picture-in-picture" loading="lazy" frameborder="0"></iframe></div></div>`);
+  }
+
   // 1. media1 + media2 (duo)
   addDuo(p.media1, p.media2);
 
