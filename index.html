@@ -187,8 +187,7 @@ body.dark .pill{
 .pc-twothird{grid-column:span 8;aspect-ratio:16/9}
 .pc-med{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.8;transition:transform .9s var(--ease),opacity .4s}
 .pc:hover .pc-med{transform:scale(1.05);opacity:.95}
-.pc-tint{position:absolute;inset:0;opacity:0;transition:opacity .4s}
-.pc:hover .pc-tint{opacity:1}
+.pc-tint{display:none}
 .pc-info{position:absolute;bottom:0;left:0;right:0;padding:22px;background:linear-gradient(transparent,rgba(0,0,0,.7));opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s}
 .pc:hover .pc-info{opacity:1;transform:translateY(0)}
 .pc-cat{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:4px}
@@ -290,7 +289,7 @@ body:not(.dark) .ov-cat{color:var(--mu)}
 .about-sks{display:flex;flex-wrap:wrap;gap:6px;margin:22px 0}
 .about-sk{font-size:12px;font-weight:500;border:1px solid var(--bdr);border-radius:100px;padding:4px 13px;color:var(--mu)}
 .about-lks{display:flex;gap:7px;flex-wrap:wrap}
-.about-lk{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;border:1px solid var(--bdr);border-radius:100px;padding:7px 15px;transition:all .2s}
+.about-lk{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;border:1px solid var(--bdr);border-radius:100px;padding:5px 14px;transition:all .2s;color:var(--mu)}
 .about-lk:hover{background:var(--inv);color:var(--invbg);border-color:var(--inv)}
 @media(max-width:768px){.about-wrap{grid-template-columns:1fr;gap:32px}.aimg{aspect-ratio:1/1}}
 @media(min-width:769px) and (max-width:1024px){.about-wrap{gap:44px}}
@@ -473,9 +472,9 @@ body:not(.dark) .ov-cat{color:var(--mu)}
           <span class="about-sk">3D Animation</span>
         </div>
         <div class="about-lks">
-          <a class="about-lk" id="el-alink1" href="https://www.linkedin.com/in/aviadchai" target="_blank">LinkedIn ↗</a>
-          <a class="about-lk" id="el-alink2" href="https://www.behance.net/AviadChai"     target="_blank">Behance ↗</a>
-          <a class="about-lk" id="el-alink3" href="https://vimeo.com/user108665724"       target="_blank">Vimeo ↗</a>
+          <a class="about-lk" id="el-alink1" href="https://www.linkedin.com/in/aviadchai" target="_blank">LinkedIn</a>
+          <a class="about-lk" id="el-alink2" href="https://www.behance.net/AviadChai"     target="_blank">Behance</a>
+          <a class="about-lk" id="el-alink3" href="https://vimeo.com/user108665724"       target="_blank">Vimeo</a>
           <a class="about-lk" id="el-alink4" href="mailto:aviadchai@gmail.com">Email me</a>
         </div>
       </div>
@@ -790,8 +789,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeOv();closeMenu
 /* ── CONTACT FORM ───────────────────────── */
 function submitForm(e){
   e.preventDefault();
-  const fid=(window._formspreeId||'').trim();
-  if(!fid){alert('Formspree ID not configured.');return;}
+  const fid=window._formspreeId||'mwvnjgav';
+  
   const btn=document.getElementById('fbtn');
   btn.textContent='Sending…';btn.disabled=true;
   fetch(`https://formspree.io/f/${fid}`,{method:'POST',body:new FormData(e.target),headers:{'Accept':'application/json'}})
