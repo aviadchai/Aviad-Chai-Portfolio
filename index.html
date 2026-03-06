@@ -244,20 +244,12 @@ body:not(.dark) .ov-cat{color:var(--mu)}
 /* overlay blocks */
 .ob{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s var(--ease)}
 .ob.vis{opacity:1;transform:translateY(0)}
-.ob-full{width:100%}
-.ob-duo{display:grid;grid-template-columns:1fr 1fr;gap:3px}
-.ob-duo{display:grid;grid-template-columns:1fr 1fr;gap:4px}
-.ob-duo>*{aspect-ratio:16/9;overflow:hidden}
-.ob-duo img,.ob-duo video{width:100%;height:100%;object-fit:cover;display:block}
-.ob-video{position:relative;padding-bottom:min(56.25%, 506px);height:0;max-width:900px;margin:0 auto}
-.ob-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .cg{display:flex;flex-wrap:wrap;gap:20px 40px}
 .cr-r{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mu2);margin-bottom:3px}
 .cr-n{font-size:13px;font-weight:500}
 
 
 /* more work */
-.mw{padding:56px 0 80px;border-top:1px solid var(--bdr);max-width:900px;margin:0 auto;width:calc(100% - 88px)}
 .mw-hdr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:28px}
 .mw-lbl{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)}
 .mw-all{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);transition:color .2s}
@@ -318,11 +310,9 @@ body:not(.dark) .ov-cat{color:var(--mu)}
 @media(max-width:768px){.sdots{display:none}}
 
 /* ── OVERLAY LAYOUT ─────────────────────── */
-:root{--ow:calc(100% - 88px);--owmax:1400px}
+.ov-container{padding:0 var(--pad)}
 .ov-title{font-size:clamp(28px,5vw,64px);font-weight:800;letter-spacing:-.04em;line-height:1;color:#fff;word-break:break-word}
 body:not(.dark) .ov-title{color:var(--txt)}
-
-/* meta + credits — constrained width */
 .ov-meta-wrap{padding:24px 0 8px}
 .ov-meta-inner{display:flex;gap:24px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid var(--bdr)}
 .mi-l{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--mu2);margin-bottom:3px}
@@ -334,46 +324,35 @@ body:not(.dark) .ov-title{color:var(--txt)}
 .ov-credits-grid{display:flex;flex-wrap:wrap;gap:10px 36px}
 .cr-item .cr-r{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mu2);margin-bottom:2px}
 .cr-item .cr-n{font-size:13px;font-weight:500}
-
-/* all blocks — full width, zero gap */
 .ob{display:block;width:100%;border:none;outline:none}
 .ov-blocks{display:flex;flex-direction:column;gap:0}
-
-.ov-blocks>*+*{margin-top:0}
-
-/* VIDEO — full width */
-.ob-video-wrap{width:calc(100% + 2*var(--pad));margin-left:calc(-1*var(--pad));overflow:hidden}
+/* VIDEO — break out of container to full width */
+.ob-video-wrap{width:100%}
 .ob-video{position:relative;padding-bottom:56.25%;height:0;background:#000}
 .ob-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-
-/* DUO — 2 side by side, zero gap */
+/* DUO */
 .ob-duo{display:grid;grid-template-columns:1fr 1fr;gap:0;width:100%}
 .ob-duo>*{aspect-ratio:16/9;overflow:hidden}
 .ob-duo img,.ob-duo video{width:100%;height:100%;object-fit:cover;display:block}
-
-/* QUAD — 2x2, zero gap */
+/* QUAD */
 .ob-quad{display:grid;grid-template-columns:1fr 1fr;gap:0;width:100%}
 .ob-quad>*{aspect-ratio:16/9;overflow:hidden}
 .ob-quad img,.ob-quad video{width:100%;height:100%;object-fit:cover;display:block}
-
-/* QUOTE — constrained */
+/* QUOTE */
 .ob-quote{padding:56px 0}
 .ob-quote p{font-size:clamp(22px,3vw,42px);font-weight:700;letter-spacing:-.03em;line-height:1.15;color:var(--txt)}
-
-/* SPLIT — full width, zero gap */
+/* SPLIT */
 .ob-split{display:grid;grid-template-columns:1fr 1fr;gap:0;width:100%;overflow:hidden}
 .ob-split-media{overflow:hidden;aspect-ratio:4/3}
 .ob-split-media img,.ob-split-media video{width:100%;height:100%;object-fit:cover;display:block}
 .ob-split-text{padding:48px 44px;display:flex;flex-direction:column;justify-content:center;background:var(--surf)}
 .ob-split-text h3{font-size:clamp(18px,2vw,28px);font-weight:700;letter-spacing:-.02em;margin-bottom:16px;line-height:1.1}
 .ob-split-text p{font-size:15px;line-height:1.8;color:var(--mu)}
-
 /* FULL WIDTH */
 .ob-full-media{width:100%}
 .ob-full-media img,.ob-full-media video{width:100%;display:block;max-height:75vh;object-fit:cover}
-
-/* more work */
-.mw{padding:48px var(--pad) 72px;border-top:1px solid var(--bdr)}
+/* MORE WORK — break out of container to full width, own padding */
+.mw{padding:48px 0 72px;border-top:1px solid var(--bdr)}
 .mw-hdr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:28px}
 .mw-lbl{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)}
 .mw-all{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);transition:color .2s}
@@ -385,20 +364,24 @@ body:not(.dark) .ov-title{color:var(--txt)}
 .mc-img img,.mc-img video{width:100%;height:100%;object-fit:cover}
 .mc-cat{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mu2);padding:10px 12px 3px}
 .mc-name{font-size:13px;font-weight:600;padding:0 12px 12px;line-height:1.3}
-
 @media(max-width:768px){
+  .ov-container{padding:0 20px}
   .ob-duo,.ob-quad{grid-template-columns:1fr}
   .ob-split{grid-template-columns:1fr}
   .ob-split-media{aspect-ratio:16/9}
   .ob-split-text{padding:28px 20px}
-  .ob-quote{padding:40px 20px}
-  .ov-container{padding:0 20px}
-  .mw-grid{grid-template-columns:repeat(2,1fr);}
+  .ob-quote{padding:40px 0}
+  .ob-video-wrap{width:calc(100% + 40px);margin-left:-20px}
+  .mw{width:calc(100% + 40px);margin-left:-20px;padding:40px 20px 60px}
+  .mw-grid{grid-template-columns:repeat(2,1fr)}
   .mw-grid .mcard:nth-child(3){display:none}
 }
 @media(min-width:769px) and (max-width:1024px){
-  :root{--ow:calc(100% - 56px)}
-  .ob-split-text{padding:40px 40px}
+  .ov-container{padding:0 28px}
+  .ob-split-text{padding:40px 36px}
+  .ob-video-wrap{width:calc(100% + 56px);margin-left:-28px}
+  .mw{width:calc(100% + 56px);margin-left:-28px;padding:48px 28px 70px}
+  .mw-grid{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
@@ -516,7 +499,6 @@ body:not(.dark) .ov-title{color:var(--txt)}
     <div class="ov-container">
     <div class="ov-meta-wrap" id="ov-meta"></div>
     <div class="ov-blocks" id="ov-blocks"></div>
-    </div><!-- /ov-container -->
     <div class="mw">
       <div class="mw-hdr">
         <span class="mw-lbl">More Work</span>
@@ -524,6 +506,7 @@ body:not(.dark) .ov-title{color:var(--txt)}
       </div>
       <div class="mw-grid" id="mw-grid"></div>
     </div>
+    </div><!-- /ov-container -->
   </div>
 </div>
 
