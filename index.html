@@ -342,7 +342,7 @@ body:not(.dark) .ov-title{color:var(--txt)}
 .ov-blocks>*+*{margin-top:0}
 
 /* VIDEO — full width */
-.ob-video-wrap{width:calc(100% + 2*var(--pad));margin-left:calc(-1*var(--pad))}
+.ob-video-wrap{width:calc(100% + 2*var(--pad));margin-left:calc(-1*var(--pad));overflow:hidden}
 .ob-video{position:relative;padding-bottom:56.25%;height:0;background:#000}
 .ob-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
@@ -373,7 +373,7 @@ body:not(.dark) .ov-title{color:var(--txt)}
 .ob-full-media img,.ob-full-media video{width:100%;display:block;max-height:75vh;object-fit:cover}
 
 /* more work */
-.mw{padding:48px var(--pad) 72px;border-top:1px solid var(--bdr);width:calc(100% + 2*var(--pad));margin-left:calc(-1*var(--pad))}
+.mw{padding:48px var(--pad) 72px;border-top:1px solid var(--bdr)}
 .mw-hdr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:28px}
 .mw-lbl{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)}
 .mw-all{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);transition:color .2s}
@@ -516,6 +516,7 @@ body:not(.dark) .ov-title{color:var(--txt)}
     <div class="ov-container">
     <div class="ov-meta-wrap" id="ov-meta"></div>
     <div class="ov-blocks" id="ov-blocks"></div>
+    </div><!-- /ov-container -->
     <div class="mw">
       <div class="mw-hdr">
         <span class="mw-lbl">More Work</span>
@@ -523,7 +524,6 @@ body:not(.dark) .ov-title{color:var(--txt)}
       </div>
       <div class="mw-grid" id="mw-grid"></div>
     </div>
-    </div><!-- /ov-container -->
   </div>
 </div>
 
