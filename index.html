@@ -346,12 +346,12 @@ body:not(.dark) .ov-title{color:var(--txt)}
 .ob-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
 /* DUO — 2 side by side, zero gap */
-.ob-duo{display:grid;grid-template-columns:1fr 1fr;gap:0;width:calc(100% + 2*var(--pad));margin-left:calc(-1*var(--pad))}
+.ob-duo{display:grid;grid-template-columns:1fr 1fr;gap:2px;width:100%}
 .ob-duo>*{aspect-ratio:16/9;overflow:hidden}
 .ob-duo img,.ob-duo video{width:100%;height:100%;object-fit:cover;display:block}
 
 /* QUAD — 2x2, zero gap */
-.ob-quad{display:grid;grid-template-columns:1fr 1fr;gap:0;width:calc(100% + 2*var(--pad));margin-left:calc(-1*var(--pad))}
+.ob-quad{display:grid;grid-template-columns:1fr 1fr;gap:2px;width:100%}
 .ob-quad>*{aspect-ratio:16/9;overflow:hidden}
 .ob-quad img,.ob-quad video{width:100%;height:100%;object-fit:cover;display:block}
 
@@ -360,7 +360,7 @@ body:not(.dark) .ov-title{color:var(--txt)}
 .ob-quote p{font-size:clamp(22px,3vw,42px);font-weight:700;letter-spacing:-.03em;line-height:1.15;color:var(--txt)}
 
 /* SPLIT — full width, zero gap */
-.ob-split{display:grid;grid-template-columns:1fr 1fr;gap:0;width:calc(100% + 2*var(--pad));margin-left:calc(-1*var(--pad));overflow:hidden}
+.ob-split{display:grid;grid-template-columns:1fr 1fr;gap:2px;width:100%;overflow:hidden}
 .ob-split-media{overflow:hidden;aspect-ratio:4/3}
 .ob-split-media img,.ob-split-media video{width:100%;height:100%;object-fit:cover;display:block}
 .ob-split-text{padding:52px 56px;display:flex;flex-direction:column;justify-content:center;background:var(--surf)}
@@ -368,11 +368,11 @@ body:not(.dark) .ov-title{color:var(--txt)}
 .ob-split-text p{font-size:15px;line-height:1.8;color:var(--mu)}
 
 /* FULL WIDTH */
-.ob-full-media{width:calc(100% + 2*var(--pad));margin-left:calc(-1*var(--pad))}
+.ob-full-media{width:100%}
 .ob-full-media img,.ob-full-media video{width:100%;display:block;max-height:75vh;object-fit:cover}
 
 /* more work */
-.mw{padding:56px 0 80px;border-top:1px solid var(--bdr)}
+.mw{padding:56px 0 80px;border-top:1px solid var(--bdr);width:100%}
 .mw-hdr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:28px}
 .mw-lbl{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)}
 .mw-all{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);transition:color .2s}
@@ -717,14 +717,14 @@ function pageFromPath(){
 
 // on load — read URL and show correct page
 (function initRoute(){
-  const p=pageFromPath();
-  goPage(p,false);
-  // check for project slug in URL
   const parts=location.pathname.split('/').filter(Boolean);
   if(parts[0]==='work'&&parts[1]){
-    const slug=parts[1];
-    // will open after projects load
-    window._pendingSlug=slug;
+    // project URL — show home page, open project after load
+    window._pendingSlug=parts[1];
+    goPage('home',false);
+  } else {
+    const p=pageFromPath();
+    goPage(p,false);
   }
 })();
 
