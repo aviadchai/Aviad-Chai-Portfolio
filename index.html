@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzAwMCIvPjx0ZXh0IHg9IjE2IiB5PSIyMiIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI4MDAiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiNmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSItMC41Ij5BQzwvdGV4dD48L3N2Zz4=">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Aviad Chai — Motion Designer</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -57,7 +58,7 @@ body.dark #cr{
 /* ── LOADER ─────────────────────────────── */
 #ld{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;animation:ldOut .45s var(--ease) 1.6s forwards}
 @keyframes ldOut{to{opacity:0;visibility:hidden;pointer-events:none}}
-#ld .ld-name{font-size:clamp(18px,2.5vw,32px);font-weight:700;letter-spacing:-.04em;overflow:hidden}
+#ld .ld-name{font-size:clamp(22px,3vw,38px);font-weight:800;letter-spacing:-.05em;overflow:hidden}
 #ld .ld-name span{display:block;animation:ldUp .7s var(--ease) .1s both}
 #ld .ld-sub{font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--mu);overflow:hidden}
 #ld .ld-sub span{display:block;animation:ldUp .6s var(--ease) .65s both}
@@ -341,7 +342,7 @@ body:not(.dark) .ov-title{color:var(--txt)}
 .ov-blocks>*+*{margin-top:0}
 
 /* VIDEO — full width */
-.ob-video-wrap{width:100%;margin-left:0}
+.ob-video-wrap{width:100%}
 .ob-video{position:relative;padding-bottom:56.25%;height:0;background:#000}
 .ob-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
@@ -363,7 +364,7 @@ body:not(.dark) .ov-title{color:var(--txt)}
 .ob-split{display:grid;grid-template-columns:1fr 1fr;gap:2px;width:100%;overflow:hidden}
 .ob-split-media{overflow:hidden;aspect-ratio:4/3}
 .ob-split-media img,.ob-split-media video{width:100%;height:100%;object-fit:cover;display:block}
-.ob-split-text{padding:52px 56px;display:flex;flex-direction:column;justify-content:center;background:var(--surf)}
+.ob-split-text{padding:48px 44px;display:flex;flex-direction:column;justify-content:center;background:var(--surf)}
 .ob-split-text h3{font-size:clamp(18px,2vw,28px);font-weight:700;letter-spacing:-.02em;margin-bottom:16px;line-height:1.1}
 .ob-split-text p{font-size:15px;line-height:1.8;color:var(--mu)}
 
@@ -719,12 +720,10 @@ function pageFromPath(){
 (function initRoute(){
   const parts=location.pathname.split('/').filter(Boolean);
   if(parts[0]==='work'&&parts[1]){
-    // project URL — show home page, open project after load
     window._pendingSlug=parts[1];
     goPage('home',false);
   } else {
-    const p=pageFromPath();
-    goPage(p,false);
+    goPage(pageFromPath(),false);
   }
 })();
 
@@ -799,9 +798,10 @@ function renderGrid(){
   observe();bindHover();
   // open pending project from URL
   if(window._pendingSlug){
-    const idx=projects.findIndex(p=>slugify(p.name)===window._pendingSlug);
-    if(idx>=0){setTimeout(()=>openProject(idx),100);}
+    const slug=window._pendingSlug;
     window._pendingSlug=null;
+    const idx=projects.findIndex(p=>slugify(p.name)===slug);
+    if(idx>=0){setTimeout(()=>openProject(idx),200);}
   }
 }
 
