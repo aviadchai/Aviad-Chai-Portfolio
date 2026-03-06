@@ -222,13 +222,13 @@ footer button:hover{color:var(--txt)}
 .ov-wrap{padding-top:var(--nav);transform:translateY(22px);opacity:0;transition:transform .5s var(--ease) .06s,opacity .5s ease .06s;overflow:hidden}
 .ov-inner{max-width:900px;margin:0 auto;width:100%;padding:0 var(--pad)}
 #ov.on .ov-wrap{transform:translateY(0);opacity:1}
-.ov-hero{position:relative;height:380px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;width:100%}
+.ov-hero{position:relative;height:420px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;width:100%}
 .ov-grad{position:absolute;inset:0;opacity:0;transform:scale(1.08);transition:opacity .7s ease,transform .9s var(--ease)}
 #ov.on .ov-grad{opacity:.78;transform:scale(1)}
 .ov-noise{position:absolute;inset:0;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:150px}
 .ov-fade{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 25%,var(--bg) 100%)}
 .ov-container{padding:0 var(--pad)}
-.ov-hc{position:relative;z-index:1;opacity:0;transform:translateY(16px);transition:opacity .55s ease .25s,transform .55s var(--ease) .25s;padding:0 0 40px}
+.ov-hc{position:relative;z-index:1;opacity:0;transform:translateY(16px);transition:opacity .55s ease .25s,transform .55s var(--ease) .25s;padding:0 0 48px}
 #ov.on .ov-hc{opacity:1;transform:translateY(0)}
 .ov-cat{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:9px}
 .ov-title{font-size:clamp(28px,5vw,58px);font-weight:800;letter-spacing:-.04em;line-height:.92;color:#fff}
@@ -261,7 +261,7 @@ body:not(.dark) .ov-cat{color:var(--mu)}
 .mw-lbl{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)}
 .mw-all{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);transition:color .2s}
 .mw-all:hover{color:var(--txt)}
-.mw-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.mw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .mcard{background:var(--card);border-radius:4px;overflow:hidden;transition:opacity .2s}
 .mcard:hover{opacity:.8}
 .mc-img{aspect-ratio:4/3;overflow:hidden}
@@ -337,10 +337,11 @@ body:not(.dark) .ov-title{color:var(--txt)}
 /* all blocks — full width, zero gap */
 .ob{display:block;width:100%;border:none;outline:none}
 .ov-blocks{display:flex;flex-direction:column;gap:0}
+.ov-blocks>.ob+.ob{margin-top:2px}
 .ov-blocks>*+*{margin-top:0}
 
 /* VIDEO — full width */
-.ob-video-wrap{width:calc(100% + 2*var(--pad));margin-left:calc(-1*var(--pad))}
+.ob-video-wrap{width:100%;margin-left:0}
 .ob-video{position:relative;padding-bottom:56.25%;height:0;background:#000}
 .ob-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
@@ -376,7 +377,7 @@ body:not(.dark) .ov-title{color:var(--txt)}
 .mw-lbl{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)}
 .mw-all{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);transition:color .2s}
 .mw-all:hover{color:var(--txt)}
-.mw-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.mw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .mcard{background:var(--card);border-radius:4px;overflow:hidden;transition:opacity .2s;cursor:none}
 .mcard:hover{opacity:.8}
 .mc-img{aspect-ratio:4/3;overflow:hidden}
@@ -391,7 +392,8 @@ body:not(.dark) .ov-title{color:var(--txt)}
   .ob-split-text{padding:28px 20px}
   .ob-quote{padding:40px 20px}
   .ov-container{padding:0 20px}
-  .mw-grid{grid-template-columns:repeat(2,1fr)}
+  .mw-grid{grid-template-columns:repeat(2,1fr);}
+  .mw-grid .mcard:nth-child(3){display:none}
 }
 @media(min-width:769px) and (max-width:1024px){
   :root{--ow:calc(100% - 56px)}
@@ -702,6 +704,8 @@ function goPage(p,pushState=true){
 
 // handle back/forward
 window.addEventListener('popstate',e=>{
+  if(e.state?.project!=null){openProject(e.state.project);return;}
+  closeOv();
   const p=e.state?.page||pageFromPath();
   goPage(p,false);
 });
@@ -715,6 +719,13 @@ function pageFromPath(){
 (function initRoute(){
   const p=pageFromPath();
   goPage(p,false);
+  // check for project slug in URL
+  const parts=location.pathname.split('/').filter(Boolean);
+  if(parts[0]==='work'&&parts[1]){
+    const slug=parts[1];
+    // will open after projects load
+    window._pendingSlug=slug;
+  }
 })();
 
 /* ── SCROLL DOTS ────────────────────────── */
@@ -786,12 +797,21 @@ function renderGrid(){
     g.appendChild(c);
   });
   observe();bindHover();
+  // open pending project from URL
+  if(window._pendingSlug){
+    const idx=projects.findIndex(p=>slugify(p.name)===window._pendingSlug);
+    if(idx>=0){setTimeout(()=>openProject(idx),100);}
+    window._pendingSlug=null;
+  }
 }
 
 /* ── OVERLAY ────────────────────────────── */
+function slugify(s){return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
 function openProject(idx){
   const mp=document.getElementById('nav-pill-mobile');
   if(mp)mp.style.display='none';
+  const slug=slugify(projects[idx].name);
+  history.pushState({project:idx},'','/work/'+slug);
   const p=projects[idx];
   const g1=p.gradient1||GRADS[idx%GRADS.length][0];
   const g2=p.gradient2||GRADS[idx%GRADS.length][1];
@@ -903,7 +923,7 @@ function openProject(idx){
   // more work
   const mwg=document.getElementById('mw-grid');
   mwg.innerHTML='';
-  projects.filter((_,i)=>i!==idx).slice(0,4).forEach(mp=>{
+  projects.filter((_,i)=>i!==idx).slice(0,3).forEach(mp=>{
     const ri=projects.indexOf(mp);
     const mg=mp.gradient1||GRADS[ri%GRADS.length][0];
     const el=document.createElement('div');
@@ -924,6 +944,7 @@ function closeOv(){
   document.body.classList.remove('lock');
   const mp=document.getElementById('nav-pill-mobile');
   if(mp)mp.style.display='';
+  history.pushState({page:'home'},'','/');;
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeOv();closeMenu();}});
 
