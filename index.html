@@ -223,13 +223,13 @@ footer button:hover{color:var(--txt)}
 .ov-wrap{padding-top:var(--nav);transform:translateY(22px);opacity:0;transition:transform .5s var(--ease) .06s,opacity .5s ease .06s;overflow:hidden}
 .ov-inner{max-width:900px;margin:0 auto;width:100%;padding:0 var(--pad)}
 #ov.on .ov-wrap{transform:translateY(0);opacity:1}
-.ov-hero{position:relative;height:420px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;width:100%}
+.ov-hero{position:relative;height:480px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;width:100%}
 .ov-grad{position:absolute;inset:0;opacity:0;transform:scale(1.08);transition:opacity .7s ease,transform .9s var(--ease)}
 #ov.on .ov-grad{opacity:.78;transform:scale(1)}
 .ov-noise{position:absolute;inset:0;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:150px}
 .ov-fade{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 25%,var(--bg) 100%)}
 .ov-container{padding:0 var(--pad);overflow:hidden}
-.ov-hc{position:relative;z-index:1;opacity:0;transform:translateY(16px);transition:opacity .55s ease .25s,transform .55s var(--ease) .25s;padding:0 0 48px}
+.ov-hc{position:relative;z-index:1;opacity:0;transform:translateY(16px);transition:opacity .55s ease .25s,transform .55s var(--ease) .25s;padding:0 0 56px}
 #ov.on .ov-hc{opacity:1;transform:translateY(0)}
 .ov-cat{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:9px}
 .ov-title{font-size:clamp(28px,5vw,58px);font-weight:800;letter-spacing:-.04em;line-height:.92;color:#fff}
@@ -323,7 +323,7 @@ body:not(.dark) .ov-cat{color:var(--mu)}
 body:not(.dark) .ov-title{color:var(--txt)}
 
 /* meta + credits — constrained width */
-.ov-meta-wrap{padding:20px 0 0}
+.ov-meta-wrap{padding:24px 0 8px}
 .ov-meta-inner{display:flex;gap:24px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid var(--bdr)}
 .mi-l{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--mu2);margin-bottom:3px}
 .mi-v{font-size:13px;font-weight:500}
@@ -342,7 +342,7 @@ body:not(.dark) .ov-title{color:var(--txt)}
 .ov-blocks>*+*{margin-top:0}
 
 /* VIDEO — full width */
-.ob-video-wrap{width:100%}
+.ob-video-wrap{width:calc(100% + 2*var(--pad));margin-left:calc(-1*var(--pad))}
 .ob-video{position:relative;padding-bottom:56.25%;height:0;background:#000}
 .ob-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
@@ -373,7 +373,7 @@ body:not(.dark) .ov-title{color:var(--txt)}
 .ob-full-media img,.ob-full-media video{width:100%;display:block;max-height:75vh;object-fit:cover}
 
 /* more work */
-.mw{padding:48px 0 72px;border-top:1px solid var(--bdr)}
+.mw{padding:48px var(--pad) 72px;border-top:1px solid var(--bdr);width:calc(100% + 2*var(--pad));margin-left:calc(-1*var(--pad))}
 .mw-hdr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:28px}
 .mw-lbl{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)}
 .mw-all{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);transition:color .2s}
