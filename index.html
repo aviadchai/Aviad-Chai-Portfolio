@@ -359,6 +359,20 @@ body:not(.dark) .ov-title{color:var(--txt)}
 /* FULL WIDTH */
 .ob-full-media{width:100%}
 .ob-full-media img,.ob-full-media video{width:100%;display:block;max-height:75vh;object-fit:cover}
+/* DUO VIDEO — two embeds side by side */
+.ob-duo-video{display:grid;grid-template-columns:1fr 1fr;gap:0;width:100%}
+.ob-duo-video .ob-video{position:relative;padding-bottom:56.25%;height:0;background:#000}
+.ob-duo-video .ob-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+/* DUO TEXT — two text columns */
+.ob-duo-text{display:grid;grid-template-columns:1fr 1fr;gap:0;width:100%}
+.ob-duo-text .dt-col{padding:48px 44px;background:var(--surf)}
+.ob-duo-text .dt-col:first-child{border-right:1px solid var(--bdr)}
+.ob-duo-text .dt-col h3{font-size:clamp(16px,1.8vw,24px);font-weight:700;letter-spacing:-.02em;margin-bottom:14px;line-height:1.1}
+.ob-duo-text .dt-col p{font-size:15px;line-height:1.8;color:var(--mu)}
+/* TEXT BLOCK — full width text paragraph */
+.ob-text{padding:40px 44px;background:var(--surf)}
+.ob-text h3{font-size:clamp(18px,2vw,28px);font-weight:700;letter-spacing:-.02em;margin-bottom:14px;line-height:1.1}
+.ob-text p{font-size:15px;line-height:1.8;color:var(--mu);max-width:680px}
 /* MORE WORK — break out of container to full width, own padding */
 .mw{padding:48px 0 72px;border-top:1px solid var(--bdr)}
 .mw-hdr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:28px}
@@ -375,7 +389,9 @@ body:not(.dark) .ov-title{color:var(--txt)}
 @media(max-width:768px){
   .ov-container{padding:0 20px}
   .ov-blocks{gap:8px}
-  .ob-duo,.ob-quad{grid-template-columns:1fr;gap:8px}
+  .ob-duo,.ob-quad,.ob-duo-video,.ob-duo-text{grid-template-columns:1fr;gap:8px}
+  .ob-duo-text .dt-col:first-child{border-right:none;border-bottom:1px solid var(--bdr)}
+  .ob-duo-text .dt-col,.ob-text{padding:28px 20px}
   .ob-split{grid-template-columns:1fr;gap:8px}
   .ob-split-media{aspect-ratio:16/9}
   .ob-split-text{padding:28px 20px}
@@ -852,7 +868,58 @@ function openProject(idx){
 
   function med(url){return url?media(url):'';}
 
-  // 1. VIDEO — full width
+  function embedSrc(src){
+    src=src.trim();
+    if(src.includes('vimeo.com')){
+      if(!src.includes('player.vimeo'))
+        src='https://player.vimeo.com/video/'+src.replace(/.*vimeo\.com\/(?:video\/)?/,'').split('?')[0];
+      src+=(src.includes('?')?'&':'?')+'autoplay=0&title=0&byline=0&portrait=0&controls=1&badge=0&dnt=1';
+    } else if(src.includes('youtu')){
+      const vid=src.includes('youtu.be/')?src.split('youtu.be/')[1].split('?')[0]:(src.match(/[?&]v=([^&]+)/)||[])[1]||'';
+      src=`https://www.youtube.com/embed/${vid}?controls=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3`;
+    }
+    return src;
+  }
+
+  // ── DYNAMIC BLOCKS (new format) ──────────
+  let dynBlocks=null;
+  try{if(p.blocks)dynBlocks=JSON.parse(p.blocks);}catch(e){}
+
+  if(dynBlocks&&dynBlocks.length>0){
+    dynBlocks.forEach(b=>{
+      if(b.type==='video'&&b.url)
+        addBlock(`<div class="ob-video-wrap"><div class="ob-video"><iframe src="${embedSrc(b.url)}" allowfullscreen allow="autoplay;fullscreen;picture-in-picture" loading="lazy" frameborder="0"></iframe></div></div>`);
+      else if(b.type==='single'&&b.url)
+        addBlock(`<div class="ob-full-media">${med(b.url)}</div>`);
+      else if(b.type==='duo'){
+        if(b.media1&&b.media2) addBlock(`<div class="ob-duo"><div>${med(b.media1)}</div><div>${med(b.media2)}</div></div>`);
+        else if(b.media1||b.media2) addBlock(`<div class="ob-full-media">${med(b.media1||b.media2)}</div>`);
+      }
+      else if(b.type==='split-left'){
+        if(b.media&&(b.title||b.text))
+          addBlock(`<div class="ob-split"><div class="ob-split-media">${med(b.media)}</div><div class="ob-split-text">${b.title?`<h3>${b.title}</h3>`:''}<p>${b.text||''}</p></div></div>`);
+        else if(b.media) addBlock(`<div class="ob-full-media">${med(b.media)}</div>`);
+      }
+      else if(b.type==='split-right'){
+        if(b.media&&(b.title||b.text))
+          addBlock(`<div class="ob-split"><div class="ob-split-text">${b.title?`<h3>${b.title}</h3>`:''}<p>${b.text||''}</p></div><div class="ob-split-media">${med(b.media)}</div></div>`);
+        else if(b.media) addBlock(`<div class="ob-full-media">${med(b.media)}</div>`);
+      }
+      else if(b.type==='duo-video'&&(b.url1||b.url2)){
+        const v1=b.url1?`<div class="ob-video"><iframe src="${embedSrc(b.url1)}" allowfullscreen allow="autoplay;fullscreen;picture-in-picture" loading="lazy" frameborder="0"></iframe></div>`:'';
+        const v2=b.url2?`<div class="ob-video"><iframe src="${embedSrc(b.url2)}" allowfullscreen allow="autoplay;fullscreen;picture-in-picture" loading="lazy" frameborder="0"></iframe></div>`:'';
+        if(v1&&v2) addBlock(`<div class="ob-duo-video">${v1}${v2}</div>`);
+        else addBlock(`<div class="ob-video-wrap"><div class="ob-video"><iframe src="${embedSrc(b.url1||b.url2)}" allowfullscreen allow="autoplay;fullscreen;picture-in-picture" loading="lazy" frameborder="0"></iframe></div></div>`);
+      }
+      else if(b.type==='text'&&(b.title||b.text))
+        addBlock(`<div class="ob-text">${b.title?`<h3>${b.title}</h3>`:''}<p>${b.text||''}</p></div>`);
+      else if(b.type==='duo-text'&&(b.title1||b.text1||b.title2||b.text2))
+        addBlock(`<div class="ob-duo-text"><div class="dt-col">${b.title1?`<h3>${b.title1}</h3>`:''}<p>${b.text1||''}</p></div><div class="dt-col">${b.title2?`<h3>${b.title2}</h3>`:''}<p>${b.text2||''}</p></div></div>`);
+      else if(b.type==='quote'&&b.text)
+        addBlock(`<div class="ob-quote"><p>${b.text}</p></div>`);
+    });
+  } else {
+  // ── LEGACY FIXED-ORDER RENDERING ─────────
   if(p.video){
     let src=p.video.trim();
     if(src.includes('vimeo.com')){
@@ -865,52 +932,29 @@ function openProject(idx){
     }
     addBlock(`<div class="ob-video-wrap"><div class="ob-video"><iframe src="${src}" allowfullscreen allow="autoplay;fullscreen;picture-in-picture" loading="lazy" frameborder="0"></iframe></div></div>`);
   }
-
-  // 2. DUO A — media1 + media2 side by side (or single full)
   if(p.media1||p.media2){
-    if(p.media1&&p.media2)
-      addBlock(`<div class="ob-duo"><div>${med(p.media1)}</div><div>${med(p.media2)}</div></div>`);
-    else
-      addBlock(`<div class="ob-full-media">${med(p.media1||p.media2)}</div>`);
+    if(p.media1&&p.media2) addBlock(`<div class="ob-duo"><div>${med(p.media1)}</div><div>${med(p.media2)}</div></div>`);
+    else addBlock(`<div class="ob-full-media">${med(p.media1||p.media2)}</div>`);
   }
-
-  // 3. DUO B — media3 + media4 (optional — if no split text, shows as 2nd duo row)
-  //    But if split text exists, media3 is used in split sections instead
-  const hasSplit = p.media5||p.title1||p.para1||p.title2||p.para2||p.media6;
-  if(!hasSplit && (p.media3||p.media4)){
-    if(p.media3&&p.media4)
-      addBlock(`<div class="ob-duo"><div>${med(p.media3)}</div><div>${med(p.media4)}</div></div>`);
-    else
-      addBlock(`<div class="ob-full-media">${med(p.media3||p.media4)}</div>`);
+  const hasSplit=p.media5||p.title1||p.para1||p.title2||p.para2||p.media6;
+  if(!hasSplit&&(p.media3||p.media4)){
+    if(p.media3&&p.media4) addBlock(`<div class="ob-duo"><div>${med(p.media3)}</div><div>${med(p.media4)}</div></div>`);
+    else addBlock(`<div class="ob-full-media">${med(p.media3||p.media4)}</div>`);
   }
-
-  // 4. QUOTE
-  if(p.quote)
-    addBlock(`<div class="ob-quote"><p>${p.quote}</p></div>`);
-
-  // 5. SPLIT LEFT — media5 left, title1+para1 right
+  if(p.quote) addBlock(`<div class="ob-quote"><p>${p.quote}</p></div>`);
   if(p.media5||p.title1||p.para1){
-    if(p.media5&&(p.title1||p.para1)){
+    if(p.media5&&(p.title1||p.para1))
       addBlock(`<div class="ob-split"><div class="ob-split-media">${med(p.media5)}</div><div class="ob-split-text">${p.title1?`<h3>${p.title1}</h3>`:''}<p>${p.para1||''}</p></div></div>`);
-    } else if(p.media5){
-      addBlock(`<div class="ob-full-media">${med(p.media5)}</div>`);
-    }
+    else if(p.media5) addBlock(`<div class="ob-full-media">${med(p.media5)}</div>`);
   }
-
-  // 6. SPLIT RIGHT — title2+para2 left, media6 right
   if(p.title2||p.para2||p.media6){
-    if(p.media6&&(p.title2||p.para2)){
+    if(p.media6&&(p.title2||p.para2))
       addBlock(`<div class="ob-split"><div class="ob-split-text">${p.title2?`<h3>${p.title2}</h3>`:''}<p>${p.para2||''}</p></div><div class="ob-split-media">${med(p.media6)}</div></div>`);
-    } else if(p.media6){
-      addBlock(`<div class="ob-full-media">${med(p.media6)}</div>`);
-    }
+    else if(p.media6) addBlock(`<div class="ob-full-media">${med(p.media6)}</div>`);
   }
-
-  // 7. FULL A
   if(p.media7) addBlock(`<div class="ob-full-media">${med(p.media7)}</div>`);
-
-  // 8. FULL B
   if(p.media8) addBlock(`<div class="ob-full-media">${med(p.media8)}</div>`);
+  }
 
   // more work
   const mwg=document.getElementById('mw-grid');
