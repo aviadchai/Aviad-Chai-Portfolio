@@ -16,15 +16,13 @@ img,video{display:block}
 button{cursor:pointer;border:none;background:none;color:inherit}
 a{color:inherit;text-decoration:none}
 
-/* ── SCREENS ──────────────────────────── */
 .screen{display:none}.screen.on{display:flex}
 
-/* ── SHARED FORM ELEMENTS ─────────────── */
+/* SHARED */
 .f-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);display:block;margin-bottom:4px}
 .f-label .req{color:var(--danger)}
 .f-inp{width:100%;background:var(--surf);border:1.5px solid var(--bdr);border-radius:8px;padding:8px 11px;font-size:13px;color:var(--txt);outline:none;transition:border-color .2s}
 .f-inp:focus{border-color:var(--txt)}
-.f-inp.bg{background:var(--bg)}
 .f-sel{width:100%;background:var(--surf);border:1.5px solid var(--bdr);border-radius:8px;padding:8px 11px;font-size:13px;color:var(--txt);outline:none;appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:26px;transition:border-color .2s}
 .f-sel:focus{border-color:var(--txt)}
 .f-ta{width:100%;background:var(--surf);border:1.5px solid var(--bdr);border-radius:8px;padding:8px 11px;font-size:13px;color:var(--txt);outline:none;resize:vertical;min-height:68px;line-height:1.55;transition:border-color .2s}
@@ -33,38 +31,33 @@ a{color:inherit;text-decoration:none}
 .fgroup{display:flex;flex-direction:column;gap:4px}
 .frow{display:grid;gap:10px;margin-bottom:10px}
 .frow.c2{grid-template-columns:1fr 1fr}
-.frow.c3{grid-template-columns:1fr 1fr 1fr}
 
-/* ── BUTTONS ──────────────────────────── */
-.btn-pri{width:100%;background:var(--txt);color:var(--bg);border-radius:8px;padding:11px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;transition:opacity .2s}
+/* BUTTONS */
+.btn-pri{width:100%;background:var(--txt);color:var(--bg);border-radius:8px;padding:11px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;transition:opacity .2s;cursor:pointer;border:none}
 .btn-pri:hover{opacity:.8}
 .btn-sm{display:inline-flex;align-items:center;gap:5px;height:30px;padding:0 11px;border-radius:7px;border:1px solid var(--bdr);background:var(--surf);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mu);transition:color .2s,border-color .2s,background .2s;cursor:pointer;flex-shrink:0}
 .btn-sm:hover{color:var(--txt);border-color:var(--txt)}
 .btn-sm.acc{background:var(--txt);color:var(--bg);border-color:var(--txt)}
 .btn-sm.acc:hover{opacity:.8}
-.btn-sm.ghost{background:none;border:1px dashed var(--bdr);color:var(--mu2)}
+.btn-sm.ghost{background:none;border:1.5px dashed var(--bdr);color:var(--mu2)}
 .btn-sm.ghost:hover{border-color:var(--txt);color:var(--txt)}
 
-/* ── LOGIN ────────────────────────────── */
+/* LOGIN */
 #s-login{height:100vh;align-items:center;justify-content:center;flex-direction:column}
 .login-box{width:100%;max-width:340px;padding:34px;background:var(--surf);border:1px solid var(--bdr);border-radius:16px;display:flex;flex-direction:column;gap:20px}
 .login-logo{font-size:20px;font-weight:800;letter-spacing:-.04em}
 .login-sub{font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mu);margin-top:4px}
 .login-err{font-size:12px;color:var(--danger);display:none;text-align:center}
 
-/* ── SETUP ────────────────────────────── */
+/* SETUP */
 #s-setup{height:100vh;align-items:flex-start;justify-content:center;padding:40px 24px;overflow-y:auto;flex-direction:column}
-.setup-box{width:100%;max-width:500px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
-.setup-card{background:var(--surf);border:1px solid var(--bdr);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:14px}
-.setup-hdr{display:flex;align-items:center;gap:10px}
-.step-num{width:22px;height:22px;border-radius:50%;background:var(--txt);color:var(--bg);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.step-title{font-size:13px;font-weight:700}
-.step-desc{font-size:12px;line-height:1.6;color:var(--mu)}
-.code-block{background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:12px 14px;font-family:monospace;font-size:11px;line-height:1.65;color:var(--mu);white-space:pre;overflow-x:auto;max-height:180px;overflow-y:auto}
-.btn-sec{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:8px;border:1px solid var(--bdr);background:var(--card);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mu);transition:color .2s,border-color .2s;cursor:pointer}
-.btn-sec:hover{color:var(--txt);border-color:var(--txt)}
+.setup-box{width:100%;max-width:480px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.setup-card{background:var(--surf);border:1px solid var(--bdr);border-radius:12px;padding:22px;display:flex;flex-direction:column;gap:14px}
+.setup-card-title{font-size:14px;font-weight:700;letter-spacing:-.02em}
+.setup-desc{font-size:12px;line-height:1.7;color:var(--mu)}
+.setup-desc code{font-family:monospace;background:var(--card);padding:1px 6px;border-radius:4px;font-size:11px}
 
-/* ── ADMIN SHELL ──────────────────────── */
+/* ADMIN */
 #s-admin{height:100vh;flex-direction:column}
 .adm-hdr{height:var(--nav);display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid var(--bdr);flex-shrink:0}
 .adm-logo{font-size:15px;font-weight:800;letter-spacing:-.04em}
@@ -72,7 +65,7 @@ a{color:inherit;text-decoration:none}
 .hdr-right{display:flex;align-items:center;gap:6px}
 .adm-body{display:flex;flex:1;overflow:hidden;min-height:0}
 
-/* ── SIDEBAR ──────────────────────────── */
+/* SIDEBAR */
 .sidebar{width:var(--side);border-right:1px solid var(--bdr);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
 .sb-top{padding:12px 14px 10px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between}
 .sb-label{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)}
@@ -92,11 +85,11 @@ a{color:inherit;text-decoration:none}
 .pi-meta{font-size:10px;color:var(--mu);margin-top:1px}
 .pi-acts{display:none;gap:2px;flex-shrink:0}
 .pi:hover .pi-acts{display:flex}
-.pi-btn{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--mu);transition:background .15s,color .15s}
+.pi-btn{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--mu);transition:background .15s,color .15s;border:none;background:none;cursor:pointer}
 .pi-btn:hover{background:var(--bdr);color:var(--txt)}
 .pi-btn.del:hover{background:#ff3b3020;color:var(--danger)}
 
-/* ── MAIN ─────────────────────────────── */
+/* MAIN */
 .adm-main{flex:1;display:flex;flex-direction:column;overflow:hidden}
 .form-bar{padding:12px 22px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;gap:12px}
 .form-bar-title{font-size:14px;font-weight:700;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -106,65 +99,62 @@ a{color:inherit;text-decoration:none}
 .form-scroll::-webkit-scrollbar{width:3px}
 .form-scroll::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:2px}
 .empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:10px;color:var(--mu);text-align:center}
-.empty-ic{font-size:36px;opacity:.3;line-height:1}
+.empty-ic{font-size:36px;opacity:.3}
 .empty-tx{font-size:12px;line-height:1.7}
 
-/* ── FORM SECTIONS ────────────────────── */
+/* FORM */
 .fsec{margin-bottom:26px}
 .fsec-title{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mu);padding-bottom:10px;margin-bottom:14px;border-bottom:1px solid var(--bdr)}
-
-/* COLOR */
 .color-row{display:flex;align-items:center;gap:7px}
 .clr-pick{width:34px;height:34px;border-radius:7px;border:1.5px solid var(--bdr);padding:2px;cursor:pointer;background:none;flex-shrink:0}
 .clr-pick::-webkit-color-swatch-wrapper{padding:0}
 .clr-pick::-webkit-color-swatch{border:none;border-radius:4px}
 .grad-prev{width:100%;height:40px;border-radius:8px;border:1px solid var(--bdr);margin-top:8px;transition:background .2s}
-
-/* THUMB PREVIEW */
 .thumb-prev{width:100%;max-height:100px;border-radius:8px;overflow:hidden;margin-top:6px;background:var(--card);display:none}
 .thumb-prev img,.thumb-prev video{width:100%;height:100px;object-fit:cover}
-
-/* TAG PILLS */
 .tag-prev{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
 .tag-pill{font-size:10px;font-weight:500;border:1px solid var(--bdr);border-radius:100px;padding:2px 9px;color:var(--mu)}
 
-/* ── BLOCK BUILDER ────────────────────── */
-.builder-empty{padding:24px;text-align:center;font-size:12px;color:var(--mu2);background:var(--card);border-radius:10px;border:1.5px dashed var(--bdr);line-height:1.7}
+/* BLOCK BUILDER */
+.builder-empty{padding:22px;text-align:center;font-size:12px;color:var(--mu2);background:var(--card);border-radius:10px;border:1.5px dashed var(--bdr);line-height:1.7}
 .blocks-list{display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
 .block-card{background:var(--surf);border:1.5px solid var(--bdr);border-radius:10px;overflow:hidden;transition:border-color .2s}
-.block-card:hover{border-color:rgba(0,0,0,.15)}
-body.dark .block-card:hover{border-color:rgba(255,255,255,.15)}
+.block-card.drag-over{border-color:var(--txt)}
 .block-hdr{display:flex;align-items:center;gap:8px;padding:10px 12px;cursor:pointer;user-select:none;background:var(--card)}
-.block-ic{font-size:13px;line-height:1;flex-shrink:0;width:20px;text-align:center}
+.block-ic{font-size:13px;width:20px;text-align:center;flex-shrink:0}
 .block-label{font-size:12px;font-weight:600;flex:1;letter-spacing:-.01em}
-.block-ctrls{display:flex;gap:2px;flex-shrink:0}
+.block-ctrls{display:flex;gap:2px}
 .block-btn{width:24px;height:24px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--mu);transition:background .15s,color .15s;border:none;background:none;cursor:pointer}
 .block-btn:hover{background:var(--bdr);color:var(--txt)}
 .block-btn.del:hover{background:#ff3b3020;color:var(--danger)}
-.block-btn.collapse-arr{font-size:9px;transition:transform .2s}
-.block-btn.collapse-arr.open{transform:rotate(90deg)}
-.block-body{padding:12px;display:none}
-.block-body.open{display:flex;flex-direction:column;gap:9px}
-
-/* ADD BLOCK BUTTON */
+.block-btn.arr{font-size:9px;transition:transform .2s}
+.block-btn.arr.open{transform:rotate(90deg)}
+.block-body{padding:12px;display:none;flex-direction:column;gap:9px}
+.block-body.open{display:flex}
 .add-block-wrap{position:relative}
-.block-type-menu{position:absolute;left:0;right:0;bottom:calc(100% + 6px);background:var(--bg);border:1.5px solid var(--bdr);border-radius:10px;overflow:hidden;z-index:100;display:none;box-shadow:0 8px 32px rgba(0,0,0,.12)}
-.block-type-menu.show{display:block}
-.btm-item{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;transition:background .15s;font-size:13px;border-bottom:1px solid var(--bdr)}
-.btm-item:last-child{border-bottom:none}
-.btm-item:hover{background:var(--surf)}
-.btm-ic{font-size:14px;width:22px;text-align:center;flex-shrink:0}
-.btm-info{display:flex;flex-direction:column;gap:1px}
-.btm-name{font-size:12px;font-weight:600}
-.btm-desc{font-size:10px;color:var(--mu)}
+.block-menu{position:absolute;left:0;right:0;bottom:calc(100%+6px);background:var(--bg);border:1.5px solid var(--bdr);border-radius:10px;overflow:hidden;z-index:100;display:none;box-shadow:0 8px 32px rgba(0,0,0,.12)}
+.block-menu.show{display:block}
+.bm-item{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;transition:background .15s;border-bottom:1px solid var(--bdr)}
+.bm-item:last-child{border-bottom:none}
+.bm-item:hover{background:var(--surf)}
+.bm-ic{font-size:14px;width:22px;text-align:center;flex-shrink:0}
+.bm-name{font-size:12px;font-weight:600}
+.bm-desc{font-size:10px;color:var(--mu);margin-top:1px}
 
-/* ── TOAST ────────────────────────────── */
+/* DEPLOY STATUS */
+.deploy-status{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--mu);padding:7px 12px;border-radius:7px;background:var(--surf);border:1px solid var(--bdr);transition:all .3s}
+.deploy-status.saving{color:#f59e0b;border-color:#f59e0b30;background:#f59e0b08}
+.deploy-status.saved{color:var(--success);border-color:#34c75930;background:#34c75908}
+.deploy-status.error{color:var(--danger);border-color:#ff3b3030;background:#ff3b3008}
+.deploy-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
+
+/* TOAST */
 #toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(60px);background:var(--txt);color:var(--bg);border-radius:100px;padding:9px 18px;font-size:12px;font-weight:600;letter-spacing:.05em;z-index:9999;transition:transform .35s var(--ease),opacity .3s;opacity:0;pointer-events:none;white-space:nowrap}
 #toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 #toast.ok{background:var(--success);color:#fff}
 #toast.err{background:var(--danger);color:#fff}
 
-/* ── CONFIRM ──────────────────────────── */
+/* CONFIRM */
 #confirm{position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:800;display:none;align-items:center;justify-content:center}
 #confirm.on{display:flex}
 .confirm-box{background:var(--bg);border:1px solid var(--bdr);border-radius:14px;padding:26px;max-width:330px;width:90%;display:flex;flex-direction:column;gap:14px}
@@ -179,63 +169,60 @@ body.dark .block-card:hover{border-color:rgba(255,255,255,.15)}
 </head>
 <body>
 
-<!-- ══ LOGIN ═══════════════════════════════ -->
+<!-- LOGIN -->
 <div id="s-login" class="screen on">
   <div class="login-box">
     <div><div class="login-logo">AC</div><div class="login-sub">Portfolio Admin</div></div>
     <div>
       <label class="f-label" for="login-pw">Password</label>
-      <input type="password" id="login-pw" class="f-inp f-inp.bg" placeholder="Enter admin password" autocomplete="current-password">
+      <input type="password" id="login-pw" class="f-inp" placeholder="Enter admin password" autocomplete="current-password">
     </div>
     <div class="login-err" id="login-err">Incorrect password.</div>
     <button class="btn-pri" onclick="doLogin()">Sign In →</button>
   </div>
 </div>
 
-<!-- ══ SETUP ════════════════════════════════ -->
+<!-- SETUP -->
 <div id="s-setup" class="screen">
   <div class="setup-box">
     <div>
-      <div style="font-size:22px;font-weight:800;letter-spacing:-.04em;margin-bottom:6px">One-time Setup</div>
-      <div style="font-size:13px;line-height:1.6;color:var(--mu)">Connect the admin panel to your Google Sheet. Only needs to be done once per browser.</div>
+      <div style="font-size:22px;font-weight:800;letter-spacing:-.04em;margin-bottom:8px">Connect to GitHub</div>
+      <div class="setup-desc">The admin saves changes directly to your GitHub repo. Vercel deploys automatically after every save.</div>
     </div>
+
     <div class="setup-card">
-      <div class="setup-hdr"><div class="step-num">1</div><div class="step-title">Create a Google Apps Script</div></div>
-      <div class="step-desc">Open <strong>script.google.com</strong> → New project → paste this code → Deploy as Web App (Execute as: <em>Me</em>, Access: <em>Anyone</em>).</div>
-      <div class="code-block" id="script-code-block">Loading…</div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn-sec" onclick="copyScript()">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          Copy Code
-        </button>
-        <a class="btn-sec" href="https://script.google.com" target="_blank">Open Apps Script ↗</a>
+      <div class="setup-card-title">Create a GitHub Token</div>
+      <div class="setup-desc">
+        1. Go to <strong>github.com</strong> → your profile photo → <strong>Settings</strong><br>
+        2. Scroll to <strong>Developer settings</strong> (bottom left)<br>
+        3. <strong>Personal access tokens → Tokens (classic)</strong><br>
+        4. <strong>Generate new token (classic)</strong><br>
+        5. Give it a name (e.g. "Portfolio Admin"), check <code>repo</code> scope<br>
+        6. Click <strong>Generate token</strong> → copy it
       </div>
     </div>
+
     <div class="setup-card">
-      <div class="setup-hdr"><div class="step-num">2</div><div class="step-title">Set your secret token in Script Properties</div></div>
-      <div class="step-desc">In Apps Script → Project Settings → Script Properties → add a property: <code style="font-family:monospace;background:var(--card);padding:1px 5px;border-radius:4px">SECRET_TOKEN</code> = any value you choose.</div>
-    </div>
-    <div class="setup-card">
-      <div class="setup-hdr"><div class="step-num">3</div><div class="step-title">Enter your configuration</div></div>
+      <div class="setup-card-title">Enter your token</div>
       <div>
-        <label class="f-label" for="setup-url">Web App URL</label>
-        <input type="url" id="setup-url" class="f-inp" placeholder="https://script.google.com/macros/s/.../exec">
+        <label class="f-label" for="setup-token">GitHub Personal Access Token</label>
+        <input type="password" id="setup-token" class="f-inp" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+        <div class="f-hint">Stored only in your browser. Never sent anywhere except GitHub.</div>
       </div>
-      <div>
-        <label class="f-label" for="setup-token">Secret Token</label>
-        <input type="text" id="setup-token" class="f-inp" placeholder="The token you set in Script Properties">
-      </div>
-      <button class="btn-pri" onclick="saveSetup()">Save & Enter Admin</button>
+      <button class="btn-pri" onclick="saveSetup()">Connect & Enter Admin</button>
     </div>
   </div>
 </div>
 
-<!-- ══ ADMIN ════════════════════════════════ -->
+<!-- ADMIN -->
 <div id="s-admin" class="screen">
-
   <header class="adm-hdr">
     <div class="adm-logo">AC <small>Admin</small></div>
     <div class="hdr-right">
+      <div class="deploy-status" id="deploy-status" style="display:none">
+        <div class="deploy-dot"></div>
+        <span id="deploy-text"></span>
+      </div>
       <a class="btn-sm" href="/" target="_blank">
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         View Site
@@ -245,14 +232,12 @@ body.dark .block-card:hover{border-color:rgba(255,255,255,.15)}
         <svg id="ic-moon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
         <span id="theme-lbl">Dark</span>
       </button>
-      <button class="btn-sm" onclick="openSettings()">Settings</button>
+      <button class="btn-sm" onclick="openSettings()">Token</button>
       <button class="btn-sm" onclick="doLogout()">Sign Out</button>
     </div>
   </header>
 
   <div class="adm-body">
-
-    <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="sb-top">
         <span class="sb-label">Projects</span>
@@ -269,7 +254,6 @@ body.dark .block-card:hover{border-color:rgba(255,255,255,.15)}
       </div>
     </aside>
 
-    <!-- MAIN -->
     <main class="adm-main">
       <div class="empty" id="form-empty">
         <div class="empty-ic">✦</div>
@@ -281,38 +265,41 @@ body.dark .block-card:hover{border-color:rgba(255,255,255,.15)}
           <div class="form-bar-title" id="form-title">New Project</div>
           <div class="form-acts">
             <button class="btn-sm" onclick="cancelForm()">Cancel</button>
-            <button class="btn-sm acc" id="save-btn" onclick="saveProject()">Save Project</button>
+            <button class="btn-sm acc" id="save-btn" onclick="saveProject()">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Publish
+            </button>
           </div>
         </div>
 
         <div class="form-scroll">
 
-          <!-- BASIC INFO -->
+          <!-- BASIC -->
           <div class="fsec">
             <div class="fsec-title">Basic Info</div>
             <div class="frow" style="margin-bottom:10px">
               <div class="fgroup">
-                <label class="f-label" for="f-name">Name <span class="req">*</span></label>
+                <label class="f-label">Name <span class="req">*</span></label>
                 <input type="text" id="f-name" class="f-inp" placeholder="e.g. Artlist — Brand Film 2025">
               </div>
             </div>
             <div class="frow c2">
               <div class="fgroup">
-                <label class="f-label" for="f-category">Category</label>
+                <label class="f-label">Category</label>
                 <input type="text" id="f-category" class="f-inp" placeholder="e.g. Brand Film">
               </div>
               <div class="fgroup">
-                <label class="f-label" for="f-client">Client</label>
+                <label class="f-label">Client</label>
                 <input type="text" id="f-client" class="f-inp" placeholder="e.g. Artlist">
               </div>
             </div>
             <div class="frow c2">
               <div class="fgroup">
-                <label class="f-label" for="f-year">Year</label>
+                <label class="f-label">Year</label>
                 <input type="text" id="f-year" class="f-inp" placeholder="2025">
               </div>
               <div class="fgroup">
-                <label class="f-label" for="f-layout">Grid Layout</label>
+                <label class="f-label">Grid Layout</label>
                 <select id="f-layout" class="f-sel">
                   <option value="half">Half — 4:3</option>
                   <option value="wide">Wide — full width</option>
@@ -327,7 +314,7 @@ body.dark .block-card:hover{border-color:rgba(255,255,255,.15)}
           <div class="fsec">
             <div class="fsec-title">Appearance</div>
             <div class="fgroup" style="margin-bottom:10px">
-              <label class="f-label" for="f-img1">Thumbnail</label>
+              <label class="f-label">Thumbnail</label>
               <input type="url" id="f-img1" class="f-inp" placeholder="Image / GIF / video URL" oninput="updateThumb()">
               <div class="thumb-prev" id="thumb-prev"><img id="thumb-img" src="" alt=""></div>
             </div>
@@ -350,69 +337,56 @@ body.dark .block-card:hover{border-color:rgba(255,255,255,.15)}
             <div class="grad-prev" id="grad-prev"></div>
           </div>
 
-          <!-- PROJECT INFO -->
+          <!-- DETAILS -->
           <div class="fsec">
             <div class="fsec-title">Project Info</div>
             <div class="fgroup" style="margin-bottom:10px">
-              <label class="f-label" for="f-description">Description</label>
+              <label class="f-label">Description</label>
               <textarea id="f-description" class="f-ta" placeholder="Short description shown in the overlay…"></textarea>
             </div>
             <div class="fgroup" style="margin-bottom:10px">
-              <label class="f-label" for="f-tags">Tags</label>
+              <label class="f-label">Tags</label>
               <input type="text" id="f-tags" class="f-inp" placeholder="Cinema 4D, After Effects, Octane Render" oninput="updateTags()">
               <div class="tag-prev" id="tag-prev"></div>
             </div>
             <div class="fgroup">
-              <label class="f-label" for="f-credits">Credits</label>
+              <label class="f-label">Credits</label>
               <input type="text" id="f-credits" class="f-inp" placeholder="Direction & Animation:Aviad Chai, Client:Artlist">
               <div class="f-hint">Format: Role:Name, Role:Name</div>
             </div>
           </div>
 
-          <!-- PAGE LAYOUT BUILDER -->
+          <!-- BLOCK BUILDER -->
           <div class="fsec">
-            <div class="fsec-title" style="margin-bottom:16px">
-              Page Content Layout
-              <span style="font-size:10px;font-weight:400;color:var(--mu2);text-transform:none;letter-spacing:0;margin-left:6px">— drag to reorder</span>
-            </div>
-
-            <!-- block list -->
+            <div class="fsec-title">Page Layout</div>
             <div class="blocks-list" id="blocks-list"></div>
-            <div id="blocks-empty" class="builder-empty" style="display:none">
-              No content blocks yet.<br>Add blocks below to build the project page layout.
-            </div>
-
-            <!-- Add block button -->
+            <div id="blocks-empty" class="builder-empty" style="display:none">No blocks yet — add content below to build the page.</div>
             <div class="add-block-wrap" id="add-block-wrap">
               <button class="btn-sm ghost" style="width:100%;justify-content:center;margin-top:2px" onclick="toggleBlockMenu(event)">
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 Add Block
               </button>
-              <div class="block-type-menu" id="block-type-menu">
-                <div class="btm-item" onclick="addBlock('video')"><span class="btm-ic">▶</span><div class="btm-info"><div class="btm-name">Video Embed</div><div class="btm-desc">Full-width Vimeo or YouTube embed</div></div></div>
-                <div class="btm-item" onclick="addBlock('single')"><span class="btm-ic">▣</span><div class="btm-info"><div class="btm-name">Single Media</div><div class="btm-desc">Full-width image, GIF or video file</div></div></div>
-                <div class="btm-item" onclick="addBlock('duo')"><span class="btm-ic">▪▪</span><div class="btm-info"><div class="btm-name">Two Media</div><div class="btm-desc">Two images or videos side by side</div></div></div>
-                <div class="btm-item" onclick="addBlock('duo-video')"><span class="btm-ic">▶▶</span><div class="btm-info"><div class="btm-name">Two Video Embeds</div><div class="btm-desc">Two Vimeo / YouTube embeds side by side</div></div></div>
-                <div class="btm-item" onclick="addBlock('split-left')"><span class="btm-ic">◧</span><div class="btm-info"><div class="btm-name">Media + Text</div><div class="btm-desc">Media on left, title &amp; text on right</div></div></div>
-                <div class="btm-item" onclick="addBlock('split-right')"><span class="btm-ic">◨</span><div class="btm-info"><div class="btm-name">Text + Media</div><div class="btm-desc">Title &amp; text on left, media on right</div></div></div>
-                <div class="btm-item" onclick="addBlock('text')"><span class="btm-ic">≡</span><div class="btm-info"><div class="btm-name">Text Block</div><div class="btm-desc">Full-width title and paragraph</div></div></div>
-                <div class="btm-item" onclick="addBlock('duo-text')"><span class="btm-ic">≡≡</span><div class="btm-info"><div class="btm-name">Two Text Boxes</div><div class="btm-desc">Two text columns side by side</div></div></div>
-                <div class="btm-item" onclick="addBlock('quote')"><span class="btm-ic">❝</span><div class="btm-info"><div class="btm-name">Quote</div><div class="btm-desc">Large typographic quote or statement</div></div></div>
+              <div class="block-menu" id="block-menu">
+                <div class="bm-item" onclick="addBlock('video')"><span class="bm-ic">▶</span><div><div class="bm-name">Video Embed</div><div class="bm-desc">Full-width Vimeo or YouTube</div></div></div>
+                <div class="bm-item" onclick="addBlock('single')"><span class="bm-ic">▣</span><div><div class="bm-name">Single Media</div><div class="bm-desc">Full-width image, GIF or video</div></div></div>
+                <div class="bm-item" onclick="addBlock('duo')"><span class="bm-ic">▪▪</span><div><div class="bm-name">Two Media</div><div class="bm-desc">Two images/videos side by side</div></div></div>
+                <div class="bm-item" onclick="addBlock('duo-video')"><span class="bm-ic">▶▶</span><div><div class="bm-name">Two Video Embeds</div><div class="bm-desc">Two Vimeo / YouTube side by side</div></div></div>
+                <div class="bm-item" onclick="addBlock('split-left')"><span class="bm-ic">◧</span><div><div class="bm-name">Media + Text</div><div class="bm-desc">Image left, title &amp; text right</div></div></div>
+                <div class="bm-item" onclick="addBlock('split-right')"><span class="bm-ic">◨</span><div><div class="bm-name">Text + Media</div><div class="bm-desc">Title &amp; text left, image right</div></div></div>
+                <div class="bm-item" onclick="addBlock('text')"><span class="bm-ic">≡</span><div><div class="bm-name">Text Block</div><div class="bm-desc">Full-width title and paragraph</div></div></div>
+                <div class="bm-item" onclick="addBlock('duo-text')"><span class="bm-ic">≡≡</span><div><div class="bm-name">Two Text Boxes</div><div class="bm-desc">Two text columns side by side</div></div></div>
+                <div class="bm-item" onclick="addBlock('quote')"><span class="bm-ic">❝</span><div><div class="bm-name">Quote</div><div class="bm-desc">Large typographic statement</div></div></div>
               </div>
             </div>
-
           </div>
 
-        </div><!-- /form-scroll -->
-      </div><!-- /proj-form -->
+        </div>
+      </div>
     </main>
   </div>
 </div>
 
-<!-- TOAST -->
 <div id="toast"></div>
-
-<!-- CONFIRM -->
 <div id="confirm">
   <div class="confirm-box">
     <div class="confirm-title" id="confirm-title">Delete Project?</div>
@@ -426,14 +400,14 @@ body.dark .block-card:hover{border-color:rgba(255,255,255,.15)}
 
 <script>
 /* ═══════════════════════════════════════
-   CONFIG
-   To change password: open browser console and run:
-   crypto.subtle.digest('SHA-256',new TextEncoder().encode('yourpassword'))
+   CONFIG — to change password run in console:
+   crypto.subtle.digest('SHA-256',new TextEncoder().encode('newpassword'))
      .then(b=>console.log([...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')))
    Default: admin123
 ═══════════════════════════════════════ */
 const PASSWORD_HASH = '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9';
-const SHEET_ID = '1km0VZJo-lnE4GRa_VWLCKEi0QiBM0O_7PQkNIe-KdUY';
+const REPO = 'aviadchai/Aviad-Chai-Portfolio';
+const FILE = 'projects.json';
 
 /* ── AUTH ───────────────────────────── */
 async function hashStr(s){
@@ -442,72 +416,69 @@ async function hashStr(s){
 }
 async function doLogin(){
   const pw=document.getElementById('login-pw').value;
-  const h=await hashStr(pw);
   const err=document.getElementById('login-err');
-  if(h===PASSWORD_HASH){ sessionStorage.setItem('ac_auth','1'); err.style.display='none'; afterLogin(); }
-  else { err.style.display='block'; document.getElementById('login-pw').select(); }
+  if(await hashStr(pw)===PASSWORD_HASH){ sessionStorage.setItem('ac_auth','1'); err.style.display='none'; afterLogin(); }
+  else{ err.style.display='block'; document.getElementById('login-pw').select(); }
 }
 document.getElementById('login-pw').addEventListener('keydown',e=>{ if(e.key==='Enter') doLogin(); });
 function doLogout(){ sessionStorage.removeItem('ac_auth'); showScreen('s-login'); document.getElementById('login-pw').value=''; }
-function afterLogin(){ const cfg=getCfg(); if(!cfg.url||!cfg.token){ initSetup(); showScreen('s-setup'); } else { showScreen('s-admin'); loadProjects(); } }
+function afterLogin(){ if(!getToken()){ showScreen('s-setup'); } else { showScreen('s-admin'); loadProjects(); } }
 
-/* ── CONFIG ─────────────────────────── */
-const getCfg=()=>({url:localStorage.getItem('ac_url')||'',token:localStorage.getItem('ac_token')||''});
+/* ── TOKEN ──────────────────────────── */
+const getToken=()=>localStorage.getItem('ac_gh_token')||'';
 function saveSetup(){
-  const url=document.getElementById('setup-url').value.trim();
-  const token=document.getElementById('setup-token').value.trim();
-  if(!url||!token){ toast('Fill in both fields','err'); return; }
-  localStorage.setItem('ac_url',url); localStorage.setItem('ac_token',token);
+  const t=document.getElementById('setup-token').value.trim();
+  if(!t){ toast('Enter your GitHub token','err'); return; }
+  localStorage.setItem('ac_gh_token',t);
   toast('Connected!','ok');
-  setTimeout(()=>{ showScreen('s-admin'); loadProjects(); },700);
+  setTimeout(()=>{ showScreen('s-admin'); loadProjects(); },600);
 }
-function openSettings(){
-  const cfg=getCfg();
-  document.getElementById('setup-url').value=cfg.url;
-  document.getElementById('setup-token').value=cfg.token;
-  initSetup(); showScreen('s-setup');
-}
+function openSettings(){ document.getElementById('setup-token').value=getToken(); showScreen('s-setup'); }
 
 /* ── SCREENS ────────────────────────── */
 function showScreen(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); document.getElementById(id).classList.add('on'); }
 
 /* ── THEME ──────────────────────────── */
 let dark=localStorage.getItem('ac_dark')==='1';
-function applyTheme(){
-  document.body.classList.toggle('dark',dark);
-  document.getElementById('ic-sun').style.display=dark?'none':'';
-  document.getElementById('ic-moon').style.display=dark?'':'none';
-  document.getElementById('theme-lbl').textContent=dark?'Light':'Dark';
-}
+function applyTheme(){ document.body.classList.toggle('dark',dark); document.getElementById('ic-sun').style.display=dark?'none':''; document.getElementById('ic-moon').style.display=dark?'':'none'; document.getElementById('theme-lbl').textContent=dark?'Light':'Dark'; }
 function toggleTheme(){ dark=!dark; localStorage.setItem('ac_dark',dark?'1':'0'); applyTheme(); }
 applyTheme();
+
+/* ── GITHUB API ─────────────────────── */
+let fileSha='';
+
+async function ghGet(){
+  const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`,{headers:{Authorization:'Bearer '+getToken(),Accept:'application/vnd.github+json'}});
+  if(!r.ok) throw new Error('GitHub fetch failed: '+r.status);
+  const j=await r.json();
+  fileSha=j.sha;
+  return JSON.parse(atob(j.content.replace(/\n/g,'')));
+}
+
+async function ghPut(data){
+  const content=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
+  const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`,{
+    method:'PUT',
+    headers:{Authorization:'Bearer '+getToken(),Accept:'application/vnd.github+json','Content-Type':'application/json'},
+    body:JSON.stringify({message:'Update projects via admin panel',content,sha:fileSha})
+  });
+  if(!r.ok){ const err=await r.json(); throw new Error(err.message||'GitHub save failed'); }
+  const j=await r.json();
+  fileSha=j.content.sha;
+}
 
 /* ── PROJECTS ───────────────────────── */
 let projects=[];
 let editIdx=-1;
 
-function normHeader(h){
-  let l=(h||'').toLowerCase().trim();
-  l=l.replace(/\n.*/,'').trim();
-  l=l.replace(/\s*\([^)]+\)\s*/g,'').trim();
-  l=l.replace(/[^a-z0-9_]/g,'_').replace(/_+/g,'_').replace(/^_|_$/g,'');
-  return l;
-}
-
 async function loadProjects(){
   try{
-    const r=await fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=Projects&headers=1&t=${Date.now()}`);
-    const txt=await r.text();
-    const j=JSON.parse(txt.match(/google\.visualization\.Query\.setResponse\(([\s\S]*?)\);?\s*$/)[1]);
-    const cols=j.table.cols.map(c=>normHeader(c.label));
-    projects=j.table.rows
-      .map(row=>{ const o={}; cols.forEach((c,i)=>{ o[c]=(row.c[i]?.v||row.c[i]?.f||'').toString().trim(); }); return o; })
-      .filter(p=>p.name&&p.name.length>0);
+    projects=await ghGet();
     renderSidebar();
   }catch(e){
     console.error(e);
-    toast('Failed to load projects','err');
-    document.getElementById('sb-list').innerHTML='<div class="empty" style="height:160px"><div class="empty-tx">Could not load.<br>Check connection.</div></div>';
+    toast('Failed to load — check your token','err');
+    document.getElementById('sb-list').innerHTML='<div class="empty" style="height:160px"><div class="empty-tx">Could not load.<br>Check your GitHub token.</div></div>';
   }
 }
 
@@ -515,28 +486,25 @@ async function loadProjects(){
 function renderSidebar(){
   document.getElementById('sb-count').textContent=projects.length;
   const list=document.getElementById('sb-list');
-  if(!projects.length){
-    list.innerHTML='<div class="empty" style="height:160px"><div class="empty-tx">No projects yet.</div></div>';
-    return;
-  }
+  if(!projects.length){ list.innerHTML='<div class="empty" style="height:160px"><div class="empty-tx">No projects yet.</div></div>'; return; }
   list.innerHTML='';
   projects.forEach((p,i)=>{
     const el=document.createElement('div');
     el.className='pi'+(editIdx===i?' on':'');
     const isVid=p.img1&&/\.(mp4|webm)$/i.test(p.img1);
     const th=p.img1?(isVid?`<video src="${p.img1}" muted playsinline></video>`:`<img src="${p.img1}" alt="" loading="lazy">`):'<div class="pi-thumb-ph">✦</div>';
-    el.innerHTML=`<div class="pi-thumb">${th}</div><div class="pi-info"><div class="pi-name">${esc(p.name)}</div><div class="pi-meta">${esc(p.category||'—')}${p.year?' · '+p.year:''}</div></div><div class="pi-acts"><button class="pi-btn" title="Edit" onclick="editProject(${i});event.stopPropagation()">✎</button><button class="pi-btn del" title="Delete" onclick="deleteProject(${i});event.stopPropagation()">✕</button></div>`;
+    el.innerHTML=`<div class="pi-thumb">${th}</div><div class="pi-info"><div class="pi-name">${esc(p.name)}</div><div class="pi-meta">${esc(p.category||'—')}${p.year?' · '+p.year:''}</div></div><div class="pi-acts"><button class="pi-btn" onclick="editProject(${i});event.stopPropagation()">✎</button><button class="pi-btn del" onclick="deleteProject(${i});event.stopPropagation()">✕</button></div>`;
     el.addEventListener('click',()=>editProject(i));
     list.appendChild(el);
   });
 }
 
 /* ── FORM ───────────────────────────── */
-const META_FIELDS=['name','category','client','year','layout','img1','gradient1','gradient2','description','tags','credits'];
+const META=['name','category','client','year','layout','img1','gradient1','gradient2','description','tags','credits'];
 
 function newProject(){
   editIdx=-1; blocksList=[];
-  META_FIELDS.forEach(f=>{ const el=document.getElementById('f-'+f); if(el) el.value=''; });
+  META.forEach(f=>{ const el=document.getElementById('f-'+f); if(el) el.value=''; });
   document.getElementById('f-layout').value='half';
   document.getElementById('f-gradient1').value='#c8ff00';
   document.getElementById('f-gradient2').value='#00ff88';
@@ -545,21 +513,16 @@ function newProject(){
   updateGrad(); document.getElementById('thumb-prev').style.display='none';
   document.getElementById('tag-prev').innerHTML='';
   document.getElementById('form-title').innerHTML='New Project';
-  renderBlocks(); showForm();
-  document.getElementById('f-name').focus();
+  renderBlocks(); showForm(); document.getElementById('f-name').focus();
 }
 
 function editProject(i){
-  editIdx=i;
-  const p=projects[i];
-  META_FIELDS.forEach(f=>{ const el=document.getElementById('f-'+f); if(el) el.value=p[f]||''; });
+  editIdx=i; const p=projects[i];
+  META.forEach(f=>{ const el=document.getElementById('f-'+f); if(el) el.value=p[f]||''; });
   document.getElementById('g1p').value=p.gradient1||'#c8ff00';
   document.getElementById('g2p').value=p.gradient2||'#00ff88';
-  document.getElementById('f-gradient1').value=p.gradient1||'#c8ff00';
-  document.getElementById('f-gradient2').value=p.gradient2||'#00ff88';
-  // Load blocks
   blocksList=[];
-  try{ if(p.blocks&&p.blocks.trim()) blocksList=JSON.parse(p.blocks); }catch(e){}
+  try{ if(p.blocks) blocksList=JSON.parse(p.blocks); }catch(e){}
   updateGrad(); updateThumb(); updateTags();
   document.getElementById('form-title').innerHTML=`Editing <span>${esc(p.name)}</span>`;
   renderBlocks(); renderSidebar(); showForm();
@@ -570,7 +533,7 @@ function cancelForm(){ editIdx=-1; document.getElementById('form-empty').style.d
 
 function getFormData(){
   const d={};
-  META_FIELDS.forEach(f=>{ const el=document.getElementById('f-'+f); d[f]=el?el.value.trim():''; });
+  META.forEach(f=>{ const el=document.getElementById('f-'+f); d[f]=el?el.value.trim():''; });
   d.blocks=blocksList.length?JSON.stringify(blocksList):'';
   return d;
 }
@@ -579,21 +542,27 @@ function getFormData(){
 async function saveProject(){
   const data=getFormData();
   if(!data.name){ toast('Project name is required','err'); document.getElementById('f-name').focus(); return; }
-  const cfg=getCfg();
   const btn=document.getElementById('save-btn');
-  btn.textContent='Saving…'; btn.disabled=true;
+  btn.textContent='Publishing…'; btn.disabled=true;
+  setDeployStatus('saving','Publishing…');
   try{
-    const payload={ token:cfg.token, action:editIdx===-1?'add':'update', project:data, ...(editIdx>=0?{originalName:projects[editIdx].name}:{}) };
-    const r=await fetch(cfg.url,{method:'POST',body:JSON.stringify(payload),headers:{'Content-Type':'text/plain'}});
-    const result=await r.json();
-    if(result.error) throw new Error(result.error);
-    toast(editIdx===-1?'Project added!':'Project updated!','ok');
-    const prevName=data.name;
-    await loadProjects();
-    const ni=projects.findIndex(p=>p.name===prevName);
-    if(ni>=0) editProject(ni); else cancelForm();
-  }catch(e){ console.error(e); toast('Save failed — check Apps Script setup','err'); }
-  finally{ btn.textContent='Save Project'; btn.disabled=false; }
+    if(editIdx===-1){ projects.push(data); }
+    else{ projects[editIdx]=data; }
+    await ghPut(projects);
+    const ni=editIdx===-1?projects.length-1:editIdx;
+    editIdx=ni;
+    setDeployStatus('saved','Published ✓');
+    toast('Published! Vercel is deploying…','ok');
+    renderSidebar();
+  }catch(e){
+    console.error(e);
+    if(editIdx===-1) projects.pop(); // rollback
+    setDeployStatus('error','Save failed');
+    toast('Save failed — '+e.message,'err');
+  }finally{
+    btn.innerHTML='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Publish';
+    btn.disabled=false;
+  }
 }
 
 /* ── DELETE ─────────────────────────── */
@@ -601,17 +570,28 @@ let _delIdx=-1;
 function deleteProject(i){ _delIdx=i; document.getElementById('confirm-title').textContent='Delete Project?'; document.getElementById('confirm-body').textContent=`"${projects[i].name}" will be permanently removed.`; document.getElementById('confirm').classList.add('on'); }
 async function confirmOk(){
   closeConfirm(); if(_delIdx<0) return;
-  const cfg=getCfg(); const name=projects[_delIdx].name;
+  const removed=projects.splice(_delIdx,1);
+  setDeployStatus('saving','Deleting…');
   try{
-    const r=await fetch(cfg.url,{method:'POST',body:JSON.stringify({token:cfg.token,action:'delete',name}),headers:{'Content-Type':'text/plain'}});
-    const result=await r.json(); if(result.error) throw new Error(result.error);
-    toast('Project deleted','ok'); if(editIdx===_delIdx) cancelForm(); _delIdx=-1; await loadProjects();
-  }catch(e){ toast('Delete failed','err'); }
+    await ghPut(projects);
+    toast('Deleted','ok'); setDeployStatus('saved','Deleted ✓');
+    if(editIdx===_delIdx) cancelForm(); _delIdx=-1; renderSidebar();
+  }catch(e){ projects.splice(_delIdx,0,...removed); toast('Delete failed','err'); setDeployStatus('error','Failed'); }
 }
 function closeConfirm(){ document.getElementById('confirm').classList.remove('on'); _delIdx=-1; }
 document.getElementById('confirm').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeConfirm(); });
 
-/* ── APPEARANCE HELPERS ─────────────── */
+/* ── DEPLOY STATUS ──────────────────── */
+let _statusT;
+function setDeployStatus(type,text){
+  const el=document.getElementById('deploy-status');
+  el.style.display='flex'; el.className='deploy-status '+type;
+  document.getElementById('deploy-text').textContent=text;
+  clearTimeout(_statusT);
+  if(type==='saved'||type==='error') _statusT=setTimeout(()=>el.style.display='none',4000);
+}
+
+/* ── APPEARANCE ─────────────────────── */
 function updateGrad(){ const g1=document.getElementById('f-gradient1').value||'#c8ff00'; const g2=document.getElementById('f-gradient2').value||'#00ff88'; document.getElementById('grad-prev').style.background=`linear-gradient(135deg,${g1},${g2})`; }
 function syncG1p(){ document.getElementById('f-gradient1').value=document.getElementById('g1p').value; updateGrad(); }
 function syncG1t(){ const v=document.getElementById('f-gradient1').value; if(/^#[0-9a-f]{6}$/i.test(v)) document.getElementById('g1p').value=v; updateGrad(); }
@@ -626,217 +606,75 @@ function updateTags(){ const val=document.getElementById('f-tags').value; const 
 let blocksList=[];
 
 const BLOCK_DEFS={
-  'video':      { label:'Video Embed',    icon:'▶',  fields:[{id:'url',  label:'Vimeo / YouTube URL', type:'url', ph:'https://vimeo.com/…'}] },
-  'single':     { label:'Single Media',   icon:'▣',  fields:[{id:'url',  label:'Image / GIF / Video URL', type:'url', ph:'https://…'}] },
-  'duo':        { label:'Two Media',      icon:'▪▪', fields:[{id:'media1',label:'Media 1 (left)',  type:'url', ph:'https://…'},{id:'media2',label:'Media 2 (right)', type:'url', ph:'https://…'}] },
-  'duo-video':  { label:'Two Videos',     icon:'▶▶', fields:[{id:'url1', label:'Video 1 (left) URL', type:'url', ph:'https://vimeo.com/…'},{id:'url2',label:'Video 2 (right) URL', type:'url', ph:'https://vimeo.com/…'}] },
-  'split-left': { label:'Media + Text',   icon:'◧',  fields:[{id:'media',label:'Media URL', type:'url', ph:'https://…'},{id:'title',label:'Title', type:'text', ph:'Section heading'},{id:'text', label:'Paragraph', type:'textarea', ph:'Text content…'}] },
-  'split-right':{ label:'Text + Media',   icon:'◨',  fields:[{id:'title',label:'Title', type:'text', ph:'Section heading'},{id:'text', label:'Paragraph', type:'textarea', ph:'Text content…'},{id:'media',label:'Media URL', type:'url', ph:'https://…'}] },
-  'text':       { label:'Text Block',     icon:'≡',  fields:[{id:'title',label:'Title (optional)', type:'text', ph:'Section heading'},{id:'text', label:'Paragraph', type:'textarea', ph:'Text content…'}] },
-  'duo-text':   { label:'Two Text Boxes', icon:'≡≡', fields:[{id:'title1',label:'Left Title', type:'text', ph:'Heading'},{id:'text1',label:'Left Text', type:'textarea', ph:'Text…'},{id:'title2',label:'Right Title', type:'text', ph:'Heading'},{id:'text2',label:'Right Text', type:'textarea', ph:'Text…'}] },
-  'quote':      { label:'Quote',          icon:'❝',  fields:[{id:'text', label:'Quote Text', type:'textarea', ph:'A powerful statement or pullquote…'}] },
+  'video':      {label:'Video Embed',    icon:'▶',  fields:[{id:'url',   label:'Vimeo / YouTube URL', type:'url', ph:'https://vimeo.com/…'}]},
+  'single':     {label:'Single Media',   icon:'▣',  fields:[{id:'url',   label:'Image / GIF / Video URL', type:'url', ph:'https://…'}]},
+  'duo':        {label:'Two Media',      icon:'▪▪', fields:[{id:'media1',label:'Left',  type:'url', ph:'https://…'},{id:'media2',label:'Right', type:'url', ph:'https://…'}]},
+  'duo-video':  {label:'Two Videos',     icon:'▶▶', fields:[{id:'url1',  label:'Left Video URL',  type:'url', ph:'https://vimeo.com/…'},{id:'url2',label:'Right Video URL', type:'url', ph:'https://vimeo.com/…'}]},
+  'split-left': {label:'Media + Text',   icon:'◧',  fields:[{id:'media', label:'Media URL', type:'url', ph:'https://…'},{id:'title',label:'Title', type:'text', ph:'Section heading'},{id:'text',label:'Paragraph', type:'textarea', ph:'Text…'}]},
+  'split-right':{label:'Text + Media',   icon:'◨',  fields:[{id:'title', label:'Title', type:'text', ph:'Section heading'},{id:'text',label:'Paragraph', type:'textarea', ph:'Text…'},{id:'media',label:'Media URL', type:'url', ph:'https://…'}]},
+  'text':       {label:'Text Block',     icon:'≡',  fields:[{id:'title', label:'Title (optional)', type:'text', ph:'Heading'},{id:'text',label:'Paragraph', type:'textarea', ph:'Text…'}]},
+  'duo-text':   {label:'Two Text Boxes', icon:'≡≡', fields:[{id:'title1',label:'Left Title', type:'text', ph:'Heading'},{id:'text1',label:'Left Text', type:'textarea', ph:'Text…'},{id:'title2',label:'Right Title', type:'text', ph:'Heading'},{id:'text2',label:'Right Text', type:'textarea', ph:'Text…'}]},
+  'quote':      {label:'Quote',          icon:'❝',  fields:[{id:'text',  label:'Quote Text', type:'textarea', ph:'A powerful statement…'}]},
 };
 
 function renderBlocks(){
   const list=document.getElementById('blocks-list');
-  const empty=document.getElementById('blocks-empty');
+  document.getElementById('blocks-empty').style.display=blocksList.length?'none':'block';
   list.innerHTML='';
-  empty.style.display=blocksList.length?'none':'block';
-  blocksList.forEach((b,i)=>{ list.appendChild(buildBlockCard(b,i)); });
+  blocksList.forEach((b,i)=>list.appendChild(buildBlockCard(b,i)));
 }
 
 function buildBlockCard(b,i){
-  const def=BLOCK_DEFS[b.type];
-  if(!def) return document.createElement('div');
-  const card=document.createElement('div');
-  card.className='block-card';
-  card.draggable=true;
+  const def=BLOCK_DEFS[b.type]; if(!def) return document.createElement('div');
+  const card=document.createElement('div'); card.className='block-card'; card.draggable=true;
+  card.addEventListener('dragstart',e=>{ e.dataTransfer.setData('text/plain',i); card.style.opacity='.4'; });
+  card.addEventListener('dragend',()=>{ card.style.opacity=''; document.querySelectorAll('.block-card').forEach(c=>c.classList.remove('drag-over')); });
+  card.addEventListener('dragover',e=>{ e.preventDefault(); card.classList.add('drag-over'); });
+  card.addEventListener('dragleave',()=>card.classList.remove('drag-over'));
+  card.addEventListener('drop',e=>{ e.preventDefault(); card.classList.remove('drag-over'); const from=parseInt(e.dataTransfer.getData('text/plain')); if(from!==i){ blocksList.splice(i,0,blocksList.splice(from,1)[0]); renderBlocks(); } });
 
-  // drag
-  card.addEventListener('dragstart',e=>{ e.dataTransfer.effectAllowed='move'; e.dataTransfer.setData('text/plain',i); card.style.opacity='.4'; });
-  card.addEventListener('dragend',()=>card.style.opacity='');
-  card.addEventListener('dragover',e=>{ e.preventDefault(); e.dataTransfer.dropEffect='move'; });
-  card.addEventListener('drop',e=>{ e.preventDefault(); const from=parseInt(e.dataTransfer.getData('text/plain')); if(from!==i){ blocksList.splice(i,0,blocksList.splice(from,1)[0]); renderBlocks(); } });
+  const hdr=document.createElement('div'); hdr.className='block-hdr';
+  const arrBtn=document.createElement('button'); arrBtn.className='block-btn arr open'; arrBtn.innerHTML='▸';
+  hdr.innerHTML=`<span class="block-ic" title="Drag to reorder" style="cursor:grab">⠿</span><span class="block-ic">${def.icon}</span><span class="block-label">${esc(def.label)}</span>`;
+  const ctrls=document.createElement('div'); ctrls.className='block-ctrls';
+  const upBtn=document.createElement('button'); upBtn.className='block-btn'; upBtn.title='Move up'; upBtn.textContent='↑'; upBtn.onclick=e=>{ e.stopPropagation(); if(i>0){ blocksList.splice(i-1,0,blocksList.splice(i,1)[0]); renderBlocks(); } };
+  const dnBtn=document.createElement('button'); dnBtn.className='block-btn'; dnBtn.title='Move down'; dnBtn.textContent='↓'; dnBtn.onclick=e=>{ e.stopPropagation(); if(i<blocksList.length-1){ blocksList.splice(i+1,0,blocksList.splice(i,1)[0]); renderBlocks(); } };
+  const delBtn=document.createElement('button'); delBtn.className='block-btn del'; delBtn.title='Remove'; delBtn.textContent='✕'; delBtn.onclick=e=>{ e.stopPropagation(); blocksList.splice(i,1); renderBlocks(); };
+  ctrls.append(arrBtn,upBtn,dnBtn,delBtn); hdr.appendChild(ctrls);
 
-  // header
-  const hdr=document.createElement('div');
-  hdr.className='block-hdr';
-  hdr.innerHTML=`<span class="block-ic" style="cursor:grab" title="Drag to reorder">⠿</span><span class="block-label">${esc(def.label)}</span>`;
-
-  const ctrls=document.createElement('div');
-  ctrls.className='block-ctrls';
-
-  const arrBtn=document.createElement('button');
-  arrBtn.className='block-btn collapse-arr open';
-  arrBtn.innerHTML='▸';
-  arrBtn.title='Collapse';
-
-  const upBtn=document.createElement('button');
-  upBtn.className='block-btn'; upBtn.title='Move up'; upBtn.textContent='↑';
-  upBtn.onclick=(e)=>{ e.stopPropagation(); if(i>0){ blocksList.splice(i-1,0,blocksList.splice(i,1)[0]); renderBlocks(); } };
-
-  const dnBtn=document.createElement('button');
-  dnBtn.className='block-btn'; dnBtn.title='Move down'; dnBtn.textContent='↓';
-  dnBtn.onclick=(e)=>{ e.stopPropagation(); if(i<blocksList.length-1){ blocksList.splice(i+1,0,blocksList.splice(i,1)[0]); renderBlocks(); } };
-
-  const delBtn=document.createElement('button');
-  delBtn.className='block-btn del'; delBtn.title='Remove block'; delBtn.textContent='✕';
-  delBtn.onclick=(e)=>{ e.stopPropagation(); blocksList.splice(i,1); renderBlocks(); };
-
-  ctrls.append(arrBtn,upBtn,dnBtn,delBtn);
-  hdr.appendChild(ctrls);
-
-  // body
-  const body=document.createElement('div');
-  body.className='block-body open';
-
+  const body=document.createElement('div'); body.className='block-body open';
   def.fields.forEach(f=>{
-    const group=document.createElement('div');
-    group.className='fgroup';
-    const lbl=document.createElement('label');
-    lbl.className='f-label';
-    lbl.textContent=f.label;
-    group.appendChild(lbl);
-
+    const g=document.createElement('div'); g.className='fgroup';
+    const lbl=document.createElement('label'); lbl.className='f-label'; lbl.textContent=f.label; g.appendChild(lbl);
     let input;
-    if(f.type==='textarea'){
-      input=document.createElement('textarea');
-      input.className='f-ta';
-      input.style.minHeight='60px';
-    } else {
-      input=document.createElement('input');
-      input.type=f.type||'text';
-      input.className='f-inp';
-    }
-    input.placeholder=f.ph||'';
-    input.value=b[f.id]||'';
+    if(f.type==='textarea'){ input=document.createElement('textarea'); input.className='f-ta'; input.style.minHeight='60px'; }
+    else{ input=document.createElement('input'); input.type=f.type||'text'; input.className='f-inp'; }
+    input.placeholder=f.ph||''; input.value=b[f.id]||'';
     input.addEventListener('input',()=>{ blocksList[i][f.id]=input.value; });
-    group.appendChild(input);
-    body.appendChild(group);
+    g.appendChild(input); body.appendChild(g);
   });
 
-  // collapse toggle
-  hdr.addEventListener('click',e=>{
-    if(e.target===upBtn||e.target===dnBtn||e.target===delBtn) return;
-    const isOpen=body.classList.toggle('open');
-    arrBtn.classList.toggle('open',isOpen);
-  });
-
-  card.append(hdr,body);
-  return card;
+  hdr.addEventListener('click',e=>{ if(e.target===upBtn||e.target===dnBtn||e.target===delBtn) return; const open=body.classList.toggle('open'); arrBtn.classList.toggle('open',open); });
+  card.append(hdr,body); return card;
 }
 
 function addBlock(type){
   const def=BLOCK_DEFS[type]; if(!def) return;
-  const block={type};
-  def.fields.forEach(f=>{ block[f.id]=''; });
-  blocksList.push(block);
-  renderBlocks();
-  document.getElementById('block-type-menu').classList.remove('show');
-  // Scroll to new block
-  setTimeout(()=>{ const cards=document.querySelectorAll('.block-card'); if(cards.length) cards[cards.length-1].scrollIntoView({behavior:'smooth',block:'nearest'}); },50);
+  const b={type}; def.fields.forEach(f=>b[f.id]=''); blocksList.push(b);
+  renderBlocks(); document.getElementById('block-menu').classList.remove('show');
+  setTimeout(()=>{ const c=document.querySelectorAll('.block-card'); if(c.length) c[c.length-1].scrollIntoView({behavior:'smooth',block:'nearest'}); },50);
 }
 
-let _menuOpen=false;
-function toggleBlockMenu(e){
-  e.stopPropagation();
-  const menu=document.getElementById('block-type-menu');
-  _menuOpen=!menu.classList.contains('show');
-  menu.classList.toggle('show',_menuOpen);
-}
-document.addEventListener('click',()=>{ document.getElementById('block-type-menu').classList.remove('show'); _menuOpen=false; });
+function toggleBlockMenu(e){ e.stopPropagation(); document.getElementById('block-menu').classList.toggle('show'); }
+document.addEventListener('click',()=>document.getElementById('block-menu').classList.remove('show'));
 
 /* ── UTILS ──────────────────────────── */
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-let _toastT;
-function toast(msg,type=''){ const el=document.getElementById('toast'); el.textContent=msg; el.className=type?`show ${type}`:'show'; clearTimeout(_toastT); _toastT=setTimeout(()=>el.className='',3200); }
-
-/* ── APPS SCRIPT CODE ───────────────── */
-const SCRIPT_CODE=`function normHeader(h) {
-  let l = (h||'').toLowerCase().trim();
-  l = l.replace(/\\n.*/,'').trim();
-  l = l.replace(/\\s*\\([^)]+\\)\\s*/g,'').trim();
-  l = l.replace(/[^a-z0-9_]/g,'_').replace(/_+/g,'_').replace(/^_|_$/g,'');
-  return l;
-}
-
-function doPost(e) {
-  try {
-    const data = JSON.parse(e.postData.contents);
-    const token = PropertiesService.getScriptProperties()
-      .getProperty('SECRET_TOKEN');
-    if (data.token !== token) return out({error:'Unauthorized'});
-
-    const ss = SpreadsheetApp.openById('${SHEET_ID}');
-    const sheet = ss.getSheetByName('Projects');
-
-    // Auto-add missing columns
-    let rawHdrs = sheet.getRange(1,1,1,sheet.getLastColumn()).getValues()[0];
-    let normHdrs = rawHdrs.map(normHeader);
-    if (data.project) {
-      Object.keys(data.project).forEach(key => {
-        if (key && !normHdrs.includes(key)) {
-          const nc = rawHdrs.length + 1;
-          sheet.getRange(1, nc).setValue(key);
-          rawHdrs.push(key);
-          normHdrs.push(key);
-        }
-      });
-    }
-
-    if (data.action === 'add') {
-      const row = normHdrs.map(h => data.project[h] || '');
-      sheet.appendRow(row);
-      return out({success:true});
-    }
-
-    if (data.action === 'update') {
-      const lastRow = sheet.getLastRow();
-      const ni = normHdrs.indexOf('name');
-      if (ni < 0) return out({error:'No name column'});
-      const names = sheet.getRange(2,ni+1,lastRow-1,1).getValues();
-      for (let i=0;i<names.length;i++) {
-        if (names[i][0] === data.originalName) {
-          const row = normHdrs.map(h => data.project[h] || '');
-          sheet.getRange(i+2,1,1,rawHdrs.length).setValues([row]);
-          return out({success:true});
-        }
-      }
-      return out({error:'Project not found'});
-    }
-
-    if (data.action === 'delete') {
-      const lastRow = sheet.getLastRow();
-      const ni = normHdrs.indexOf('name');
-      if (ni < 0) return out({error:'No name column'});
-      const names = sheet.getRange(2,ni+1,lastRow-1,1).getValues();
-      for (let i=0;i<names.length;i++) {
-        if (names[i][0] === data.name) {
-          sheet.deleteRow(i+2);
-          return out({success:true});
-        }
-      }
-      return out({error:'Project not found'});
-    }
-
-    return out({error:'Unknown action'});
-  } catch(err) {
-    return out({error: err.toString()});
-  }
-}
-
-function out(data) {
-  return ContentService
-    .createTextOutput(JSON.stringify(data))
-    .setMimeType(ContentService.MimeType.JSON);
-}`;
-
-function initSetup(){ document.getElementById('script-code-block').textContent=SCRIPT_CODE; const cfg=getCfg(); if(cfg.url) document.getElementById('setup-url').value=cfg.url; if(cfg.token) document.getElementById('setup-token').value=cfg.token; }
-function copyScript(){ navigator.clipboard.writeText(SCRIPT_CODE).then(()=>toast('Copied!','ok')); }
+let _tt;
+function toast(msg,type=''){ const el=document.getElementById('toast'); el.textContent=msg; el.className=type?`show ${type}`:'show'; clearTimeout(_tt); _tt=setTimeout(()=>el.className='',3200); }
 
 /* ── INIT ───────────────────────────── */
-updateGrad();
-renderBlocks();
+updateGrad(); renderBlocks();
 if(sessionStorage.getItem('ac_auth')==='1') afterLogin();
 </script>
 </body>

@@ -997,42 +997,16 @@ function submitForm(e){
     .catch(()=>{btn.textContent='Error — try again';btn.disabled=false;});
 }
 
-/* ── SHEET ──────────────────────────────── */
-const SHEET_ID='1km0VZJo-lnE4GRa_VWLCKEi0QiBM0O_7PQkNIe-KdUY';
-
-async function loadSheet(){
+/* ── LOAD PROJECTS ──────────────────────── */
+async function loadProjects(){
   try{
-    // Projects sheet — שורה 1 חייבת להיות headers
-    const r1=await fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=Projects&headers=1`);
-    const t1=await r1.text();
-    const j1=JSON.parse(t1.match(/google\.visualization\.Query\.setResponse\(([\s\S]*?)\);?\s*$/)[1]);
-    const cols=j1.table.cols.map(c=>{
-      let l=(c.label||'').toLowerCase().trim();
-      // normalize: "thumbnail\n(img1)" → "img1", strip newlines+parens
-      l=l.replace(/\n.*/,'').trim(); // take only first line
-      l=l.replace(/\s*\(([^)]+)\)\s*/g,'').trim(); // remove (xxx)
-      l=l.replace(/[^a-z0-9_]/g,'_').replace(/_+/g,'_').replace(/^_|_$/g,'');
-      return l;
-    });
-    const rows=j1.table.rows
-      .map(row=>{const o={};cols.forEach((c,i)=>{o[c]=(row.c[i]?.v||row.c[i]?.f||'').toString().trim();});return o;})
-      .filter(p=>p.name&&p.name.length>0);
-    if(rows.length>0){
-      projects=rows;
+    const r=await fetch('/projects.json?t='+Date.now());
+    if(!r.ok) return;
+    const data=await r.json();
+    if(Array.isArray(data)&&data.length>0){
+      projects=data;
       renderGrid();
     }
-    // Site Content sheet
-    const r2=await fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=Site%20Content&headers=1`);
-    const t2=await r2.text();
-    const j2=JSON.parse(t2.match(/google\.visualization\.Query\.setResponse\(([\s\S]*?)\);?\s*$/)[1]);
-    const SC={};
-    j2.table.rows.forEach(row=>{
-      const k=(row.c[0]?.v||'').toString().trim();
-      const v=(row.c[1]?.v||'').toString().trim();
-      if(k&&v)SC[k]=v;
-    });
-    applySiteContent(SC);
-    // open project from URL after everything loaded
     const pendingSlug=window._pendingSlug||sessionStorage.getItem('openProject');
     if(pendingSlug){
       window._pendingSlug=null;
@@ -1040,41 +1014,12 @@ async function loadSheet(){
       const idx=projects.findIndex(p=>slugify(p.name)===pendingSlug);
       if(idx>=0){setTimeout(()=>openProject(idx),400);}
     }
-  }catch(e){console.warn('Sheet error:',e);}
-}
-
-function applySiteContent(SC){
-  const s=(id,v)=>{const el=document.getElementById(id);if(el&&v)el.textContent=v;};
-  const src=(id,v)=>{const el=document.getElementById(id);if(el&&v)el.src=v;};
-  s('el-logo',SC.logo);
-  s('el-h1',SC.hero_line1);s('el-h2',SC.hero_line2);
-  s('el-tag',SC.hero_tag);s('el-desc',SC.hero_desc);
-  s('el-about-tag',SC.about_tag);s('el-about-title',SC.about_title);
-  s('el-bio1',SC.about_bio1);s('el-bio2',SC.about_bio2);
-  src('el-photo',SC.about_photo);
-  if(SC.about_skills){
-    const el=document.getElementById('el-skills');
-    if(el)el.innerHTML=SC.about_skills.split(',').map(sk=>`<span class="about-sk">${sk.trim()}</span>`).join('');
-  }
-  ['1','2','3','4'].forEach(n=>{
-    const lbl=SC[`about_link${n}_label`],url=SC[`about_link${n}_url`];
-    const el=document.getElementById(`el-alink${n}`);
-    if(el&&lbl){el.textContent=lbl;if(url)el.href=url;}
-    const sl=document.getElementById(`el-slink${n}`);
-    if(sl&&lbl){sl.textContent=lbl;if(url)sl.href=url;}
-  });
-  const ctitle=document.getElementById('el-contact-title');
-  if(ctitle&&SC.contact_title)ctitle.innerHTML=SC.contact_title.replace(/\n/g,'<br>');
-  s('el-contact-sub',SC.contact_sub);
-  s('el-contact-email',SC.contact_email);s('el-contact-phone',SC.contact_phone);
-  if(SC.formspree_id&&SC.formspree_id!=='YOUR_FORMSPREE_ID')window._formspreeId=SC.formspree_id;
-  const copy=SC.footer_copy||'';
-  ['el-footer-home','el-footer-about','el-footer-contact'].forEach(id=>s(id,copy));
+  }catch(e){console.warn('projects.json load error:',e);}
 }
 
 /* ── INIT ───────────────────────────────── */
 renderGrid();
-loadSheet();
+loadProjects();
 bindHover();
 </script>
 </body>
