@@ -739,14 +739,14 @@ async function saveProject(){
 let _delIdx=-1;
 function deleteProject(i){ _delIdx=i; document.getElementById('confirm-title').textContent='מחיקת פרויקט?'; document.getElementById('confirm-body').textContent=`"${projects[i].name}" יימחק לצמיתות.`; document.getElementById('confirm').classList.add('on'); }
 async function confirmOk(){
-  closeConfirm(); if(_delIdx<0) return;
-  const removed=projects.splice(_delIdx,1);
+  const idx=_delIdx; closeConfirm(); if(idx<0) return;
+  const removed=projects.splice(idx,1);
   setDeployStatus('saving','מוחק…');
   try{
     fileSha=await ghPut(FILE,projects,fileSha,'מחיקת פרויקט דרך פאנל הניהול');
     toast('נמחק','ok'); setDeployStatus('saved','נמחק ✓');
-    if(editIdx===_delIdx) cancelForm(); _delIdx=-1; renderSidebar();
-  }catch(e){ projects.splice(_delIdx,0,...removed); toast('שגיאה במחיקה','err'); setDeployStatus('error','שגיאה'); }
+    if(editIdx===idx) cancelForm(); renderSidebar();
+  }catch(e){ projects.splice(idx,0,...removed); toast('שגיאה במחיקה','err'); setDeployStatus('error','שגיאה'); }
 }
 function closeConfirm(){ document.getElementById('confirm').classList.remove('on'); _delIdx=-1; }
 document.getElementById('confirm').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeConfirm(); });
