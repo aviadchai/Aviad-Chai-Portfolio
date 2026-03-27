@@ -1,5 +1,19 @@
 [
   {
+    "name": "Artlist AI Music",
+    "category": "Motion design",
+    "client": "Artlist",
+    "year": "2026",
+    "layout": "half",
+    "img1": "/assets/1774640521479-j1co.mp4",
+    "gradient1": "#FFDA2A",
+    "gradient2": "#FFDA2A",
+    "description": "",
+    "tags": "After Effects",
+    "credits": ",Creative Director: Itzik Cohen, SoundMix: Tal Avital, Motion Team lead: Dror Strom, Motion Designer: Aviad Chai and Tomer Malcov,",
+    "blocks": "[{\"type\":\"duo\",\"media1\":\"/assets/1774640999062-33t5.mp4\",\"media2\":\"/assets/1774640983305-ub77.mp4\"},{\"type\":\"duo\",\"media1\":\"/assets/1774640990989-nslc.mp4\",\"media2\":\"/assets/1774640996352-ha0h.mp4\"}]"
+  },
+  {
     "name": "What's Coming in 2025?",
     "category": "Motion design",
     "client": "Artlist",
@@ -110,20 +124,6 @@
     "tags": "Cinema 4D, After Effects, Motion Design",
     "credits": "All work by Aviad Chai",
     "blocks": ""
-  },
-  {
-    "name": "Artlist AI Music",
-    "category": "Motion design",
-    "client": "Artlist",
-    "year": "2026",
-    "layout": "half",
-    "img1": "/assets/1774640521479-j1co.mp4",
-    "gradient1": "#FFDA2A",
-    "gradient2": "#FFDA2A",
-    "description": "",
-    "tags": "After Effects",
-    "credits": ",Creative Director: Itzik Cohen, SoundMix: Tal Avital, Motion Team lead: Dror Strom, Motion Designer: Aviad Chai and Tomer Malcov,",
-    "blocks": "[{\"type\":\"duo\",\"media1\":\"/assets/1774640999062-33t5.mp4\",\"media2\":\"/assets/1774640983305-ub77.mp4\"},{\"type\":\"duo\",\"media1\":\"/assets/1774640990989-nslc.mp4\",\"media2\":\"/assets/1774640996352-ha0h.mp4\"}]"
   },
   {
     "name": "שדגגג",
