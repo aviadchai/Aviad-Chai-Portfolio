@@ -10,7 +10,7 @@
 body.dark{--bg:#0a0a0a;--surf:#111;--card:#1a1a1a;--txt:#ede9df;--mu:rgba(237,233,223,.42);--mu2:rgba(237,233,223,.18);--bdr:rgba(255,255,255,.07)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-font-smoothing:antialiased;height:100%}
-body{font-family:var(--f);background:var(--bg);color:var(--txt);height:100%;overflow:hidden;transition:background .3s,color .3s}
+body{font-family:var(--f);background:var(--bg);color:var(--txt);height:100%;overflow:hidden;transition:background .3s,color .3s;direction:rtl}
 input,textarea,select,button{font-family:var(--f)}
 img,video{display:block}
 button{cursor:pointer;border:none;background:none;color:inherit}
@@ -30,7 +30,7 @@ a{color:inherit;text-decoration:none}
 .f-hint{font-size:10px;color:var(--mu2);margin-top:3px}
 .fgroup{display:flex;flex-direction:column;gap:4px}
 .frow{display:grid;gap:10px;margin-bottom:10px}
-.frow.c2{grid-template-columns:1fr 1fr}
+.frow.c2{grid-template-columns:1fr}
 
 /* BUTTONS */
 .btn-pri{width:100%;background:var(--txt);color:var(--bg);border-radius:8px;padding:11px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;transition:opacity .2s;cursor:pointer;border:none}
@@ -66,7 +66,7 @@ a{color:inherit;text-decoration:none}
 .adm-body{display:flex;flex:1;overflow:hidden;min-height:0}
 
 /* SIDEBAR */
-.sidebar{width:var(--side);border-right:1px solid var(--bdr);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
+.sidebar{width:var(--side);border-left:1px solid var(--bdr);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
 .sb-tabs{display:flex;border-bottom:1px solid var(--bdr);flex-shrink:0}
 .sb-tab{flex:1;height:36px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);border:none;background:none;cursor:pointer;transition:color .2s,background .2s;border-bottom:2px solid transparent}
 .sb-tab.on{color:var(--txt);border-bottom-color:var(--txt);background:var(--surf)}
@@ -77,15 +77,15 @@ a{color:inherit;text-decoration:none}
 .sb-list::-webkit-scrollbar{width:3px}
 .sb-list::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:2px}
 .sb-bottom{padding:10px;border-top:1px solid var(--bdr)}
-.pi{display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:8px;cursor:pointer;transition:background .15s}
+.pi{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:8px;cursor:pointer;transition:background .15s}
 .pi:hover{background:var(--surf)}
 .pi.on{background:var(--card)}
-.pi-thumb{width:38px;height:28px;border-radius:4px;background:var(--card);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;border:1px solid var(--bdr)}
+.pi-thumb{width:54px;height:40px;border-radius:5px;background:var(--card);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;border:1px solid var(--bdr)}
 .pi-thumb img,.pi-thumb video{width:100%;height:100%;object-fit:cover}
-.pi-thumb-ph{font-size:10px;color:var(--mu2)}
+.pi-thumb-ph{font-size:12px;color:var(--mu)}
 .pi-info{flex:1;min-width:0}
-.pi-name{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3}
-.pi-meta{font-size:10px;color:var(--mu);margin-top:1px}
+.pi-name{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3;color:var(--txt)}
+.pi-meta{font-size:11px;color:var(--mu);margin-top:2px;font-weight:500}
 .pi-acts{display:none;gap:2px;flex-shrink:0}
 .pi:hover .pi-acts{display:flex}
 .pi-btn{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--mu);transition:background .15s,color .15s;border:none;background:none;cursor:pointer}
@@ -105,7 +105,8 @@ a{color:inherit;text-decoration:none}
 .form-bar-title{font-size:14px;font-weight:700;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .form-bar-title span{color:var(--mu);font-weight:500}
 .form-acts{display:flex;gap:6px;flex-shrink:0}
-.form-scroll{flex:1;overflow-y:auto;padding:22px 24px}
+.form-scroll{flex:1;overflow-y:auto;padding:28px 32px}
+.form-scroll .fsec{max-width:560px;margin:0 auto}
 .form-scroll::-webkit-scrollbar{width:3px}
 .form-scroll::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:2px}
 .empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:10px;color:var(--mu);text-align:center}
@@ -124,6 +125,11 @@ a{color:inherit;text-decoration:none}
 .thumb-prev img,.thumb-prev video{width:100%;height:100px;object-fit:cover}
 .tag-prev{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
 .tag-pill{font-size:10px;font-weight:500;border:1px solid var(--bdr);border-radius:100px;padding:2px 9px;color:var(--mu)}
+.up-row{display:flex;gap:6px;align-items:flex-start}
+.up-row .f-inp{flex:1;min-width:0}
+.up-btn{flex-shrink:0;height:36px;padding:0 12px;border-radius:8px;border:1.5px solid var(--bdr);background:var(--surf);font-size:11px;font-weight:600;color:var(--mu);cursor:pointer;display:flex;align-items:center;gap:5px;transition:color .2s,border-color .2s;white-space:nowrap}
+.up-btn:hover{color:var(--txt);border-color:var(--txt)}
+.up-btn.loading{opacity:.5;pointer-events:none}
 
 /* BLOCK BUILDER */
 .builder-empty{padding:22px;text-align:center;font-size:12px;color:var(--mu2);background:var(--card);border-radius:10px;border:1.5px dashed var(--bdr);line-height:1.7}
@@ -369,7 +375,13 @@ a{color:inherit;text-decoration:none}
             <div class="fsec-title">מראה</div>
             <div class="fgroup" style="margin-bottom:10px">
               <label class="f-label">תמונה ממוזערת</label>
-              <input type="url" id="f-img1" class="f-inp" placeholder="כתובת תמונה / GIF / וידאו" oninput="updateThumb()">
+              <div class="up-row">
+                <input type="url" id="f-img1" class="f-inp" placeholder="כתובת תמונה / GIF / וידאו" oninput="updateThumb()">
+                <button class="up-btn" id="up-btn-img1" onclick="pickImage('f-img1','up-btn-img1',false)">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  העלה
+                </button>
+              </div>
               <div class="thumb-prev" id="thumb-prev"><img id="thumb-img" src="" alt=""></div>
             </div>
             <div class="frow c2" style="margin-bottom:6px">
@@ -457,6 +469,7 @@ a{color:inherit;text-decoration:none}
   </div>
 </div>
 
+<input type="file" id="_file-pick" accept="image/*,image/gif,video/mp4,video/webm" style="display:none" onchange="handleFilePick()">
 <div id="toast"></div>
 
 <div id="confirm">
@@ -783,16 +796,27 @@ function selectSiteSection(sec){
     if(f.type==='textarea'){
       inp=document.createElement('textarea'); inp.className='f-ta'; inp.style.minHeight='72px';
       inp.placeholder=f.ph||''; inp.value=secData[f.id]||'';
+      inp.dataset.field=f.id; g.appendChild(inp);
     } else if(f.type==='select'){
       inp=document.createElement('select'); inp.className='f-sel';
       (f.options||[]).forEach(o=>{ const opt=document.createElement('option'); opt.value=o.v; opt.textContent=o.l; inp.appendChild(opt); });
       inp.value=secData[f.id]||f.options[0].v;
+      inp.dataset.field=f.id; g.appendChild(inp);
+    } else if(f.type==='url'){
+      inp=document.createElement('input'); inp.type='url'; inp.className='f-inp';
+      inp.placeholder=f.ph||''; inp.value=secData[f.id]||''; inp.dataset.field=f.id;
+      const upId='site-ubtn-'+f.id;
+      const upBtn=document.createElement('button'); upBtn.className='up-btn'; upBtn.id=upId;
+      upBtn.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> העלה';
+      upBtn.onclick=()=>pickImage(null,upId,true,(url)=>{ inp.value=url; });
+      const row=document.createElement('div'); row.className='up-row';
+      row.append(inp,upBtn); g.appendChild(row);
     } else {
       inp=document.createElement('input'); inp.type=f.type||'text'; inp.className='f-inp';
       inp.placeholder=f.ph||''; inp.value=secData[f.id]||'';
+      inp.dataset.field=f.id; g.appendChild(inp);
     }
-    inp.dataset.field=f.id;
-    g.appendChild(inp); scroll.appendChild(g);
+    scroll.appendChild(g);
   });
 }
 
@@ -940,11 +964,20 @@ function buildBlockCard(b,i){
     const g=document.createElement('div'); g.className='fgroup';
     const lbl=document.createElement('label'); lbl.className='f-label'; lbl.textContent=f.label; g.appendChild(lbl);
     let input;
-    if(f.type==='textarea'){ input=document.createElement('textarea'); input.className='f-ta'; input.style.minHeight='60px'; }
-    else{ input=document.createElement('input'); input.type=f.type||'text'; input.className='f-inp'; }
-    input.placeholder=f.ph||''; input.value=b[f.id]||'';
-    input.addEventListener('input',()=>{ blocksList[i][f.id]=input.value; });
-    g.appendChild(input); body.appendChild(g);
+    const isMedia=f.type==='url'&&!f.ph?.includes('vimeo.com')&&!f.ph?.includes('youtube');
+    if(f.type==='textarea'){ input=document.createElement('textarea'); input.className='f-ta'; input.style.minHeight='60px'; input.placeholder=f.ph||''; input.value=b[f.id]||''; input.addEventListener('input',()=>{ blocksList[i][f.id]=input.value; }); g.appendChild(input); }
+    else if(isMedia){
+      const row=document.createElement('div'); row.className='up-row';
+      input=document.createElement('input'); input.type='url'; input.className='f-inp'; input.placeholder=f.ph||''; input.value=b[f.id]||'';
+      input.addEventListener('input',()=>{ blocksList[i][f.id]=input.value; });
+      const upId='ubtn-'+i+'-'+f.id;
+      const upBtn=document.createElement('button'); upBtn.className='up-btn'; upBtn.id=upId;
+      upBtn.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> העלה';
+      upBtn.onclick=()=>pickImage(null,upId,true,(url)=>{ input.value=url; blocksList[i][f.id]=url; });
+      row.append(input,upBtn); g.appendChild(row);
+    }
+    else{ input=document.createElement('input'); input.type=f.type||'text'; input.className='f-inp'; input.placeholder=f.ph||''; input.value=b[f.id]||''; input.addEventListener('input',()=>{ blocksList[i][f.id]=input.value; }); g.appendChild(input); }
+    body.appendChild(g);
   });
 
   hdr.addEventListener('click',e=>{ if(e.target===upBtn||e.target===dnBtn||e.target===delBtn) return; const open=body.classList.toggle('open'); arrBtn.classList.toggle('open',open); });
@@ -960,6 +993,57 @@ function addBlock(type){
 
 function toggleBlockMenu(e){ e.stopPropagation(); document.getElementById('block-menu').classList.toggle('show'); }
 document.addEventListener('click',()=>document.getElementById('block-menu').classList.remove('show'));
+
+/* ── IMAGE UPLOAD ───────────────────── */
+let _upTarget='', _upBtnId='', _upCallback=null;
+
+function pickImage(fieldId, btnId, isCallback, cb){
+  _upTarget=fieldId; _upBtnId=btnId; _upCallback=cb||null;
+  document.getElementById('_file-pick').click();
+}
+
+async function handleFilePick(){
+  const inp=document.getElementById('_file-pick');
+  const file=inp.files[0]; inp.value='';
+  if(!file) return;
+  const btn=_upBtnId?document.getElementById(_upBtnId):null;
+  if(btn){ btn.classList.add('loading'); btn.textContent='מעלה…'; }
+  try{
+    const url=await ghUploadImage(file);
+    if(_upCallback){ _upCallback(url); }
+    else if(_upTarget){
+      const el=document.getElementById(_upTarget);
+      if(el){ el.value=url; el.dispatchEvent(new Event('input')); }
+    }
+    toast('הועלה בהצלחה!','ok');
+  }catch(e){ toast('שגיאה בהעלאה: '+e.message,'err'); }
+  finally{
+    if(btn){ btn.classList.remove('loading'); btn.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> העלה'; }
+  }
+}
+
+async function ghUploadImage(file){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onerror=()=>reject(new Error('שגיאה בקריאת הקובץ'));
+    reader.onload=async()=>{
+      try{
+        const b64=reader.result.split(',')[1];
+        const ext=file.name.split('.').pop().toLowerCase().replace(/[^a-z0-9]/g,'');
+        const name=`${Date.now()}-${Math.random().toString(36).slice(2,6)}.${ext||'jpg'}`;
+        const path=`assets/${name}`;
+        const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`,{
+          method:'PUT',
+          headers:{Authorization:'Bearer '+getToken(),Accept:'application/vnd.github+json','Content-Type':'application/json'},
+          body:JSON.stringify({message:`העלאת קובץ: ${name}`,content:b64})
+        });
+        if(!r.ok){ const err=await r.json(); throw new Error(err.message||'שגיאה בהעלאה'); }
+        resolve(`/assets/${name}`);
+      }catch(e){ reject(e); }
+    };
+    reader.readAsDataURL(file);
+  });
+}
 
 /* ── UTILS ──────────────────────────── */
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
