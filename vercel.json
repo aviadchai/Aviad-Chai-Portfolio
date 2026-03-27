@@ -1,6 +1,8 @@
 {
   "rewrites": [
     { "source": "/admin", "destination": "/admin.html" },
+    { "source": "/projects.json", "destination": "/projects.json" },
+    { "source": "/site.json", "destination": "/site.json" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

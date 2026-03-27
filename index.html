@@ -1032,9 +1032,18 @@ async function loadSiteContent(){
     }
     if(s.about){
       const a=s.about;
+      if(a.photo) document.getElementById('el-photo').src=a.photo;
       if(a.title){ const lines=a.title.split('\n'); document.getElementById('el-about-title').innerHTML=lines.map((l,i)=>i<lines.length-1?l+'<br>':l).join(''); }
+      if(a.titleSize){
+        const tsMap={small:'clamp(20px,3vw,38px)',medium:'clamp(24px,3.8vw,48px)',large:'clamp(28px,4.5vw,58px)',xlarge:'clamp(34px,5.5vw,72px)'};
+        if(tsMap[a.titleSize]) document.getElementById('el-about-title').style.fontSize=tsMap[a.titleSize];
+      }
       if(a.bio1) document.getElementById('el-bio1').textContent=a.bio1;
       if(a.bio2) document.getElementById('el-bio2').textContent=a.bio2;
+      if(a.bioSize){
+        const bsMap={small:'13px',medium:'15px',large:'17px'};
+        if(bsMap[a.bioSize]){ document.getElementById('el-bio1').style.fontSize=bsMap[a.bioSize]; document.getElementById('el-bio2').style.fontSize=bsMap[a.bioSize]; }
+      }
       if(a.skills){
         const sk=document.getElementById('el-skills');
         sk.innerHTML=a.skills.split(',').filter(x=>x.trim()).map(x=>`<span class="about-sk">${x.trim()}</span>`).join('');

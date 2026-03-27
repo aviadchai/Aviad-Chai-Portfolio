@@ -493,6 +493,17 @@ const REPO = 'aviadchai/Aviad-Chai-Portfolio';
 const FILE = 'projects.json';
 const SITE_FILE = 'site.json';
 
+/* ── COOKIE HELPERS ─────────────────── */
+function setCookie(name,val,days){
+  const exp=new Date(Date.now()+days*864e5).toUTCString();
+  document.cookie=`${name}=${encodeURIComponent(val)};expires=${exp};path=/;SameSite=Lax`;
+}
+function getCookie(name){
+  const m=document.cookie.match('(?:^|; )'+name+'=([^;]*)');
+  return m?decodeURIComponent(m[1]):'';
+}
+function delCookie(name){ document.cookie=`${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/`; }
+
 /* ── AUTH ───────────────────────────── */
 async function hashStr(s){
   const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));
@@ -503,23 +514,30 @@ async function doLogin(){
   const pw=document.getElementById('login-pw').value;
   const err=document.getElementById('login-err');
   const ok=(await hashStr(un)===USERNAME_HASH)&&(await hashStr(pw)===PASSWORD_HASH);
-  if(ok){ sessionStorage.setItem('ac_auth','1'); err.style.display='none'; afterLogin(); }
+  if(ok){ setCookie('ac_auth','1',0.333); sessionStorage.setItem('ac_auth','1'); err.style.display='none'; afterLogin(); }
   else{ err.style.display='block'; document.getElementById('login-pw').select(); }
 }
 document.getElementById('login-pw').addEventListener('keydown',e=>{ if(e.key==='Enter') doLogin(); });
-function doLogout(){ sessionStorage.removeItem('ac_auth'); showScreen('s-login'); document.getElementById('login-pw').value=''; }
+function doLogout(){ delCookie('ac_auth'); sessionStorage.removeItem('ac_auth'); showScreen('s-login'); document.getElementById('login-pw').value=''; }
 function afterLogin(){ if(!getToken()){ showScreen('s-setup'); } else { showScreen('s-admin'); loadAll(); } }
 
 /* ── TOKEN ──────────────────────────── */
-const getToken=()=>localStorage.getItem('ac_gh_token')||'';
+function getToken(){ return localStorage.getItem('ac_gh_token')||getCookie('ac_gh_token')||''; }
 function saveSetup(){
   const t=document.getElementById('setup-token').value.trim();
   if(!t){ toast('הכנס את הטוקן שלך','err'); return; }
   localStorage.setItem('ac_gh_token',t);
+  setCookie('ac_gh_token',t,365);
   toast('מחובר!','ok');
   setTimeout(()=>{ showScreen('s-admin'); loadAll(); },600);
 }
 function openSettings(){ document.getElementById('setup-token').value=getToken(); showScreen('s-setup'); }
+
+/* ── AUTO-LOGIN ─────────────────────── */
+(function autoLogin(){
+  const hasAuth=getCookie('ac_auth')==='1'||sessionStorage.getItem('ac_auth')==='1';
+  if(hasAuth&&getToken()){ showScreen('s-admin'); loadAll(); }
+}());
 
 /* ── SCREENS ────────────────────────── */
 function showScreen(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); document.getElementById(id).classList.add('on'); }
@@ -537,7 +555,7 @@ async function ghGet(path){
   const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`,{headers:{Authorization:'Bearer '+getToken(),Accept:'application/vnd.github+json'}});
   if(!r.ok) throw new Error('GitHub fetch failed: '+r.status);
   const j=await r.json();
-  return {data: JSON.parse(atob(j.content.replace(/\n/g,''))), sha: j.sha};
+  return {data: JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\n/g,''))))), sha: j.sha};
 }
 
 async function ghPut(path,data,sha,message){
@@ -709,9 +727,12 @@ const SITE_SECTIONS={
   about:{
     label:'About — עמוד אודות',
     fields:[
+      {id:'photo',label:'תמונת פרופיל (URL)',type:'url',ph:'https://…'},
       {id:'title',label:'כותרת גדולה (שורות עם Enter)',type:'textarea',ph:'Motion designer,\nstoryteller,\nTel Aviv.'},
+      {id:'titleSize',label:'גודל כותרת',type:'select',options:[{v:'small',l:'קטן'},{v:'medium',l:'בינוני'},{v:'large',l:'גדול (ברירת מחדל)'},{v:'xlarge',l:'ענק'}]},
       {id:'bio1',label:'ביו — פסקה 1',type:'textarea',ph:''},
       {id:'bio2',label:'ביו — פסקה 2',type:'textarea',ph:''},
+      {id:'bioSize',label:'גודל טקסט ביו',type:'select',options:[{v:'small',l:'קטן — 13px'},{v:'medium',l:'בינוני — 15px (ברירת מחדל)'},{v:'large',l:'גדול — 17px'}]},
       {id:'skills',label:'כישורים (מופרדים בפסיק)',type:'text',ph:'Cinema 4D, After Effects, Octane Render'},
       {id:'linkedin',label:'קישור LinkedIn',type:'url',ph:'https://www.linkedin.com/in/…'},
       {id:'behance',label:'קישור Behance',type:'url',ph:'https://www.behance.net/…'},
@@ -759,9 +780,18 @@ function selectSiteSection(sec){
     const g=document.createElement('div'); g.className='fgroup'; g.style.marginBottom='14px';
     const lbl=document.createElement('label'); lbl.className='f-label'; lbl.textContent=f.label; g.appendChild(lbl);
     let inp;
-    if(f.type==='textarea'){ inp=document.createElement('textarea'); inp.className='f-ta'; inp.style.minHeight='72px'; }
-    else{ inp=document.createElement('input'); inp.type=f.type||'text'; inp.className='f-inp'; }
-    inp.placeholder=f.ph||''; inp.value=secData[f.id]||''; inp.dataset.field=f.id;
+    if(f.type==='textarea'){
+      inp=document.createElement('textarea'); inp.className='f-ta'; inp.style.minHeight='72px';
+      inp.placeholder=f.ph||''; inp.value=secData[f.id]||'';
+    } else if(f.type==='select'){
+      inp=document.createElement('select'); inp.className='f-sel';
+      (f.options||[]).forEach(o=>{ const opt=document.createElement('option'); opt.value=o.v; opt.textContent=o.l; inp.appendChild(opt); });
+      inp.value=secData[f.id]||f.options[0].v;
+    } else {
+      inp=document.createElement('input'); inp.type=f.type||'text'; inp.className='f-inp';
+      inp.placeholder=f.ph||''; inp.value=secData[f.id]||'';
+    }
+    inp.dataset.field=f.id;
     g.appendChild(inp); scroll.appendChild(g);
   });
 }
@@ -825,7 +855,7 @@ async function revertToCommit(sha){
     const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${file}?ref=${sha}`,{headers:{Authorization:'Bearer '+getToken(),Accept:'application/vnd.github+json'}});
     if(!r.ok) throw new Error('failed');
     const j=await r.json();
-    const data=JSON.parse(atob(j.content.replace(/\n/g,'')));
+    const data=JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\n/g,'')))));
     closeHistory();
     setDeployStatus('saving','משחזר…');
     if(histFileType==='site'){
