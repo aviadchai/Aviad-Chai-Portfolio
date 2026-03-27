@@ -124,5 +124,19 @@
     "tags": "After Effects",
     "credits": "Creative Director: Itzik Cohen, SoundMix: Tal Avital, Motion Team lead: Dror Strom. Motion Designer: Aviad Chai and Tomer Malcov,",
     "blocks": "[{\"type\":\"duo\",\"media1\":\"/assets/1774640999062-33t5.mp4\",\"media2\":\"/assets/1774640983305-ub77.mp4\"},{\"type\":\"duo\",\"media1\":\"/assets/1774640990989-nslc.mp4\",\"media2\":\"/assets/1774640996352-ha0h.mp4\"}]"
+  },
+  {
+    "name": "שדגגג",
+    "category": "",
+    "client": "",
+    "year": "",
+    "layout": "half",
+    "img1": "",
+    "gradient1": "#c8ff00",
+    "gradient2": "#00ff88",
+    "description": "",
+    "tags": "",
+    "credits": "",
+    "blocks": ""
   }
 ]
