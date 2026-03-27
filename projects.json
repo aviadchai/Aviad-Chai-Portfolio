@@ -56,20 +56,6 @@
     "blocks": ""
   },
   {
-    "name": "Channel 14 â Election Broadcast",
-    "category": "Broadcast Design",
-    "client": "Channel 14",
-    "year": "2022",
-    "layout": "third",
-    "img1": "https://cdn.prod.website-files.com/63a96dee90b0cac7dbcb99d2/63b31a2e5885fb19782892df_Main-offical-image.jpg",
-    "gradient1": "#192656",
-    "gradient2": "#4264d1",
-    "description": "A comprehensive broadcast design package for Channel 14's election night.",
-    "tags": "After Effects, Broadcast Design",
-    "credits": "Motion Design:Aviad Chai, Channel:Channel 14",
-    "blocks": ""
-  },
-  {
     "name": "Google Hiring Ad",
     "category": "Advertising",
     "client": "Google",
@@ -81,6 +67,20 @@
     "img1": "https://cdn.prod.website-files.com/63a96dee90b0cac7dbcb99d2/63b3476c39b2f7141ad62290_googleAD.gif",
     "tags": "Cinema 4D, After Effects",
     "credits": "Direction & Animation:Aviad Chai, Client:Google",
+    "blocks": ""
+  },
+  {
+    "name": "Channel 14 â Election Broadcast",
+    "category": "Broadcast Design",
+    "client": "Channel 14",
+    "year": "2022",
+    "layout": "third",
+    "img1": "https://cdn.prod.website-files.com/63a96dee90b0cac7dbcb99d2/63b31a2e5885fb19782892df_Main-offical-image.jpg",
+    "gradient1": "#192656",
+    "gradient2": "#4264d1",
+    "description": "A comprehensive broadcast design package for Channel 14's election night.",
+    "tags": "After Effects, Broadcast Design",
+    "credits": "Motion Design:Aviad Chai, Channel:Channel 14",
     "blocks": ""
   },
   {
