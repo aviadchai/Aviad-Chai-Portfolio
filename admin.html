@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Admin — AC Portfolio</title>
+<title>פאנל ניהול — AC Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--f:'Syne',sans-serif;--ease:cubic-bezier(.22,1,.36,1);--bg:#fff;--surf:#f8f8f8;--card:#f0f0f0;--txt:#000;--mu:rgba(0,0,0,.44);--mu2:rgba(0,0,0,.20);--bdr:rgba(0,0,0,.08);--nav:56px;--side:280px;--danger:#ff3b30;--success:#34c759}
@@ -67,13 +67,16 @@ a{color:inherit;text-decoration:none}
 
 /* SIDEBAR */
 .sidebar{width:var(--side);border-right:1px solid var(--bdr);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
-.sb-top{padding:12px 14px 10px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between}
+.sb-tabs{display:flex;border-bottom:1px solid var(--bdr);flex-shrink:0}
+.sb-tab{flex:1;height:36px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);border:none;background:none;cursor:pointer;transition:color .2s,background .2s;border-bottom:2px solid transparent}
+.sb-tab.on{color:var(--txt);border-bottom-color:var(--txt);background:var(--surf)}
+.sb-top{padding:12px 14px 10px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .sb-label{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)}
 .sb-count{font-size:10px;color:var(--mu2);font-weight:500}
 .sb-list{flex:1;overflow-y:auto;padding:6px;display:flex;flex-direction:column;gap:1px}
 .sb-list::-webkit-scrollbar{width:3px}
 .sb-list::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:2px}
-.sb-bottom{padding:10px}
+.sb-bottom{padding:10px;border-top:1px solid var(--bdr)}
 .pi{display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:8px;cursor:pointer;transition:background .15s}
 .pi:hover{background:var(--surf)}
 .pi.on{background:var(--card)}
@@ -88,6 +91,13 @@ a{color:inherit;text-decoration:none}
 .pi-btn{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--mu);transition:background .15s,color .15s;border:none;background:none;cursor:pointer}
 .pi-btn:hover{background:var(--bdr);color:var(--txt)}
 .pi-btn.del:hover{background:#ff3b3020;color:var(--danger)}
+
+/* SITE NAV in sidebar */
+.site-nav{flex:1;overflow-y:auto;padding:8px 6px;display:flex;flex-direction:column;gap:2px}
+.site-nav-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;cursor:pointer;transition:background .15s;font-size:12px;font-weight:600}
+.site-nav-item:hover{background:var(--surf)}
+.site-nav-item.on{background:var(--card)}
+.site-nav-ic{font-size:14px;width:22px;text-align:center;flex-shrink:0}
 
 /* MAIN */
 .adm-main{flex:1;display:flex;flex-direction:column;overflow:hidden}
@@ -165,6 +175,21 @@ a{color:inherit;text-decoration:none}
 .btn-danger:hover{opacity:.85}
 .loading::after{content:'...';animation:ldots 1.2s steps(4) infinite}
 @keyframes ldots{0%,100%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}}
+
+/* HISTORY MODAL */
+#hist-modal{position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:800;display:none;align-items:flex-end;justify-content:center}
+#hist-modal.on{display:flex}
+.hist-box{background:var(--bg);border:1px solid var(--bdr);border-radius:18px 18px 0 0;width:100%;max-width:560px;max-height:70vh;display:flex;flex-direction:column;overflow:hidden}
+.hist-hdr{padding:18px 22px 14px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.hist-title{font-size:15px;font-weight:800;letter-spacing:-.03em}
+.hist-list{flex:1;overflow-y:auto;padding:8px}
+.hist-item{display:flex;align-items:center;gap:12px;padding:12px 10px;border-radius:10px;cursor:default;transition:background .15s;border-bottom:1px solid var(--bdr)}
+.hist-item:last-child{border-bottom:none}
+.hist-item:hover{background:var(--surf)}
+.hist-info{flex:1;min-width:0}
+.hist-msg{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hist-date{font-size:10px;color:var(--mu);margin-top:2px}
+.hist-empty{padding:32px;text-align:center;font-size:12px;color:var(--mu)}
 </style>
 </head>
 <body>
@@ -172,17 +197,17 @@ a{color:inherit;text-decoration:none}
 <!-- LOGIN -->
 <div id="s-login" class="screen on">
   <div class="login-box">
-    <div><div class="login-logo">AC</div><div class="login-sub">Portfolio Admin</div></div>
+    <div><div class="login-logo">AC</div><div class="login-sub">פאנל ניהול</div></div>
     <div>
-      <label class="f-label" for="login-un">Username</label>
-      <input type="text" id="login-un" class="f-inp" placeholder="Username" autocomplete="username">
+      <label class="f-label" for="login-un">שם משתמש</label>
+      <input type="text" id="login-un" class="f-inp" placeholder="שם משתמש" autocomplete="username">
     </div>
     <div>
-      <label class="f-label" for="login-pw">Password</label>
-      <input type="password" id="login-pw" class="f-inp" placeholder="Password" autocomplete="current-password">
+      <label class="f-label" for="login-pw">סיסמא</label>
+      <input type="password" id="login-pw" class="f-inp" placeholder="סיסמא" autocomplete="current-password">
     </div>
-    <div class="login-err" id="login-err">Incorrect password.</div>
-    <button class="btn-pri" onclick="doLogin()">Sign In →</button>
+    <div class="login-err" id="login-err">שם משתמש או סיסמא שגויים.</div>
+    <button class="btn-pri" onclick="doLogin()">כניסה →</button>
   </div>
 </div>
 
@@ -190,30 +215,30 @@ a{color:inherit;text-decoration:none}
 <div id="s-setup" class="screen">
   <div class="setup-box">
     <div>
-      <div style="font-size:22px;font-weight:800;letter-spacing:-.04em;margin-bottom:8px">Connect to GitHub</div>
-      <div class="setup-desc">The admin saves changes directly to your GitHub repo. Vercel deploys automatically after every save.</div>
+      <div style="font-size:22px;font-weight:800;letter-spacing:-.04em;margin-bottom:8px">חיבור ל-GitHub</div>
+      <div class="setup-desc">הפאנל שומר שינויים ישירות לריפו ב-GitHub. Vercel מפרסם אוטומטית לאחר כל שמירה.</div>
     </div>
 
     <div class="setup-card">
-      <div class="setup-card-title">Create a GitHub Token</div>
+      <div class="setup-card-title">יצירת GitHub Token</div>
       <div class="setup-desc">
-        1. Go to <strong>github.com</strong> → your profile photo → <strong>Settings</strong><br>
-        2. Scroll to <strong>Developer settings</strong> (bottom left)<br>
+        1. כנס ל-<strong>github.com</strong> → תמונת פרופיל → <strong>Settings</strong><br>
+        2. גלול ל-<strong>Developer settings</strong> (בתחתית)<br>
         3. <strong>Personal access tokens → Tokens (classic)</strong><br>
         4. <strong>Generate new token (classic)</strong><br>
-        5. Give it a name (e.g. "Portfolio Admin"), check <code>repo</code> scope<br>
-        6. Click <strong>Generate token</strong> → copy it
+        5. תן שם (למשל "Portfolio Admin"), סמן <code>public_repo</code><br>
+        6. לחץ <strong>Generate token</strong> והעתק
       </div>
     </div>
 
     <div class="setup-card">
-      <div class="setup-card-title">Enter your token</div>
+      <div class="setup-card-title">הכנס את הטוקן</div>
       <div>
         <label class="f-label" for="setup-token">GitHub Personal Access Token</label>
         <input type="password" id="setup-token" class="f-inp" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
-        <div class="f-hint">Stored only in your browser. Never sent anywhere except GitHub.</div>
+        <div class="f-hint">נשמר רק בדפדפן שלך. לא נשלח לשום מקום מלבד GitHub.</div>
       </div>
-      <button class="btn-pri" onclick="saveSetup()">Connect & Enter Admin</button>
+      <button class="btn-pri" onclick="saveSetup()">התחבר וכנס לפאנל</button>
     </div>
   </div>
 </div>
@@ -221,7 +246,7 @@ a{color:inherit;text-decoration:none}
 <!-- ADMIN -->
 <div id="s-admin" class="screen">
   <header class="adm-hdr">
-    <div class="adm-logo">AC <small>Admin</small></div>
+    <div class="adm-logo">AC <small>פאנל ניהול</small></div>
     <div class="hdr-right">
       <div class="deploy-status" id="deploy-status" style="display:none">
         <div class="deploy-dot"></div>
@@ -229,49 +254,74 @@ a{color:inherit;text-decoration:none}
       </div>
       <a class="btn-sm" href="/" target="_blank">
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        View Site
+        צפה באתר
       </a>
+      <button class="btn-sm" onclick="openHistory()" title="היסטוריה ושחזור">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4"/></svg>
+        היסטוריה
+      </button>
       <button class="btn-sm" id="theme-btn" onclick="toggleTheme()">
         <svg id="ic-sun" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
         <svg id="ic-moon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-        <span id="theme-lbl">Dark</span>
+        <span id="theme-lbl">כהה</span>
       </button>
-      <button class="btn-sm" onclick="openSettings()">Token</button>
-      <button class="btn-sm" onclick="doLogout()">Sign Out</button>
+      <button class="btn-sm" onclick="openSettings()">טוקן</button>
+      <button class="btn-sm" onclick="doLogout()">התנתק</button>
     </div>
   </header>
 
   <div class="adm-body">
     <aside class="sidebar">
-      <div class="sb-top">
-        <span class="sb-label">Projects</span>
-        <span class="sb-count" id="sb-count">—</span>
+      <div class="sb-tabs">
+        <button class="sb-tab on" id="tab-proj" onclick="setMode('projects')">פרויקטים</button>
+        <button class="sb-tab" id="tab-site" onclick="setMode('site')">תוכן האתר</button>
       </div>
-      <div class="sb-list" id="sb-list">
-        <div class="empty" style="height:180px"><div class="empty-tx loading">Loading</div></div>
+
+      <!-- Projects sidebar -->
+      <div id="sb-projects" style="display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0">
+        <div class="sb-top">
+          <span class="sb-label">פרויקטים</span>
+          <span class="sb-count" id="sb-count">—</span>
+        </div>
+        <div class="sb-list" id="sb-list">
+          <div class="empty" style="height:180px"><div class="empty-tx loading">טוען</div></div>
+        </div>
+        <div class="sb-bottom">
+          <button class="btn-sm acc" style="width:100%;justify-content:center" onclick="newProject()">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            פרויקט חדש
+          </button>
+        </div>
       </div>
-      <div class="sb-bottom">
-        <button class="btn-sm acc" style="width:100%;justify-content:center" onclick="newProject()">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          New Project
-        </button>
+
+      <!-- Site content sidebar -->
+      <div id="sb-site" style="display:none;flex-direction:column;flex:1;overflow:hidden;min-height:0">
+        <div class="site-nav" id="site-nav">
+          <div class="site-nav-item on" data-sec="hero" onclick="selectSiteSection('hero')"><span class="site-nav-ic">✦</span>Hero</div>
+          <div class="site-nav-item" data-sec="about" onclick="selectSiteSection('about')"><span class="site-nav-ic">👤</span>About</div>
+          <div class="site-nav-item" data-sec="contact" onclick="selectSiteSection('contact')"><span class="site-nav-ic">✉</span>Contact</div>
+          <div class="site-nav-item" data-sec="footer" onclick="selectSiteSection('footer')"><span class="site-nav-ic">—</span>Footer</div>
+        </div>
       </div>
     </aside>
 
     <main class="adm-main">
+
+      <!-- PROJECTS: empty state -->
       <div class="empty" id="form-empty">
         <div class="empty-ic">✦</div>
-        <div class="empty-tx">Select a project to edit<br>or create a new one</div>
+        <div class="empty-tx">בחר פרויקט לעריכה<br>או צור חדש</div>
       </div>
 
+      <!-- PROJECTS: form -->
       <div id="proj-form" style="display:none;flex-direction:column;height:100%">
         <div class="form-bar">
-          <div class="form-bar-title" id="form-title">New Project</div>
+          <div class="form-bar-title" id="form-title">פרויקט חדש</div>
           <div class="form-acts">
-            <button class="btn-sm" onclick="cancelForm()">Cancel</button>
+            <button class="btn-sm" onclick="cancelForm()">ביטול</button>
             <button class="btn-sm acc" id="save-btn" onclick="saveProject()">
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              Publish
+              פרסם
             </button>
           </div>
         </div>
@@ -280,34 +330,34 @@ a{color:inherit;text-decoration:none}
 
           <!-- BASIC -->
           <div class="fsec">
-            <div class="fsec-title">Basic Info</div>
+            <div class="fsec-title">פרטים בסיסיים</div>
             <div class="frow" style="margin-bottom:10px">
               <div class="fgroup">
-                <label class="f-label">Name <span class="req">*</span></label>
-                <input type="text" id="f-name" class="f-inp" placeholder="e.g. Artlist — Brand Film 2025">
+                <label class="f-label">שם <span class="req">*</span></label>
+                <input type="text" id="f-name" class="f-inp" placeholder="למשל Artlist — Brand Film 2025">
               </div>
             </div>
             <div class="frow c2">
               <div class="fgroup">
-                <label class="f-label">Category</label>
-                <input type="text" id="f-category" class="f-inp" placeholder="e.g. Brand Film">
+                <label class="f-label">קטגוריה</label>
+                <input type="text" id="f-category" class="f-inp" placeholder="למשל Brand Film">
               </div>
               <div class="fgroup">
-                <label class="f-label">Client</label>
-                <input type="text" id="f-client" class="f-inp" placeholder="e.g. Artlist">
+                <label class="f-label">לקוח</label>
+                <input type="text" id="f-client" class="f-inp" placeholder="למשל Artlist">
               </div>
             </div>
             <div class="frow c2">
               <div class="fgroup">
-                <label class="f-label">Year</label>
+                <label class="f-label">שנה</label>
                 <input type="text" id="f-year" class="f-inp" placeholder="2025">
               </div>
               <div class="fgroup">
-                <label class="f-label">Grid Layout</label>
+                <label class="f-label">פריסה בגריד</label>
                 <select id="f-layout" class="f-sel">
                   <option value="half">Half — 4:3</option>
-                  <option value="wide">Wide — full width</option>
-                  <option value="third">Third — portrait</option>
+                  <option value="wide">Wide — רוחב מלא</option>
+                  <option value="third">Third — פורטרט</option>
                   <option value="twothird">Two-Third — 16:9</option>
                 </select>
               </div>
@@ -316,22 +366,22 @@ a{color:inherit;text-decoration:none}
 
           <!-- APPEARANCE -->
           <div class="fsec">
-            <div class="fsec-title">Appearance</div>
+            <div class="fsec-title">מראה</div>
             <div class="fgroup" style="margin-bottom:10px">
-              <label class="f-label">Thumbnail</label>
-              <input type="url" id="f-img1" class="f-inp" placeholder="Image / GIF / video URL" oninput="updateThumb()">
+              <label class="f-label">תמונה ממוזערת</label>
+              <input type="url" id="f-img1" class="f-inp" placeholder="כתובת תמונה / GIF / וידאו" oninput="updateThumb()">
               <div class="thumb-prev" id="thumb-prev"><img id="thumb-img" src="" alt=""></div>
             </div>
             <div class="frow c2" style="margin-bottom:6px">
               <div class="fgroup">
-                <label class="f-label">Gradient 1</label>
+                <label class="f-label">גרדיאנט 1</label>
                 <div class="color-row">
                   <input type="color" id="g1p" class="clr-pick" value="#c8ff00" oninput="syncG1p()">
                   <input type="text" id="f-gradient1" class="f-inp" value="#c8ff00" placeholder="#c8ff00" oninput="syncG1t()">
                 </div>
               </div>
               <div class="fgroup">
-                <label class="f-label">Gradient 2</label>
+                <label class="f-label">גרדיאנט 2</label>
                 <div class="color-row">
                   <input type="color" id="g2p" class="clr-pick" value="#00ff88" oninput="syncG2p()">
                   <input type="text" id="f-gradient2" class="f-inp" value="#00ff88" placeholder="#00ff88" oninput="syncG2t()">
@@ -343,76 +393,105 @@ a{color:inherit;text-decoration:none}
 
           <!-- DETAILS -->
           <div class="fsec">
-            <div class="fsec-title">Project Info</div>
+            <div class="fsec-title">תיאור ותגיות</div>
             <div class="fgroup" style="margin-bottom:10px">
-              <label class="f-label">Description</label>
-              <textarea id="f-description" class="f-ta" placeholder="Short description shown in the overlay…"></textarea>
+              <label class="f-label">תיאור</label>
+              <textarea id="f-description" class="f-ta" placeholder="תיאור קצר המוצג בהובר…"></textarea>
             </div>
             <div class="fgroup" style="margin-bottom:10px">
-              <label class="f-label">Tags</label>
+              <label class="f-label">תגיות</label>
               <input type="text" id="f-tags" class="f-inp" placeholder="Cinema 4D, After Effects, Octane Render" oninput="updateTags()">
               <div class="tag-prev" id="tag-prev"></div>
             </div>
             <div class="fgroup">
-              <label class="f-label">Credits</label>
+              <label class="f-label">קרדיטים</label>
               <input type="text" id="f-credits" class="f-inp" placeholder="Direction & Animation:Aviad Chai, Client:Artlist">
-              <div class="f-hint">Format: Role:Name, Role:Name</div>
+              <div class="f-hint">פורמט: תפקיד:שם, תפקיד:שם</div>
             </div>
           </div>
 
           <!-- BLOCK BUILDER -->
           <div class="fsec">
-            <div class="fsec-title">Page Layout</div>
+            <div class="fsec-title">בנאי עמוד</div>
             <div class="blocks-list" id="blocks-list"></div>
-            <div id="blocks-empty" class="builder-empty" style="display:none">No blocks yet — add content below to build the page.</div>
+            <div id="blocks-empty" class="builder-empty" style="display:none">אין בלוקים עדיין — הוסף תוכן למטה כדי לבנות את העמוד.</div>
             <div class="add-block-wrap" id="add-block-wrap">
               <button class="btn-sm ghost" style="width:100%;justify-content:center;margin-top:2px" onclick="toggleBlockMenu(event)">
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                Add Block
+                הוסף בלוק
               </button>
               <div class="block-menu" id="block-menu">
-                <div class="bm-item" onclick="addBlock('video')"><span class="bm-ic">▶</span><div><div class="bm-name">Video Embed</div><div class="bm-desc">Full-width Vimeo or YouTube</div></div></div>
-                <div class="bm-item" onclick="addBlock('single')"><span class="bm-ic">▣</span><div><div class="bm-name">Single Media</div><div class="bm-desc">Full-width image, GIF or video</div></div></div>
-                <div class="bm-item" onclick="addBlock('duo')"><span class="bm-ic">▪▪</span><div><div class="bm-name">Two Media</div><div class="bm-desc">Two images/videos side by side</div></div></div>
-                <div class="bm-item" onclick="addBlock('duo-video')"><span class="bm-ic">▶▶</span><div><div class="bm-name">Two Video Embeds</div><div class="bm-desc">Two Vimeo / YouTube side by side</div></div></div>
-                <div class="bm-item" onclick="addBlock('split-left')"><span class="bm-ic">◧</span><div><div class="bm-name">Media + Text</div><div class="bm-desc">Image left, title &amp; text right</div></div></div>
-                <div class="bm-item" onclick="addBlock('split-right')"><span class="bm-ic">◨</span><div><div class="bm-name">Text + Media</div><div class="bm-desc">Title &amp; text left, image right</div></div></div>
-                <div class="bm-item" onclick="addBlock('text')"><span class="bm-ic">≡</span><div><div class="bm-name">Text Block</div><div class="bm-desc">Full-width title and paragraph</div></div></div>
-                <div class="bm-item" onclick="addBlock('duo-text')"><span class="bm-ic">≡≡</span><div><div class="bm-name">Two Text Boxes</div><div class="bm-desc">Two text columns side by side</div></div></div>
-                <div class="bm-item" onclick="addBlock('quote')"><span class="bm-ic">❝</span><div><div class="bm-name">Quote</div><div class="bm-desc">Large typographic statement</div></div></div>
+                <div class="bm-item" onclick="addBlock('video')"><span class="bm-ic">▶</span><div><div class="bm-name">הטמעת וידאו</div><div class="bm-desc">Vimeo או YouTube ברוחב מלא</div></div></div>
+                <div class="bm-item" onclick="addBlock('single')"><span class="bm-ic">▣</span><div><div class="bm-name">מדיה יחידה</div><div class="bm-desc">תמונה, GIF או וידאו ברוחב מלא</div></div></div>
+                <div class="bm-item" onclick="addBlock('duo')"><span class="bm-ic">▪▪</span><div><div class="bm-name">שתי מדיות</div><div class="bm-desc">שתי תמונות/וידאו זו לצד זו</div></div></div>
+                <div class="bm-item" onclick="addBlock('duo-video')"><span class="bm-ic">▶▶</span><div><div class="bm-name">שני וידאו</div><div class="bm-desc">שני Vimeo / YouTube זה לצד זה</div></div></div>
+                <div class="bm-item" onclick="addBlock('split-left')"><span class="bm-ic">◧</span><div><div class="bm-name">מדיה + טקסט</div><div class="bm-desc">תמונה משמאל, כותרת וטקסט מימין</div></div></div>
+                <div class="bm-item" onclick="addBlock('split-right')"><span class="bm-ic">◨</span><div><div class="bm-name">טקסט + מדיה</div><div class="bm-desc">כותרת וטקסט משמאל, תמונה מימין</div></div></div>
+                <div class="bm-item" onclick="addBlock('text')"><span class="bm-ic">≡</span><div><div class="bm-name">בלוק טקסט</div><div class="bm-desc">כותרת ופסקה ברוחב מלא</div></div></div>
+                <div class="bm-item" onclick="addBlock('duo-text')"><span class="bm-ic">≡≡</span><div><div class="bm-name">שתי עמודות טקסט</div><div class="bm-desc">שני תיבות טקסט זו לצד זו</div></div></div>
+                <div class="bm-item" onclick="addBlock('quote')"><span class="bm-ic">❝</span><div><div class="bm-name">ציטוט</div><div class="bm-desc">משפט טיפוגרפי גדול</div></div></div>
               </div>
             </div>
           </div>
 
         </div>
       </div>
+
+      <!-- SITE CONTENT PANEL -->
+      <div id="site-panel" style="display:none;flex-direction:column;height:100%">
+        <div class="form-bar">
+          <div class="form-bar-title" id="site-form-title">Hero</div>
+          <div class="form-acts">
+            <button class="btn-sm acc" id="site-save-btn" onclick="saveSiteSection()">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              פרסם
+            </button>
+          </div>
+        </div>
+        <div class="form-scroll" id="site-form-scroll">
+          <!-- filled dynamically -->
+        </div>
+      </div>
+
     </main>
   </div>
 </div>
 
 <div id="toast"></div>
+
 <div id="confirm">
   <div class="confirm-box">
-    <div class="confirm-title" id="confirm-title">Delete Project?</div>
-    <div class="confirm-body" id="confirm-body">This will permanently remove the project.</div>
+    <div class="confirm-title" id="confirm-title">מחיקת פרויקט?</div>
+    <div class="confirm-body" id="confirm-body">הפרויקט יימחק לצמיתות.</div>
     <div class="confirm-acts">
-      <button class="btn-sm" onclick="closeConfirm()">Cancel</button>
-      <button class="btn-danger" onclick="confirmOk()">Delete</button>
+      <button class="btn-sm" onclick="closeConfirm()">ביטול</button>
+      <button class="btn-danger" onclick="confirmOk()">מחק</button>
+    </div>
+  </div>
+</div>
+
+<!-- HISTORY MODAL -->
+<div id="hist-modal">
+  <div class="hist-box">
+    <div class="hist-hdr">
+      <div class="hist-title" id="hist-title">היסטוריית שינויים</div>
+      <button class="btn-sm" onclick="closeHistory()">סגור</button>
+    </div>
+    <div class="hist-list" id="hist-list">
+      <div class="hist-empty loading">טוען</div>
     </div>
   </div>
 </div>
 
 <script>
 /* ═══════════════════════════════════════
-   CONFIG — to change password run in console:
-   crypto.subtle.digest('SHA-256',new TextEncoder().encode('newpassword'))
-     .then(b=>console.log([...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')))
-   Default: admin123
+   CONFIG
 ═══════════════════════════════════════ */
 const USERNAME_HASH = 'f87f0ee9213835572bd72465a325306d828a303887cf1fc9fc8d2eb2c422a38d';
 const PASSWORD_HASH = 'f9299203cb4b4e3ff3970d4bf2494ee546bfcaf0ebc9991cc880f0ea266a6869';
 const REPO = 'aviadchai/Aviad-Chai-Portfolio';
 const FILE = 'projects.json';
+const SITE_FILE = 'site.json';
 
 /* ── AUTH ───────────────────────────── */
 async function hashStr(s){
@@ -429,16 +508,16 @@ async function doLogin(){
 }
 document.getElementById('login-pw').addEventListener('keydown',e=>{ if(e.key==='Enter') doLogin(); });
 function doLogout(){ sessionStorage.removeItem('ac_auth'); showScreen('s-login'); document.getElementById('login-pw').value=''; }
-function afterLogin(){ if(!getToken()){ showScreen('s-setup'); } else { showScreen('s-admin'); loadProjects(); } }
+function afterLogin(){ if(!getToken()){ showScreen('s-setup'); } else { showScreen('s-admin'); loadAll(); } }
 
 /* ── TOKEN ──────────────────────────── */
 const getToken=()=>localStorage.getItem('ac_gh_token')||'';
 function saveSetup(){
   const t=document.getElementById('setup-token').value.trim();
-  if(!t){ toast('Enter your GitHub token','err'); return; }
+  if(!t){ toast('הכנס את הטוקן שלך','err'); return; }
   localStorage.setItem('ac_gh_token',t);
-  toast('Connected!','ok');
-  setTimeout(()=>{ showScreen('s-admin'); loadProjects(); },600);
+  toast('מחובר!','ok');
+  setTimeout(()=>{ showScreen('s-admin'); loadAll(); },600);
 }
 function openSettings(){ document.getElementById('setup-token').value=getToken(); showScreen('s-setup'); }
 
@@ -447,31 +526,36 @@ function showScreen(id){ document.querySelectorAll('.screen').forEach(s=>s.class
 
 /* ── THEME ──────────────────────────── */
 let dark=localStorage.getItem('ac_dark')==='1';
-function applyTheme(){ document.body.classList.toggle('dark',dark); document.getElementById('ic-sun').style.display=dark?'none':''; document.getElementById('ic-moon').style.display=dark?'':'none'; document.getElementById('theme-lbl').textContent=dark?'Light':'Dark'; }
+function applyTheme(){ document.body.classList.toggle('dark',dark); document.getElementById('ic-sun').style.display=dark?'none':''; document.getElementById('ic-moon').style.display=dark?'':'none'; document.getElementById('theme-lbl').textContent=dark?'בהיר':'כהה'; }
 function toggleTheme(){ dark=!dark; localStorage.setItem('ac_dark',dark?'1':'0'); applyTheme(); }
 applyTheme();
 
 /* ── GITHUB API ─────────────────────── */
-let fileSha='';
+let fileSha='', siteSha='';
 
-async function ghGet(){
-  const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`,{headers:{Authorization:'Bearer '+getToken(),Accept:'application/vnd.github+json'}});
+async function ghGet(path){
+  const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`,{headers:{Authorization:'Bearer '+getToken(),Accept:'application/vnd.github+json'}});
   if(!r.ok) throw new Error('GitHub fetch failed: '+r.status);
   const j=await r.json();
-  fileSha=j.sha;
-  return JSON.parse(atob(j.content.replace(/\n/g,'')));
+  return {data: JSON.parse(atob(j.content.replace(/\n/g,''))), sha: j.sha};
 }
 
-async function ghPut(data){
+async function ghPut(path,data,sha,message){
   const content=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
-  const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`,{
+  const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`,{
     method:'PUT',
     headers:{Authorization:'Bearer '+getToken(),Accept:'application/vnd.github+json','Content-Type':'application/json'},
-    body:JSON.stringify({message:'Update projects via admin panel',content,sha:fileSha})
+    body:JSON.stringify({message,content,sha})
   });
   if(!r.ok){ const err=await r.json(); throw new Error(err.message||'GitHub save failed'); }
   const j=await r.json();
-  fileSha=j.content.sha;
+  return j.content.sha;
+}
+
+/* ── INIT LOAD ──────────────────────── */
+async function loadAll(){
+  loadProjects();
+  loadSiteData();
 }
 
 /* ── PROJECTS ───────────────────────── */
@@ -480,12 +564,13 @@ let editIdx=-1;
 
 async function loadProjects(){
   try{
-    projects=await ghGet();
+    const res=await ghGet(FILE);
+    fileSha=res.sha; projects=res.data;
     renderSidebar();
   }catch(e){
     console.error(e);
-    toast('Failed to load — check your token','err');
-    document.getElementById('sb-list').innerHTML='<div class="empty" style="height:160px"><div class="empty-tx">Could not load.<br>Check your GitHub token.</div></div>';
+    toast('שגיאה בטעינה — בדוק את הטוקן','err');
+    document.getElementById('sb-list').innerHTML='<div class="empty" style="height:160px"><div class="empty-tx">לא ניתן לטעון.<br>בדוק את הטוקן.</div></div>';
   }
 }
 
@@ -493,7 +578,7 @@ async function loadProjects(){
 function renderSidebar(){
   document.getElementById('sb-count').textContent=projects.length;
   const list=document.getElementById('sb-list');
-  if(!projects.length){ list.innerHTML='<div class="empty" style="height:160px"><div class="empty-tx">No projects yet.</div></div>'; return; }
+  if(!projects.length){ list.innerHTML='<div class="empty" style="height:160px"><div class="empty-tx">אין פרויקטים עדיין.</div></div>'; return; }
   list.innerHTML='';
   projects.forEach((p,i)=>{
     const el=document.createElement('div');
@@ -504,6 +589,25 @@ function renderSidebar(){
     el.addEventListener('click',()=>editProject(i));
     list.appendChild(el);
   });
+}
+
+/* ── MODE SWITCH ────────────────────── */
+let adminMode='projects';
+function setMode(mode){
+  adminMode=mode;
+  document.getElementById('tab-proj').classList.toggle('on',mode==='projects');
+  document.getElementById('tab-site').classList.toggle('on',mode==='site');
+  document.getElementById('sb-projects').style.display=mode==='projects'?'flex':'none';
+  document.getElementById('sb-site').style.display=mode==='site'?'flex':'none';
+  if(mode==='site'){
+    document.getElementById('form-empty').style.display='none';
+    document.getElementById('proj-form').style.display='none';
+    document.getElementById('site-panel').style.display='flex';
+    selectSiteSection(currentSiteSection||'hero');
+  } else {
+    document.getElementById('site-panel').style.display='none';
+    cancelForm();
+  }
 }
 
 /* ── FORM ───────────────────────────── */
@@ -519,7 +623,7 @@ function newProject(){
   document.getElementById('g2p').value='#00ff88';
   updateGrad(); document.getElementById('thumb-prev').style.display='none';
   document.getElementById('tag-prev').innerHTML='';
-  document.getElementById('form-title').innerHTML='New Project';
+  document.getElementById('form-title').innerHTML='פרויקט חדש';
   renderBlocks(); showForm(); document.getElementById('f-name').focus();
 }
 
@@ -531,11 +635,11 @@ function editProject(i){
   blocksList=[];
   try{ if(p.blocks) blocksList=JSON.parse(p.blocks); }catch(e){}
   updateGrad(); updateThumb(); updateTags();
-  document.getElementById('form-title').innerHTML=`Editing <span>${esc(p.name)}</span>`;
+  document.getElementById('form-title').innerHTML=`עריכה: <span>${esc(p.name)}</span>`;
   renderBlocks(); renderSidebar(); showForm();
 }
 
-function showForm(){ document.getElementById('form-empty').style.display='none'; document.getElementById('proj-form').style.display='flex'; }
+function showForm(){ document.getElementById('form-empty').style.display='none'; document.getElementById('proj-form').style.display='flex'; document.getElementById('site-panel').style.display='none'; }
 function cancelForm(){ editIdx=-1; document.getElementById('form-empty').style.display='flex'; document.getElementById('proj-form').style.display='none'; renderSidebar(); }
 
 function getFormData(){
@@ -545,48 +649,200 @@ function getFormData(){
   return d;
 }
 
-/* ── SAVE ───────────────────────────── */
+/* ── SAVE PROJECT ───────────────────── */
 async function saveProject(){
   const data=getFormData();
-  if(!data.name){ toast('Project name is required','err'); document.getElementById('f-name').focus(); return; }
+  if(!data.name){ toast('שם הפרויקט הוא שדה חובה','err'); document.getElementById('f-name').focus(); return; }
   const btn=document.getElementById('save-btn');
-  btn.textContent='Publishing…'; btn.disabled=true;
-  setDeployStatus('saving','Publishing…');
+  btn.textContent='מפרסם…'; btn.disabled=true;
+  setDeployStatus('saving','מפרסם…');
   try{
     if(editIdx===-1){ projects.push(data); }
     else{ projects[editIdx]=data; }
-    await ghPut(projects);
+    fileSha=await ghPut(FILE,projects,fileSha,'עדכון פרויקטים דרך פאנל הניהול');
     const ni=editIdx===-1?projects.length-1:editIdx;
     editIdx=ni;
-    setDeployStatus('saved','Published ✓');
-    toast('Published! Vercel is deploying…','ok');
+    setDeployStatus('saved','פורסם ✓');
+    toast('פורסם! Vercel מפרסם לאתר…','ok');
     renderSidebar();
   }catch(e){
     console.error(e);
-    if(editIdx===-1) projects.pop(); // rollback
-    setDeployStatus('error','Save failed');
-    toast('Save failed — '+e.message,'err');
+    if(editIdx===-1) projects.pop();
+    setDeployStatus('error','שגיאה בשמירה');
+    toast('שגיאה בשמירה — '+e.message,'err');
   }finally{
-    btn.innerHTML='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Publish';
+    btn.innerHTML='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> פרסם';
     btn.disabled=false;
   }
 }
 
 /* ── DELETE ─────────────────────────── */
 let _delIdx=-1;
-function deleteProject(i){ _delIdx=i; document.getElementById('confirm-title').textContent='Delete Project?'; document.getElementById('confirm-body').textContent=`"${projects[i].name}" will be permanently removed.`; document.getElementById('confirm').classList.add('on'); }
+function deleteProject(i){ _delIdx=i; document.getElementById('confirm-title').textContent='מחיקת פרויקט?'; document.getElementById('confirm-body').textContent=`"${projects[i].name}" יימחק לצמיתות.`; document.getElementById('confirm').classList.add('on'); }
 async function confirmOk(){
   closeConfirm(); if(_delIdx<0) return;
   const removed=projects.splice(_delIdx,1);
-  setDeployStatus('saving','Deleting…');
+  setDeployStatus('saving','מוחק…');
   try{
-    await ghPut(projects);
-    toast('Deleted','ok'); setDeployStatus('saved','Deleted ✓');
+    fileSha=await ghPut(FILE,projects,fileSha,'מחיקת פרויקט דרך פאנל הניהול');
+    toast('נמחק','ok'); setDeployStatus('saved','נמחק ✓');
     if(editIdx===_delIdx) cancelForm(); _delIdx=-1; renderSidebar();
-  }catch(e){ projects.splice(_delIdx,0,...removed); toast('Delete failed','err'); setDeployStatus('error','Failed'); }
+  }catch(e){ projects.splice(_delIdx,0,...removed); toast('שגיאה במחיקה','err'); setDeployStatus('error','שגיאה'); }
 }
 function closeConfirm(){ document.getElementById('confirm').classList.remove('on'); _delIdx=-1; }
 document.getElementById('confirm').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeConfirm(); });
+
+/* ── SITE CONTENT ───────────────────── */
+let siteData=null;
+let currentSiteSection='hero';
+
+const SITE_SECTIONS={
+  hero:{
+    label:'Hero — כותרת ראשית',
+    fields:[
+      {id:'tag',label:'תגית (מתחת לשם)',type:'text',ph:'3D Motion Designer · Tel Aviv'},
+      {id:'name1',label:'שם — שורה 1',type:'text',ph:'Aviad'},
+      {id:'name2',label:'שם — שורה 2',type:'text',ph:'Chai'},
+      {id:'desc',label:'תיאור',type:'textarea',ph:'Crafting motion that moves people…'},
+    ]
+  },
+  about:{
+    label:'About — עמוד אודות',
+    fields:[
+      {id:'title',label:'כותרת גדולה (שורות עם Enter)',type:'textarea',ph:'Motion designer,\nstoryteller,\nTel Aviv.'},
+      {id:'bio1',label:'ביו — פסקה 1',type:'textarea',ph:''},
+      {id:'bio2',label:'ביו — פסקה 2',type:'textarea',ph:''},
+      {id:'skills',label:'כישורים (מופרדים בפסיק)',type:'text',ph:'Cinema 4D, After Effects, Octane Render'},
+      {id:'linkedin',label:'קישור LinkedIn',type:'url',ph:'https://www.linkedin.com/in/…'},
+      {id:'behance',label:'קישור Behance',type:'url',ph:'https://www.behance.net/…'},
+      {id:'vimeo',label:'קישור Vimeo',type:'url',ph:'https://vimeo.com/…'},
+      {id:'email',label:'קישור מייל',type:'text',ph:'mailto:you@email.com'},
+    ]
+  },
+  contact:{
+    label:'Contact — צור קשר',
+    fields:[
+      {id:'title',label:'כותרת גדולה',type:'textarea',ph:"Let's Work\nTogether."},
+      {id:'sub',label:'תת-כותרת',type:'text',ph:'Got a project in mind?…'},
+      {id:'email',label:'מייל',type:'text',ph:'you@email.com'},
+      {id:'phone',label:'טלפון',type:'text',ph:'+972 050-000-0000'},
+      {id:'linkedin',label:'קישור LinkedIn',type:'url',ph:'https://www.linkedin.com/in/…'},
+      {id:'behance',label:'קישור Behance',type:'url',ph:'https://www.behance.net/…'},
+      {id:'vimeo',label:'קישור Vimeo',type:'url',ph:'https://vimeo.com/…'},
+      {id:'instagram',label:'קישור Instagram',type:'url',ph:'https://www.instagram.com/…'},
+    ]
+  },
+  footer:{
+    label:'Footer — כותרת תחתונה',
+    fields:[
+      {id:'text',label:'טקסט Footer',type:'text',ph:'© 2025 Aviad Chai'},
+    ]
+  }
+};
+
+async function loadSiteData(){
+  try{
+    const res=await ghGet(SITE_FILE);
+    siteSha=res.sha; siteData=res.data;
+  }catch(e){ console.warn('site.json load error',e); }
+}
+
+function selectSiteSection(sec){
+  currentSiteSection=sec;
+  document.querySelectorAll('.site-nav-item').forEach(el=>el.classList.toggle('on',el.dataset.sec===sec));
+  const def=SITE_SECTIONS[sec];
+  document.getElementById('site-form-title').textContent=def.label;
+  const scroll=document.getElementById('site-form-scroll');
+  scroll.innerHTML='';
+  const secData=(siteData&&siteData[sec])||{};
+  def.fields.forEach(f=>{
+    const g=document.createElement('div'); g.className='fgroup'; g.style.marginBottom='14px';
+    const lbl=document.createElement('label'); lbl.className='f-label'; lbl.textContent=f.label; g.appendChild(lbl);
+    let inp;
+    if(f.type==='textarea'){ inp=document.createElement('textarea'); inp.className='f-ta'; inp.style.minHeight='72px'; }
+    else{ inp=document.createElement('input'); inp.type=f.type||'text'; inp.className='f-inp'; }
+    inp.placeholder=f.ph||''; inp.value=secData[f.id]||''; inp.dataset.field=f.id;
+    g.appendChild(inp); scroll.appendChild(g);
+  });
+}
+
+async function saveSiteSection(){
+  if(!siteData) siteData={};
+  const sec=currentSiteSection;
+  const secData={};
+  document.querySelectorAll('#site-form-scroll [data-field]').forEach(inp=>{
+    secData[inp.dataset.field]=inp.value.trim();
+  });
+  siteData[sec]=secData;
+  // handle footer specially (flat text)
+  if(sec==='footer') siteData.footer=secData.text||secData.footer||'';
+
+  const btn=document.getElementById('site-save-btn');
+  btn.textContent='מפרסם…'; btn.disabled=true;
+  setDeployStatus('saving','מפרסם…');
+  try{
+    siteSha=await ghPut(SITE_FILE,siteData,siteSha,'עדכון תוכן האתר דרך פאנל הניהול');
+    setDeployStatus('saved','פורסם ✓');
+    toast('פורסם! Vercel מפרסם לאתר…','ok');
+  }catch(e){
+    console.error(e);
+    setDeployStatus('error','שגיאה בשמירה');
+    toast('שגיאה — '+e.message,'err');
+  }finally{
+    btn.innerHTML='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> פרסם';
+    btn.disabled=false;
+  }
+}
+
+/* ── HISTORY ────────────────────────── */
+let histFileType='projects';
+async function openHistory(){
+  histFileType=adminMode==='site'?'site':'projects';
+  const file=histFileType==='site'?SITE_FILE:FILE;
+  document.getElementById('hist-title').textContent=histFileType==='site'?'היסטוריה — תוכן האתר':'היסטוריה — פרויקטים';
+  document.getElementById('hist-list').innerHTML='<div class="hist-empty loading">טוען</div>';
+  document.getElementById('hist-modal').classList.add('on');
+  try{
+    const r=await fetch(`https://api.github.com/repos/${REPO}/commits?path=${file}&per_page=10`,{headers:{Authorization:'Bearer '+getToken(),Accept:'application/vnd.github+json'}});
+    if(!r.ok) throw new Error('failed');
+    const commits=await r.json();
+    if(!commits.length){ document.getElementById('hist-list').innerHTML='<div class="hist-empty">אין היסטוריה עדיין.</div>'; return; }
+    const list=document.getElementById('hist-list');
+    list.innerHTML='';
+    commits.forEach((c,i)=>{
+      const date=new Date(c.commit.author.date).toLocaleString('he-IL',{dateStyle:'short',timeStyle:'short'});
+      const div=document.createElement('div'); div.className='hist-item';
+      div.innerHTML=`<div class="hist-info"><div class="hist-msg">${esc(c.commit.message)}</div><div class="hist-date">${date}</div></div><button class="btn-sm${i===0?' ':' '}" onclick="revertToCommit('${c.sha}')">${i===0?'נוכחי':'שחזר'}</button>`;
+      if(i===0) div.querySelector('button').disabled=true;
+      list.appendChild(div);
+    });
+  }catch(e){ document.getElementById('hist-list').innerHTML='<div class="hist-empty">שגיאה בטעינת ההיסטוריה.</div>'; }
+}
+
+async function revertToCommit(sha){
+  const file=histFileType==='site'?SITE_FILE:FILE;
+  try{
+    const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${file}?ref=${sha}`,{headers:{Authorization:'Bearer '+getToken(),Accept:'application/vnd.github+json'}});
+    if(!r.ok) throw new Error('failed');
+    const j=await r.json();
+    const data=JSON.parse(atob(j.content.replace(/\n/g,'')));
+    closeHistory();
+    setDeployStatus('saving','משחזר…');
+    if(histFileType==='site'){
+      siteSha=await ghPut(SITE_FILE,data,siteSha,'שחזור גרסה קודמת — תוכן האתר');
+      siteData=data;
+      selectSiteSection(currentSiteSection);
+    } else {
+      fileSha=await ghPut(FILE,data,fileSha,'שחזור גרסה קודמת — פרויקטים');
+      projects=data; editIdx=-1; cancelForm(); renderSidebar();
+    }
+    setDeployStatus('saved','שוחזר ✓');
+    toast('הגרסה שוחזרה בהצלחה','ok');
+  }catch(e){ toast('שגיאה בשחזור: '+e.message,'err'); setDeployStatus('error','שגיאה'); }
+}
+
+function closeHistory(){ document.getElementById('hist-modal').classList.remove('on'); }
+document.getElementById('hist-modal').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeHistory(); });
 
 /* ── DEPLOY STATUS ──────────────────── */
 let _statusT;
@@ -613,15 +869,15 @@ function updateTags(){ const val=document.getElementById('f-tags').value; const 
 let blocksList=[];
 
 const BLOCK_DEFS={
-  'video':      {label:'Video Embed',    icon:'▶',  fields:[{id:'url',   label:'Vimeo / YouTube URL', type:'url', ph:'https://vimeo.com/…'}]},
-  'single':     {label:'Single Media',   icon:'▣',  fields:[{id:'url',   label:'Image / GIF / Video URL', type:'url', ph:'https://…'}]},
-  'duo':        {label:'Two Media',      icon:'▪▪', fields:[{id:'media1',label:'Left',  type:'url', ph:'https://…'},{id:'media2',label:'Right', type:'url', ph:'https://…'}]},
-  'duo-video':  {label:'Two Videos',     icon:'▶▶', fields:[{id:'url1',  label:'Left Video URL',  type:'url', ph:'https://vimeo.com/…'},{id:'url2',label:'Right Video URL', type:'url', ph:'https://vimeo.com/…'}]},
-  'split-left': {label:'Media + Text',   icon:'◧',  fields:[{id:'media', label:'Media URL', type:'url', ph:'https://…'},{id:'title',label:'Title', type:'text', ph:'Section heading'},{id:'text',label:'Paragraph', type:'textarea', ph:'Text…'}]},
-  'split-right':{label:'Text + Media',   icon:'◨',  fields:[{id:'title', label:'Title', type:'text', ph:'Section heading'},{id:'text',label:'Paragraph', type:'textarea', ph:'Text…'},{id:'media',label:'Media URL', type:'url', ph:'https://…'}]},
-  'text':       {label:'Text Block',     icon:'≡',  fields:[{id:'title', label:'Title (optional)', type:'text', ph:'Heading'},{id:'text',label:'Paragraph', type:'textarea', ph:'Text…'}]},
-  'duo-text':   {label:'Two Text Boxes', icon:'≡≡', fields:[{id:'title1',label:'Left Title', type:'text', ph:'Heading'},{id:'text1',label:'Left Text', type:'textarea', ph:'Text…'},{id:'title2',label:'Right Title', type:'text', ph:'Heading'},{id:'text2',label:'Right Text', type:'textarea', ph:'Text…'}]},
-  'quote':      {label:'Quote',          icon:'❝',  fields:[{id:'text',  label:'Quote Text', type:'textarea', ph:'A powerful statement…'}]},
+  'video':      {label:'הטמעת וידאו',       icon:'▶',  fields:[{id:'url',   label:'Vimeo / YouTube URL', type:'url', ph:'https://vimeo.com/…'}]},
+  'single':     {label:'מדיה יחידה',         icon:'▣',  fields:[{id:'url',   label:'כתובת תמונה / GIF / וידאו', type:'url', ph:'https://…'}]},
+  'duo':        {label:'שתי מדיות',          icon:'▪▪', fields:[{id:'media1',label:'שמאל',  type:'url', ph:'https://…'},{id:'media2',label:'ימין', type:'url', ph:'https://…'}]},
+  'duo-video':  {label:'שני וידאו',          icon:'▶▶', fields:[{id:'url1',  label:'כתובת וידאו שמאל',  type:'url', ph:'https://vimeo.com/…'},{id:'url2',label:'כתובת וידאו ימין', type:'url', ph:'https://vimeo.com/…'}]},
+  'split-left': {label:'מדיה + טקסט',        icon:'◧',  fields:[{id:'media', label:'כתובת מדיה', type:'url', ph:'https://…'},{id:'title',label:'כותרת', type:'text', ph:'כותרת סקשן'},{id:'text',label:'פסקה', type:'textarea', ph:'טקסט…'}]},
+  'split-right':{label:'טקסט + מדיה',        icon:'◨',  fields:[{id:'title', label:'כותרת', type:'text', ph:'כותרת סקשן'},{id:'text',label:'פסקה', type:'textarea', ph:'טקסט…'},{id:'media',label:'כתובת מדיה', type:'url', ph:'https://…'}]},
+  'text':       {label:'בלוק טקסט',          icon:'≡',  fields:[{id:'title', label:'כותרת (אופציונלי)', type:'text', ph:'כותרת'},{id:'text',label:'פסקה', type:'textarea', ph:'טקסט…'}]},
+  'duo-text':   {label:'שתי עמודות טקסט',    icon:'≡≡', fields:[{id:'title1',label:'כותרת שמאל', type:'text', ph:'כותרת'},{id:'text1',label:'טקסט שמאל', type:'textarea', ph:'טקסט…'},{id:'title2',label:'כותרת ימין', type:'text', ph:'כותרת'},{id:'text2',label:'טקסט ימין', type:'textarea', ph:'טקסט…'}]},
+  'quote':      {label:'ציטוט',              icon:'❝',  fields:[{id:'text',  label:'טקסט הציטוט', type:'textarea', ph:'משפט חזק…'}]},
 };
 
 function renderBlocks(){
@@ -642,11 +898,11 @@ function buildBlockCard(b,i){
 
   const hdr=document.createElement('div'); hdr.className='block-hdr';
   const arrBtn=document.createElement('button'); arrBtn.className='block-btn arr open'; arrBtn.innerHTML='▸';
-  hdr.innerHTML=`<span class="block-ic" title="Drag to reorder" style="cursor:grab">⠿</span><span class="block-ic">${def.icon}</span><span class="block-label">${esc(def.label)}</span>`;
+  hdr.innerHTML=`<span class="block-ic" title="גרור לסידור מחדש" style="cursor:grab">⠿</span><span class="block-ic">${def.icon}</span><span class="block-label">${esc(def.label)}</span>`;
   const ctrls=document.createElement('div'); ctrls.className='block-ctrls';
-  const upBtn=document.createElement('button'); upBtn.className='block-btn'; upBtn.title='Move up'; upBtn.textContent='↑'; upBtn.onclick=e=>{ e.stopPropagation(); if(i>0){ blocksList.splice(i-1,0,blocksList.splice(i,1)[0]); renderBlocks(); } };
-  const dnBtn=document.createElement('button'); dnBtn.className='block-btn'; dnBtn.title='Move down'; dnBtn.textContent='↓'; dnBtn.onclick=e=>{ e.stopPropagation(); if(i<blocksList.length-1){ blocksList.splice(i+1,0,blocksList.splice(i,1)[0]); renderBlocks(); } };
-  const delBtn=document.createElement('button'); delBtn.className='block-btn del'; delBtn.title='Remove'; delBtn.textContent='✕'; delBtn.onclick=e=>{ e.stopPropagation(); blocksList.splice(i,1); renderBlocks(); };
+  const upBtn=document.createElement('button'); upBtn.className='block-btn'; upBtn.title='העבר למעלה'; upBtn.textContent='↑'; upBtn.onclick=e=>{ e.stopPropagation(); if(i>0){ blocksList.splice(i-1,0,blocksList.splice(i,1)[0]); renderBlocks(); } };
+  const dnBtn=document.createElement('button'); dnBtn.className='block-btn'; dnBtn.title='העבר למטה'; dnBtn.textContent='↓'; dnBtn.onclick=e=>{ e.stopPropagation(); if(i<blocksList.length-1){ blocksList.splice(i+1,0,blocksList.splice(i,1)[0]); renderBlocks(); } };
+  const delBtn=document.createElement('button'); delBtn.className='block-btn del'; delBtn.title='הסר'; delBtn.textContent='✕'; delBtn.onclick=e=>{ e.stopPropagation(); blocksList.splice(i,1); renderBlocks(); };
   ctrls.append(arrBtn,upBtn,dnBtn,delBtn); hdr.appendChild(ctrls);
 
   const body=document.createElement('div'); body.className='block-body open';

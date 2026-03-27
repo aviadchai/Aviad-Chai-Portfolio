@@ -1017,9 +1017,55 @@ async function loadProjects(){
   }catch(e){console.warn('projects.json load error:',e);}
 }
 
+/* ── SITE CONTENT ───────────────────────── */
+async function loadSiteContent(){
+  try{
+    const r=await fetch('/site.json?t='+Date.now());
+    if(!r.ok) return;
+    const s=await r.json();
+    if(s.hero){
+      const h=s.hero;
+      if(h.tag) document.getElementById('el-tag').textContent=h.tag;
+      if(h.name1) document.getElementById('el-h1').textContent=h.name1;
+      if(h.name2) document.getElementById('el-h2').textContent=h.name2;
+      if(h.desc) document.getElementById('el-desc').textContent=h.desc;
+    }
+    if(s.about){
+      const a=s.about;
+      if(a.title){ const lines=a.title.split('\n'); document.getElementById('el-about-title').innerHTML=lines.map((l,i)=>i<lines.length-1?l+'<br>':l).join(''); }
+      if(a.bio1) document.getElementById('el-bio1').textContent=a.bio1;
+      if(a.bio2) document.getElementById('el-bio2').textContent=a.bio2;
+      if(a.skills){
+        const sk=document.getElementById('el-skills');
+        sk.innerHTML=a.skills.split(',').filter(x=>x.trim()).map(x=>`<span class="about-sk">${x.trim()}</span>`).join('');
+      }
+      if(a.linkedin) document.getElementById('el-alink1').href=a.linkedin;
+      if(a.behance) document.getElementById('el-alink2').href=a.behance;
+      if(a.vimeo) document.getElementById('el-alink3').href=a.vimeo;
+      if(a.email) document.getElementById('el-alink4').href=a.email;
+    }
+    if(s.contact){
+      const c=s.contact;
+      if(c.title){ const lines=c.title.split('\n'); document.getElementById('el-contact-title').innerHTML=lines.map((l,i)=>i<lines.length-1?l+'<br>':l).join(''); }
+      if(c.sub) document.getElementById('el-contact-sub').textContent=c.sub;
+      if(c.email){ document.getElementById('el-contact-email').textContent=c.email; }
+      if(c.phone) document.getElementById('el-contact-phone').textContent=c.phone;
+      if(c.linkedin) document.getElementById('el-slink1').href=c.linkedin;
+      if(c.behance) document.getElementById('el-slink2').href=c.behance;
+      if(c.vimeo) document.getElementById('el-slink3').href=c.vimeo;
+      if(c.instagram) document.getElementById('el-slink4').href=c.instagram;
+    }
+    if(s.footer){
+      const ft=typeof s.footer==='string'?s.footer:s.footer.text||'';
+      if(ft){ document.getElementById('el-footer-home').textContent=ft; document.getElementById('el-footer-contact').textContent=ft; }
+    }
+  }catch(e){ console.warn('site.json load error:',e); }
+}
+
 /* ── INIT ───────────────────────────────── */
 renderGrid();
 loadProjects();
+loadSiteContent();
 bindHover();
 </script>
 </body>
