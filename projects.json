@@ -75,13 +75,13 @@
     "client": "Nao Sushi",
     "year": "2022",
     "layout": "half",
-    "gradient1": "#00ffcc",
-    "gradient2": "#0044ff",
-    "description": "Elegant brand motion for Nao Sushi â Japanese minimalism meets modern animation.",
     "img1": "https://cdn.prod.website-files.com/63a96dee90b0cac7dbcb99d2/63b19856ea6dbc7372ec4b45_homepage%20img.jpg",
+    "gradient1": "#ff6600",
+    "gradient2": "#ff2e38",
+    "description": "Elegant brand motion for Nao Sushi â Japanese minimalism meets modern animation.",
     "tags": "After Effects, Brand Design",
     "credits": "Motion Design:Aviad Chai, Client:Nao Sushi",
-    "blocks": ""
+    "blocks": "[{\"type\":\"duo\",\"media1\":\"/assets/1774631487877-k0yk.gif\",\"media2\":\"/assets/1774631500737-sebs.gif\"},{\"type\":\"duo\",\"media1\":\"/assets/1774631523196-1gmx.gif\",\"media2\":\"/assets/1774631566663-5fwa.jpg\"},{\"type\":\"single\",\"url\":\"/assets/1774631581024-3wrs.mp4\"},{\"type\":\"duo\",\"media1\":\"/assets/1774631596273-cxls.jpg\",\"media2\":\"/assets/1774631600007-tk1w.jpg\"},{\"type\":\"single\",\"url\":\"/assets/1774631611519-u9jp.gif\"}]"
   },
   {
     "name": "TV Channel Stripe Design",
