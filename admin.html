@@ -86,6 +86,9 @@ a{color:inherit;text-decoration:none}
 .pi-info{flex:1;min-width:0}
 .pi-name{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3;color:var(--txt)}
 .pi-meta{font-size:11px;color:var(--mu);margin-top:2px;font-weight:500}
+.pi-drag{color:var(--mu2);cursor:grab;font-size:15px;flex-shrink:0;padding:0 2px;opacity:0;transition:opacity .15s}
+.pi:hover .pi-drag{opacity:1}
+.pi.drag-over{background:var(--surf);box-shadow:0 0 0 2px var(--txt) inset}
 .pi-acts{display:none;gap:2px;flex-shrink:0}
 .pi:hover .pi-acts{display:flex}
 .pi-btn{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--mu);transition:background .15s,color .15s;border:none;background:none;cursor:pointer}
@@ -614,12 +617,37 @@ function renderSidebar(){
   projects.forEach((p,i)=>{
     const el=document.createElement('div');
     el.className='pi'+(editIdx===i?' on':'');
+    el.draggable=true;
     const isVid=p.img1&&/\.(mp4|webm)$/i.test(p.img1);
     const th=p.img1?(isVid?`<video src="${p.img1}" muted playsinline></video>`:`<img src="${p.img1}" alt="" loading="lazy">`):'<div class="pi-thumb-ph">✦</div>';
-    el.innerHTML=`<div class="pi-thumb">${th}</div><div class="pi-info"><div class="pi-name">${esc(p.name)}</div><div class="pi-meta">${esc(p.category||'—')}${p.year?' · '+p.year:''}</div></div><div class="pi-acts"><button class="pi-btn" onclick="editProject(${i});event.stopPropagation()">✎</button><button class="pi-btn del" onclick="deleteProject(${i});event.stopPropagation()">✕</button></div>`;
+    el.innerHTML=`<span class="pi-drag" title="גרור לסידור">⠿</span><div class="pi-thumb">${th}</div><div class="pi-info"><div class="pi-name">${esc(p.name)}</div><div class="pi-meta">${esc(p.category||'—')}${p.year?' · '+p.year:''}</div></div><div class="pi-acts"><button class="pi-btn" onclick="editProject(${i});event.stopPropagation()">✎</button><button class="pi-btn del" onclick="deleteProject(${i});event.stopPropagation()">✕</button></div>`;
     el.addEventListener('click',()=>editProject(i));
+    el.addEventListener('dragstart',e=>{ e.dataTransfer.setData('text/plain',String(i)); el.style.opacity='.4'; });
+    el.addEventListener('dragend',()=>{ el.style.opacity=''; document.querySelectorAll('.pi').forEach(p=>p.classList.remove('drag-over')); });
+    el.addEventListener('dragover',e=>{ e.preventDefault(); el.classList.add('drag-over'); });
+    el.addEventListener('dragleave',()=>el.classList.remove('drag-over'));
+    el.addEventListener('drop',e=>{
+      e.preventDefault(); el.classList.remove('drag-over');
+      const from=parseInt(e.dataTransfer.getData('text/plain'));
+      if(from===i) return;
+      projects.splice(i,0,projects.splice(from,1)[0]);
+      if(editIdx===from) editIdx=i;
+      else if(from<i&&editIdx>from&&editIdx<=i) editIdx--;
+      else if(from>i&&editIdx<from&&editIdx>=i) editIdx++;
+      renderSidebar();
+      saveOrder();
+    });
     list.appendChild(el);
   });
+}
+
+async function saveOrder(){
+  setDeployStatus('saving','שומר סדר…');
+  try{
+    fileSha=await ghPut(FILE,projects,fileSha,'עדכון סדר פרויקטים');
+    setDeployStatus('saved','סדר עודכן ✓');
+    toast('סדר הפרויקטים עודכן','ok');
+  }catch(e){ setDeployStatus('error','שגיאה'); toast('שגיאה בשמירה: '+e.message,'err'); }
 }
 
 /* ── MODE SWITCH ────────────────────── */
@@ -788,6 +816,7 @@ function selectSiteSection(sec){
   document.getElementById('site-form-title').textContent=def.label;
   const scroll=document.getElementById('site-form-scroll');
   scroll.innerHTML='';
+  const wrap=document.createElement('div'); wrap.className='fsec'; scroll.appendChild(wrap);
   const secData=(siteData&&siteData[sec])||{};
   def.fields.forEach(f=>{
     const g=document.createElement('div'); g.className='fgroup'; g.style.marginBottom='14px';
@@ -816,7 +845,7 @@ function selectSiteSection(sec){
       inp.placeholder=f.ph||''; inp.value=secData[f.id]||'';
       inp.dataset.field=f.id; g.appendChild(inp);
     }
-    scroll.appendChild(g);
+    wrap.appendChild(g);
   });
 }
 
