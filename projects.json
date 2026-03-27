@@ -74,13 +74,13 @@
     "category": "Brand Animation",
     "client": "Nao Sushi",
     "year": "2022",
-    "layout": "half",
+    "layout": "third",
     "img1": "https://cdn.prod.website-files.com/63a96dee90b0cac7dbcb99d2/63b19856ea6dbc7372ec4b45_homepage%20img.jpg",
     "gradient1": "#e33748",
     "gradient2": "#fe7c89",
     "description": "Elegant brand motion for Nao Sushi â Japanese minimalism meets modern animation.",
-    "tags": "After Effects, Brand Design",
-    "credits": "Motion Design:Aviad Chai, Client:Nao Sushi",
+    "tags": "Brand Design",
+    "credits": "Brand Design: Aviad Chai, Client: Nao Sushi",
     "blocks": "[{\"type\":\"duo\",\"media1\":\"/assets/1774631487877-k0yk.gif\",\"media2\":\"/assets/1774631500737-sebs.gif\"},{\"type\":\"duo\",\"media1\":\"/assets/1774631523196-1gmx.gif\",\"media2\":\"/assets/1774631566663-5fwa.jpg\"},{\"type\":\"single\",\"url\":\"/assets/1774631581024-3wrs.mp4\"},{\"type\":\"duo\",\"media1\":\"/assets/1774631596273-cxls.jpg\",\"media2\":\"/assets/1774631600007-tk1w.jpg\"},{\"type\":\"single\",\"url\":\"/assets/1774631611519-u9jp.gif\"}]"
   },
   {
