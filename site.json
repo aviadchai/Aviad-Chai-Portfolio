@@ -1,14 +1,14 @@
 {
   "hero": {
-    "tag": "3D Motion Designer · Tel Aviv",
+    "tag": "3D Motion Designer Â· Tel Aviv",
     "name1": "Aviad",
     "name2": "Chai",
-    "desc": "Crafting motion that moves people — from concept to final frame. Brands, broadcasts, and everything in between."
+    "desc": "Crafting motion that moves people â from concept to final frame. Brands, broadcasts, and everything in between."
   },
   "about": {
-    "title": "Motion designer,\nstoryteller,\nTel Aviv.",
-    "bio1": "I'm a 3D Motion Designer based in Tel Aviv, crafting visual stories for brands, TV channels, and agencies.",
-    "bio2": "I believe great motion design communicates something real — whether a broadcast package or a full brand film, I bring the same level of craft to every frame.",
+    "title": "Motion designer based in Jerusalem",
+    "bio1": "I'm a Motion Designer based in Jerusalem, crafting visual stories for brands, TV channels, and agencies.",
+    "bio2": "I believe great motion design communicates something real â whether a broadcast package or a full brand film, I bring the same level of craft to every frame.",
     "skills": "Cinema 4D, After Effects, Octane Render, Redshift, Motion Graphics, Broadcast Design, 3D Animation",
     "linkedin": "https://www.linkedin.com/in/aviadchai",
     "behance": "https://www.behance.net/AviadChai",
@@ -25,5 +25,5 @@
     "vimeo": "https://vimeo.com/user108665724",
     "instagram": "https://www.instagram.com/aviadchai/"
   },
-  "footer": "© 2025 Aviad Chai"
+  "footer": "Â© 2025 Aviad Chai"
 }
