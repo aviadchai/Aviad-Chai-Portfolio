@@ -70,20 +70,6 @@
     "blocks": ""
   },
   {
-    "name": "Channel 14 â Election Broadcast",
-    "category": "Broadcast Design",
-    "client": "Channel 14",
-    "year": "2022",
-    "layout": "third",
-    "img1": "https://cdn.prod.website-files.com/63a96dee90b0cac7dbcb99d2/63b31a2e5885fb19782892df_Main-offical-image.jpg",
-    "gradient1": "#192656",
-    "gradient2": "#4264d1",
-    "description": "A comprehensive broadcast design package for Channel 14's election night.",
-    "tags": "After Effects, Broadcast Design",
-    "credits": "Motion Design:Aviad Chai, Channel:Channel 14",
-    "blocks": ""
-  },
-  {
     "name": "Nao Sushi",
     "category": "Brand Design",
     "client": "Nao Sushi",
@@ -96,6 +82,20 @@
     "tags": "Brand Design",
     "credits": "Brand Design: Aviad Chai, Client: Nao Sushi",
     "blocks": "[{\"type\":\"split-left\",\"media\":\"/assets/1774638580987-xcby.gif\",\"title\":\"Concept & Logo Design\",\"text\":\"The brand identity for NAO Sushi was built around a simple and recognizable idea: the sushi box. The logo takes inspiration from the clean geometry of a takeaway box, with chopsticks integrated on the sides to create a balanced and memorable mark. The result is minimal, modern, and instantly connected to the product.\"},{\"type\":\"split-right\",\"title\":\"Visual Language\",\"text\":\"The visual language draws from Japanese aesthetics, particularly the symbolism of the rising sun. Circular forms, warm tones, and strong contrasts create a bold yet refined look that reflects both tradition and contemporary design. This influence brings a sense of origin and cultural depth to the brand without feeling literal.\",\"media\":\"/assets/1774638796712-zj1b.gif\"},{\"type\":\"duo\",\"media1\":\"/assets/1774631596273-cxls.jpg\",\"media2\":\"/assets/1774631600007-tk1w.jpg\"},{\"type\":\"quote\",\"text\":\"Rooted in the spirit of the rising sun, shaped with modern precision.\"},{\"type\":\"single\",\"url\":\"/assets/1774631611519-u9jp.gif\"},{\"type\":\"duo\",\"media1\":\"/assets/1774639073111-cuod.jpg\",\"media2\":\"/assets/1774638990968-2lyu.jpg\"},{\"type\":\"single\",\"url\":\"/assets/1774631581024-3wrs.mp4\"}]"
+  },
+  {
+    "name": "Channel 14 â Election Broadcast",
+    "category": "Broadcast Design",
+    "client": "Channel 14",
+    "year": "2022",
+    "layout": "third",
+    "img1": "https://cdn.prod.website-files.com/63a96dee90b0cac7dbcb99d2/63b31a2e5885fb19782892df_Main-offical-image.jpg",
+    "gradient1": "#192656",
+    "gradient2": "#4264d1",
+    "description": "A comprehensive broadcast design package for Channel 14's election night.",
+    "tags": "After Effects, Broadcast Design",
+    "credits": "Motion Design:Aviad Chai, Channel:Channel 14",
+    "blocks": ""
   },
   {
     "name": "TV Channel Stripe Design",
