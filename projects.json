@@ -19,13 +19,13 @@
     "client": "",
     "year": "2024",
     "layout": "half",
-    "gradient1": "#ff6b35",
-    "gradient2": "#ff006e",
-    "description": "High-energy motion graphics for a $100K funding announcement.",
     "img1": "https://cdn.prod.website-files.com/63a96dee90b0cac7dbcb99d2/6948688cd676493b34e2c035_0055%20-_1.gif",
-    "tags": "After Effects, Motion Graphics",
-    "credits": "Direction & Animation:Aviad Chai",
-    "blocks": ""
+    "gradient1": "#FFDA2A",
+    "gradient2": "#a3a3a3",
+    "description": "High-energy motion graphics for a $100K funding announcement.",
+    "tags": "Cinema 4D, Redshift",
+    "credits": "",
+    "blocks": "[{\"type\":\"duo\",\"media1\":\"\",\"media2\":\"/assets/1774639888002-0ejc.gif\"},{\"type\":\"duo\",\"media1\":\"/assets/1774639904968-hdlf.jpg\",\"media2\":\"/assets/1774639902287-uo91.jpg\"}]"
   },
   {
     "name": "iPhone 14 Presentation",
