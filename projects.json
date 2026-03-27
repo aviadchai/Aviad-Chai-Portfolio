@@ -32,11 +32,11 @@
     "category": "Product Visualization",
     "client": "",
     "year": "2023",
-    "layout": "half",
+    "layout": "twothird",
+    "img1": "https://cdn.prod.website-files.com/63a96dee90b0cac7dbcb99d2/63aa1872e473f354569c0cfb_iphone14_gif.gif",
     "gradient1": "#00d4ff",
     "gradient2": "#0066ff",
     "description": "Photorealistic 3D product visualization for iPhone 14.",
-    "img1": "https://cdn.prod.website-files.com/63a96dee90b0cac7dbcb99d2/63aa1872e473f354569c0cfb_iphone14_gif.gif",
     "tags": "Cinema 4D, Octane Render, After Effects",
     "credits": "3D & Animation:Aviad Chai",
     "blocks": ""
