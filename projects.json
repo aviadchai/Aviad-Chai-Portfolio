@@ -28,20 +28,6 @@
     "blocks": "[{\"type\":\"duo\",\"media1\":\"/assets/1774640999062-33t5.mp4\",\"media2\":\"/assets/1774640983305-ub77.mp4\"},{\"type\":\"duo\",\"media1\":\"/assets/1774640990989-nslc.mp4\",\"media2\":\"/assets/1774640996352-ha0h.mp4\"}]"
   },
   {
-    "name": "$100K Fund",
-    "category": "Motion Design",
-    "client": "",
-    "year": "2024",
-    "layout": "third",
-    "img1": "/assets/1774641412471-51cb.gif",
-    "gradient1": "#FFDA2A",
-    "gradient2": "#a3a3a3",
-    "description": "High-energy motion graphics for a $100K funding announcement.",
-    "tags": "Cinema 4D, Redshift",
-    "credits": "3D: Aviad Chai",
-    "blocks": "[{\"type\":\"duo\",\"media1\":\"/assets/1774639945812-yxq4.gif\",\"media2\":\"/assets/1774639888002-0ejc.gif\"},{\"type\":\"duo\",\"media1\":\"/assets/1774639904968-hdlf.jpg\",\"media2\":\"/assets/1774639902287-uo91.jpg\"}]"
-  },
-  {
     "name": "iPhone 14 Presentation",
     "category": "Product Visualization",
     "client": "",
@@ -54,6 +40,20 @@
     "tags": "Cinema 4D, Octane Render, After Effects",
     "credits": "3D & Animation:Aviad Chai",
     "blocks": ""
+  },
+  {
+    "name": "$100K Fund",
+    "category": "Motion Design",
+    "client": "",
+    "year": "2024",
+    "layout": "third",
+    "img1": "/assets/1774641412471-51cb.gif",
+    "gradient1": "#FFDA2A",
+    "gradient2": "#a3a3a3",
+    "description": "High-energy motion graphics for a $100K funding announcement.",
+    "tags": "Cinema 4D, Redshift",
+    "credits": "3D: Aviad Chai",
+    "blocks": "[{\"type\":\"duo\",\"media1\":\"/assets/1774639945812-yxq4.gif\",\"media2\":\"/assets/1774639888002-0ejc.gif\"},{\"type\":\"duo\",\"media1\":\"/assets/1774639904968-hdlf.jpg\",\"media2\":\"/assets/1774639902287-uo91.jpg\"}]"
   },
   {
     "name": "What's Coming in 2025?",
