@@ -1086,50 +1086,6 @@ loadProjects();
 loadSiteContent();
 bindHover();
 
-/* ── LENS CURSOR ─────────────────────────── */
-(function(){
-  if(window.matchMedia('(hover:none)').matches)return;
-  // Uniform 2× magnification: pixel at lens-local (cx,cy) samples from (cx/2, cy/2)
-  // displacement = -cx/2, encoded as R = 128 + (-cx/H)*100
-  // feDisplacementMap scale = H*100/255/0.5 ≈ H*0.784 → for H=32: DS≈25
-  // Adjusted empirically: S=64, DS=50 gives clear 2× warp
-  const S=64,H=S/2,DS=50;
-  const cv=document.createElement('canvas');
-  cv.width=cv.height=S;
-  const ctx=cv.getContext('2d'),im=ctx.createImageData(S,S);
-  for(let py=0;py<S;py++)for(let px=0;px<S;px++){
-    const dx=px-H,dy=py-H,i4=(py*S+px)*4;
-    if(dx*dx+dy*dy<H*H){
-      // Linear uniform zoom: R encodes x-displacement, G encodes y-displacement
-      im.data[i4]  =Math.max(0,Math.min(255,Math.round(128+(-dx/H)*100)));
-      im.data[i4+1]=Math.max(0,Math.min(255,Math.round(128+(-dy/H)*100)));
-      im.data[i4+2]=128;im.data[i4+3]=255;
-    }else im.data[i4+3]=0;
-  }
-  ctx.putImageData(im,0,0);
-  const sv=document.createElementNS('http://www.w3.org/2000/svg','svg');
-  sv.setAttribute('style','position:fixed;width:0;height:0;pointer-events:none');
-  sv.innerHTML=`<defs><filter id="lf" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" x="0%" y="0%" width="100%" height="100%"><feFlood flood-color="rgb(128,128,128)" result="ng"/><feImage id="lfi" href="${cv.toDataURL()}" x="-9999" y="-9999" width="${S}" height="${S}" preserveAspectRatio="none" result="lm"/><feComposite in="lm" in2="ng" operator="over" result="dm"/><feDisplacementMap in="SourceGraphic" in2="dm" scale="${DS}" xChannelSelector="R" yChannelSelector="G"/></filter></defs>`;
-  document.body.appendChild(sv);
-  const lfi=sv.querySelector('#lfi');
-  let cur=null,raf=null,mx=0,my=0;
-  function activePage(){
-    if(document.getElementById('ov')?.classList.contains('on'))return null;
-    return['home-pg','about-pg','contact-pg'].map(k=>document.getElementById(k)).find(e=>e?.classList.contains('on'))??null;
-  }
-  function tick(){
-    raf=null;
-    const el=activePage();
-    if(el!==cur){if(cur)cur.style.filter='';cur=el;if(cur)cur.style.filter='url(#lf)';}
-    if(!cur)return;
-    lfi.setAttribute('x',mx-H);
-    lfi.setAttribute('y',my+window.scrollY-H);
-  }
-  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;if(!raf)raf=requestAnimationFrame(tick);});
-  document.addEventListener('mouseleave',()=>{if(cur)cur.style.filter='';cur=null;});
-  const mo=new MutationObserver(()=>{if(!raf)raf=requestAnimationFrame(tick);});
-  ['home-pg','about-pg','contact-pg','ov'].forEach(k=>{const e=document.getElementById(k);if(e)mo.observe(e,{attributes:true,attributeFilter:['class']});});
-})();
 </script>
 </body>
 </html>
