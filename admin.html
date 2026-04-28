@@ -184,6 +184,17 @@ a{color:inherit;text-decoration:none}
 .btn-danger:hover{opacity:.85}
 .loading::after{content:'...';animation:ldots 1.2s steps(4) infinite}
 @keyframes ldots{0%,100%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}}
+/* TOGGLE */
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:10px 13px;background:var(--surf);border:1.5px solid var(--bdr);border-radius:8px}
+.toggle-label{font-size:12px;font-weight:600;color:var(--txt)}
+.toggle-sub{font-size:11px;color:var(--mu);margin-top:1px}
+.toggle-sw{position:relative;width:36px;height:20px;flex-shrink:0}
+.toggle-sw input{opacity:0;width:0;height:0;position:absolute}
+.toggle-track{position:absolute;inset:0;border-radius:100px;background:var(--bdr);cursor:pointer;transition:background .2s}
+.toggle-sw input:checked+.toggle-track{background:#ff3b30}
+.toggle-knob{position:absolute;width:14px;height:14px;border-radius:50%;background:#fff;top:3px;left:3px;transition:transform .2s;pointer-events:none;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.toggle-sw input:checked~.toggle-knob{transform:translateX(16px)}
+.pi-hidden-badge{font-size:9px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#ff3b30;background:#ff3b3012;border-radius:4px;padding:1px 5px;flex-shrink:0}
 
 /* HISTORY MODAL */
 #hist-modal{position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:800;display:none;align-items:flex-end;justify-content:center}
@@ -370,6 +381,17 @@ a{color:inherit;text-decoration:none}
                   <option value="twothird">Two-Third — 16:9</option>
                 </select>
               </div>
+            </div>
+            <div class="toggle-row" style="margin-top:4px">
+              <div>
+                <div class="toggle-label">הסתר עבודה</div>
+                <div class="toggle-sub">לא תוצג בגריד הפרויקטים</div>
+              </div>
+              <label class="toggle-sw">
+                <input type="checkbox" id="f-hidden" onchange="updateHiddenBadge()">
+                <div class="toggle-track"></div>
+                <div class="toggle-knob"></div>
+              </label>
             </div>
           </div>
 
@@ -620,7 +642,7 @@ function renderSidebar(){
     el.draggable=true;
     const isVid=p.img1&&/\.(mp4|webm)$/i.test(p.img1);
     const th=p.img1?(isVid?`<video src="${p.img1}" muted playsinline></video>`:`<img src="${p.img1}" alt="" loading="lazy">`):'<div class="pi-thumb-ph">✦</div>';
-    el.innerHTML=`<span class="pi-drag" title="גרור לסידור">⠿</span><div class="pi-thumb">${th}</div><div class="pi-info"><div class="pi-name">${esc(p.name)}</div><div class="pi-meta">${esc(p.category||'—')}${p.year?' · '+p.year:''}</div></div><div class="pi-acts"><button class="pi-btn" onclick="editProject(${i});event.stopPropagation()">✎</button><button class="pi-btn del" onclick="deleteProject(${i});event.stopPropagation()">✕</button></div>`;
+    el.innerHTML=`<span class="pi-drag" title="גרור לסידור">⠿</span><div class="pi-thumb">${th}</div><div class="pi-info"><div class="pi-name">${esc(p.name)}</div><div class="pi-meta">${esc(p.category||'—')}${p.year?' · '+p.year:''}</div></div>${p.hidden?'<span class="pi-hidden-badge">מוסתר</span>':''}<div class="pi-acts"><button class="pi-btn" onclick="editProject(${i});event.stopPropagation()">✎</button><button class="pi-btn del" onclick="deleteProject(${i});event.stopPropagation()">✕</button></div>`;
     el.addEventListener('click',()=>editProject(i));
     el.addEventListener('dragstart',e=>{ e.dataTransfer.setData('text/plain',String(i)); el.style.opacity='.4'; });
     el.addEventListener('dragend',()=>{ el.style.opacity=''; document.querySelectorAll('.pi').forEach(p=>p.classList.remove('drag-over')); });
@@ -680,6 +702,7 @@ function newProject(){
   document.getElementById('f-gradient2').value='#00ff88';
   document.getElementById('g1p').value='#c8ff00';
   document.getElementById('g2p').value='#00ff88';
+  document.getElementById('f-hidden').checked=false;
   updateGrad(); document.getElementById('thumb-prev').style.display='none';
   document.getElementById('tag-prev').innerHTML='';
   document.getElementById('form-title').innerHTML='פרויקט חדש';
@@ -691,6 +714,7 @@ function editProject(i){
   META.forEach(f=>{ const el=document.getElementById('f-'+f); if(el) el.value=p[f]||''; });
   document.getElementById('g1p').value=p.gradient1||'#c8ff00';
   document.getElementById('g2p').value=p.gradient2||'#00ff88';
+  document.getElementById('f-hidden').checked=!!p.hidden;
   blocksList=[];
   try{ if(p.blocks) blocksList=JSON.parse(p.blocks); }catch(e){}
   updateGrad(); updateThumb(); updateTags();
@@ -705,7 +729,12 @@ function getFormData(){
   const d={};
   META.forEach(f=>{ const el=document.getElementById('f-'+f); d[f]=el?el.value.trim():''; });
   d.blocks=blocksList.length?JSON.stringify(blocksList):'';
+  d.hidden=document.getElementById('f-hidden').checked||false;
   return d;
+}
+function updateHiddenBadge(){
+  const title=document.getElementById('form-bar-title')||document.getElementById('form-title');
+  // just update sidebar badge after save; no need to do more here
 }
 
 /* ── SAVE PROJECT ───────────────────── */
