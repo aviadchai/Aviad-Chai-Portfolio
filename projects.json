@@ -10,7 +10,7 @@
     "gradient2": "#FFDA2A",
     "description": "",
     "tags": "",
-    "credits": "",
+    "credits": "Head of Creative: Liran Friedman, Motion Design Team Lead: Dror StromCreative Direction: Gili Aharoni, Motion Design: Aviad Chai,   Producer: Lilach Cohen Music & SFX: Roni Abelha Copy: Laura Ramsay",
     "blocks": "[{\"type\":\"video\",\"url\":\"https://www.youtube.com/watch?v=9tmhTiQ_-no\"},{\"type\":\"duo\",\"media1\":\"/assets/1777319038672-6xm9.mp4\",\"media2\":\"/assets/1777319138319-1562.mp4\"},{\"type\":\"split-left\",\"media\":\"/assets/1777319187723-ts5r.mp4\",\"title\":\"Directing AI, Not Just Generating It\",\"text\":\"This project explores a new approach to AI-driven cinematography shifting the focus from generating isolated shots to directing full sequences. Developed with real editing workflows in mind, the system emphasizes control and precision at every stage of the process. The goal was to create a cohesive visual flow where characters, environments, lighting, and lens behavior feel intentionally guided, not randomly generated.\"},{\"type\":\"split-right\",\"title\":\"Depth, Atmosphere, Control\",\"text\":\"The motion design focuses on depth, atmosphere, and control. Using layered compositions in After Effects, I combined cinematic framing with floating glass UI to reflect real creative workflows. Subtle optical details and timing maintain realism within a stylized environment.\",\"media\":\"/assets/1777128092413-xmpi.mp4\"},{\"type\":\"quote\",\"text\":\"Built by video creators, for video creators\"},{\"type\":\"single\",\"url\":\"/assets/1777128153837-9jde.mp4\"}]"
   },
   {
@@ -137,20 +137,6 @@
     "description": "A curated look at standout motion work from 2021.",
     "tags": "Cinema 4D, After Effects, Motion Design",
     "credits": "All work by Aviad Chai",
-    "blocks": ""
-  },
-  {
-    "name": "שדגגג",
-    "category": "",
-    "client": "",
-    "year": "",
-    "layout": "half",
-    "img1": "",
-    "gradient1": "#c8ff00",
-    "gradient2": "#00ff88",
-    "description": "",
-    "tags": "",
-    "credits": "",
     "blocks": ""
   }
 ]
