@@ -137,6 +137,7 @@
     "description": "A curated look at standout motion work from 2021.",
     "tags": "Cinema 4D, After Effects, Motion Design",
     "credits": "All work by Aviad Chai",
-    "blocks": ""
+    "blocks": "",
+    "hidden": true
   }
 ]
